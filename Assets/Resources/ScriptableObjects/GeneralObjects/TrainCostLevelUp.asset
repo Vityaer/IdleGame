@@ -1,0 +1,80 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee33df75976f4a343bec7ea7b67b81f6, type: 3}
+  m_Name: TrainCostLevelUp
+  m_EditorClassIdentifier: 
+  levelsCost:
+  - Name: 1-30 levels
+    level: 1
+    list:
+      resources:
+      - Name: 0
+        count: 30
+        e10: 0
+      - Name: 2
+        count: 26
+        e10: 0
+    listIncrease:
+    - 16
+    - 16
+  - Name: 31-60 levels
+    level: 31
+    list:
+      resources:
+      - Name: 0
+        count: 2610
+        e10: 0
+      - Name: 2
+        count: 2340
+        e10: 0
+    listIncrease:
+    - 13
+    - 13
+  - Name: 61-90 levels
+    level: 61
+    list:
+      resources:
+      - Name: 0
+        count: 105430
+        e10: 0
+      - Name: 2
+        count: 91800
+        e10: 0
+    listIncrease:
+    - 10
+    - 10
+  - Name: 91-100 levels
+    level: 91
+    list:
+      resources:
+      - Name: 0
+        count: 310
+        e10: 3
+      - Name: 2
+        count: 285
+        e10: 3
+    listIncrease:
+    - 8
+    - 8
+  - Name: 101-150 levels
+    level: 101
+    list:
+      resources:
+      - Name: 0
+        count: 14
+        e10: 6
+      - Name: 2
+        count: 13.5
+        e10: 6
+    listIncrease:
+    - 6
+    - 6

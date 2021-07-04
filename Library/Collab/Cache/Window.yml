@@ -1,0 +1,243 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1
+MonoBehaviour:
+  m_ObjectHideFlags: 61
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffe70aba2e7074048aca5de573b64a59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SimpleSelectedItems:
+    m_Keys:
+    - Assets/FileGame.data
+    - Assets/FileListHero.data
+    - Assets/Prefabs/Effects.meta
+    - Assets/Prefabs/Effects/Dots.meta
+    - Assets/Prefabs/Effects/Dots/DotBleending.prefab
+    - Assets/Prefabs/Effects/Dots/DotBleending.prefab.meta
+    - Assets/Prefabs/Effects/Dots/DotPoison.prefab
+    - Assets/Prefabs/Effects/Dots/DotPoison.prefab.meta
+    - Assets/Prefabs/Effects/Particals.meta
+    - Assets/Prefabs/Effects/Particals/HealVisualize.prefab
+    - Assets/Prefabs/Effects/Particals/HealVisualize.prefab.meta
+    - Assets/Prefabs/Effects/States.meta
+    - Assets/Prefabs/Effects/States/SilencePrefab.prefab
+    - Assets/Prefabs/Effects/States/SilencePrefab.prefab.meta
+    - Assets/Prefabs/Effects/States/StunPrefab.prefab
+    - Assets/Prefabs/Effects/States/StunPrefab.prefab.meta
+    - Assets/Prefabs/UI/CellPet.prefab
+    - Assets/Prefabs/UI/CellPet.prefab.meta
+    - Assets/Prefabs/UI/HorizontalRating.prefab
+    - Assets/Prefabs/UI/ItemForge.prefab
+    - Assets/Prefabs/UI/ItemForge.prefab.meta
+    - Assets/Prefabs/UI/Mission.prefab
+    - Assets/Prefabs/UI/ObserverResource.prefab
+    - Assets/Prefabs/UI/ObserverResource.prefab.meta
+    - Assets/Prefabs/UI/Product.prefab
+    - Assets/Prefabs/UI/Product.prefab.meta
+    - Assets/Prefabs/UI/Task.prefab
+    - Assets/Prefabs/UI/Task.prefab.meta
+    - Assets/Scenes/SampleScene.unity
+    - Assets/ScriptableObjects/CampaignChapters.meta
+    - Assets/ScriptableObjects/CampaignChapters/Chapter_1.asset
+    - Assets/ScriptableObjects/CampaignChapters/Chapter_1.asset.meta
+    - Assets/ScriptableObjects/GeneralObjects.meta
+    - Assets/ScriptableObjects/GeneralObjects/CostLevelUp.asset
+    - Assets/ScriptableObjects/GeneralObjects/CostLevelUp.asset.meta
+    - Assets/ScriptableObjects/HeroesData/1101.asset
+    - Assets/ScriptableObjects/HeroesData/2101.asset
+    - Assets/ScriptableObjects/HeroesData/2502.asset
+    - Assets/ScriptableObjects/HeroesData/2502.asset.meta
+    - Assets/ScriptableObjects/HeroesData/3101.asset
+    - Assets/ScriptableObjects/HeroesData/3201.asset
+    - Assets/ScriptableObjects/HeroesData/3201.asset.meta
+    - Assets/ScriptableObjects/HeroesData/3502.asset
+    - Assets/ScriptableObjects/HeroesData/3502.asset.meta
+    - Assets/ScriptableObjects/HeroesData/4101.asset
+    - Assets/ScriptableObjects/HeroesData/5301.asset
+    - Assets/ScriptableObjects/HeroesData/5301.asset.meta
+    - Assets/ScriptableObjects/HeroesData/5502.asset
+    - Assets/ScriptableObjects/HeroesData/5502.asset.meta
+    - Assets/ScriptableObjects/HeroesData/6101.asset
+    - Assets/ScriptableObjects/HeroesData/6101.asset.meta
+    - Assets/ScriptableObjects/HeroesData/6501.asset
+    - Assets/ScriptableObjects/HeroesData/6501.asset.meta
+    - Assets/ScriptableObjects/HeroesData/Abadon.asset
+    - Assets/ScriptableObjects/HeroesData/Abadon.asset.meta
+    - Assets/ScriptableObjects/HeroesData/New InfoHero.asset
+    - Assets/ScriptableObjects/HeroesData/New InfoHero.asset.meta
+    - Assets/ScriptableObjects/HeroesData/Rogue.asset
+    - Assets/ScriptableObjects/HeroesData/Rogue.asset.meta
+    - Assets/ScriptableObjects/HeroesData/Sceleton.asset
+    - Assets/ScriptableObjects/HeroesData/Sceleton.asset.meta
+    - Assets/ScriptableObjects/HeroesData/Smith.asset
+    - Assets/ScriptableObjects/HeroesData/Smith.asset.meta
+    - Assets/ScriptableObjects/Items.meta
+    - Assets/ScriptableObjects/Items/DragonSword.asset
+    - Assets/ScriptableObjects/Items/DragonSword.asset.meta
+    - Assets/ScriptableObjects/Items/Sword.asset
+    - Assets/ScriptableObjects/Items/Sword.asset.meta
+    - Assets/ScriptableObjects/Items/TrollSword.asset
+    - Assets/ScriptableObjects/Items/TrollSword.asset.meta
+    - Assets/ScriptableObjects/Tasks.meta
+    - Assets/ScriptableObjects/Tasks/test.asset
+    - Assets/ScriptableObjects/Tasks/test.asset.meta
+    - Assets/Scripts/Campaign.meta
+    - Assets/Scripts/Campaign/AutoFightScript.cs
+    - Assets/Scripts/Campaign/AutoFightScript.cs.meta
+    - Assets/Scripts/Campaign/CampaignChapterScript.cs
+    - Assets/Scripts/Campaign/CampaignChapterScript.cs.meta
+    - Assets/Scripts/Campaign/CampaignScript.cs
+    - Assets/Scripts/Campaign/CampaignScript.cs.meta
+    - Assets/Scripts/Campaign/GoldHeapScript.cs
+    - Assets/Scripts/Campaign/GoldHeapScript.cs.meta
+    - Assets/Scripts/Campaign/Mission.cs
+    - Assets/Scripts/Campaign/Mission.cs.meta
+    - Assets/Scripts/Campaign/MissionControllerScript.cs
+    - Assets/Scripts/Campaign/MissionControllerScript.cs.meta
+    - Assets/Scripts/Campaign/MissionEnemy.cs
+    - Assets/Scripts/Campaign/MissionEnemy.cs.meta
+    - Assets/Scripts/City/Buildings.meta
+    - Assets/Scripts/City/Buildings/ArenaScript.cs
+    - Assets/Scripts/City/Buildings/ArenaScript.cs.meta
+    - Assets/Scripts/City/Buildings/Building.cs
+    - Assets/Scripts/City/Buildings/Building.cs.meta
+    - Assets/Scripts/City/Buildings/ForgeScript.cs
+    - Assets/Scripts/City/Buildings/ForgeScript.cs.meta
+    - Assets/Scripts/City/Buildings/MarketScript.cs
+    - Assets/Scripts/City/Buildings/MarketScript.cs.meta
+    - Assets/Scripts/City/Buildings/PetsZooScript.cs
+    - Assets/Scripts/City/Buildings/PetsZooScript.cs.meta
+    - Assets/Scripts/City/Buildings/TaskGiverScript.cs
+    - Assets/Scripts/City/Buildings/TaskGiverScript.cs.meta
+    - Assets/Scripts/City/Buildings/TavernScript.cs
+    - Assets/Scripts/City/Buildings/TavernScript.cs.meta
+    - Assets/Scripts/City/Buildings/WheelFortuneScript.cs
+    - Assets/Scripts/City/Buildings/WheelFortuneScript.cs.meta
+    - Assets/Scripts/City/NewHeroScript.cs
+    - Assets/Scripts/City/NewHeroScript.cs.meta
+    - Assets/Scripts/City/TrainCamp/CostLevelUp.cs
+    - Assets/Scripts/City/TrainCamp/CostLevelUp.cs.meta
+    - Assets/Scripts/City/TrainCamp/CostUiListScript.cs
+    - Assets/Scripts/City/TrainCamp/TrainCampScript.cs
+    - Assets/Scripts/DevelopHelper/ActionEffectEditor.cs
+    - Assets/Scripts/DevelopHelper/ActionEffectEditor.cs.meta
+    - Assets/Scripts/DevelopHelper/RequirementEditor.cs
+    - Assets/Scripts/DevelopHelper/RequirementEditor.cs.meta
+    - Assets/Scripts/Fight/ArrowScript.cs
+    - Assets/Scripts/Fight/DotObject.cs
+    - Assets/Scripts/Fight/DotObject.cs.meta
+    - Assets/Scripts/Fight/FightControllerScript.cs
+    - Assets/Scripts/Fight/FightDataScript.cs
+    - Assets/Scripts/Fight/FightDataScript.cs.meta
+    - Assets/Scripts/Fight/FightEffectControllerScript.cs
+    - Assets/Scripts/Fight/HeroControllerScript.cs
+    - Assets/Scripts/Fight/HeroFightStatistics.cs
+    - Assets/Scripts/Fight/HeroFightStatistics.cs.meta
+    - Assets/Scripts/Fight/HeroStatusPartialAPI.cs
+    - Assets/Scripts/Fight/HeroStatusPartialAPI.cs.meta
+    - Assets/Scripts/Fight/HeroStatusRoundsController.cs
+    - Assets/Scripts/Fight/HeroStatusRoundsController.cs.meta
+    - Assets/Scripts/Fight/HeroStatusScript.cs
+    - Assets/Scripts/Fight/LocationControllerScript.cs
+    - Assets/Scripts/Fight/LocationControllerScript.cs.meta
+    - Assets/Scripts/Fight/PetControllerScript.cs
+    - Assets/Scripts/Fight/PetControllerScript.cs.meta
+    - Assets/Scripts/Fight/StrikeFight.cs
+    - Assets/Scripts/Fight/StrikeFight.cs.meta
+    - Assets/Scripts/GeneralObject.meta
+    - Assets/Scripts/GeneralObject/ListResource.cs
+    - Assets/Scripts/GeneralObject/ListResource.cs.meta
+    - Assets/Scripts/GeneralObject/Requirement.cs
+    - Assets/Scripts/GeneralObject/Requirement.cs.meta
+    - Assets/Scripts/GeneralObject/Resource.cs
+    - Assets/Scripts/GeneralObject/Resource.cs.meta
+    - Assets/Scripts/GeneralObject/Task.cs
+    - Assets/Scripts/GeneralObject/Task.cs.meta
+    - Assets/Scripts/Hero/ActionEffect.cs
+    - Assets/Scripts/Hero/BreakthroughHero.cs
+    - Assets/Scripts/Hero/Effect.cs
+    - Assets/Scripts/Hero/EffectActionDetails.cs
+    - Assets/Scripts/Hero/EffectActionDetails.cs.meta
+    - Assets/Scripts/Hero/Hero.cs
+    - Assets/Scripts/Hero/InfoHero.cs
+    - Assets/Scripts/Hero/PartialHeroAPI.cs
+    - Assets/Scripts/Hero/PartialHeroAPI.cs.meta
+    - Assets/Scripts/Hero/Race.cs
+    - Assets/Scripts/Hero/Round.cs
+    - Assets/Scripts/Hero/Skill.cs
+    - Assets/Scripts/Hero/TypeEffectGeneralInfo.cs
+    - Assets/Scripts/Hero/TypeEffectGeneralInfo.cs.meta
+    - Assets/Scripts/Hero/Vocation.cs
+    - Assets/Scripts/MainScripts/PlayerScript.cs
+    - Assets/Scripts/MainScripts/PlayerScript.cs.meta
+    - Assets/Scripts/UIController/ButtonCostScript.cs
+    - Assets/Scripts/UIController/ButtonCostScript.cs.meta
+    - Assets/Scripts/UIController/CardScript.cs
+    - Assets/Scripts/UIController/CardScript.cs.meta
+    - Assets/Scripts/UIController/Gradient.meta
+    - Assets/Scripts/UIController/Gradient/UIGradient.cs
+    - Assets/Scripts/UIController/Gradient/UIGradient.cs.meta
+    - Assets/Scripts/UIController/Gradient/UIGradientUtils.cs
+    - Assets/Scripts/UIController/Gradient/UIGradientUtils.cs.meta
+    - Assets/Scripts/UIController/ItemVisual.cs
+    - Assets/Scripts/UIController/ItemVisual.cs.meta
+    - Assets/Scripts/UIController/ListCardOnWarTableScript.cs
+    - Assets/Scripts/UIController/ListCardOnWarTableScript.cs.meta
+    - Assets/Scripts/UIController/Localization.meta
+    - Assets/Scripts/UIController/Localization/Languages.meta
+    - Assets/Scripts/UIController/Localization/Languages/LanguageControllerScript.cs
+    - Assets/Scripts/UIController/Localization/Languages/LanguageControllerScript.cs.meta
+    - Assets/Scripts/UIController/Localization/Languages/LanguageObject.cs
+    - Assets/Scripts/UIController/Localization/Languages/LanguageObject.cs.meta
+    - Assets/Scripts/UIController/MenuControllerScript.cs
+    - Assets/Scripts/UIController/ObserverResourceScript.cs
+    - Assets/Scripts/UIController/ObserverResourceScript.cs.meta
+    - Assets/Scripts/UIController/PetAvatarControllerScript.cs
+    - Assets/Scripts/UIController/PetAvatarControllerScript.cs.meta
+    - Assets/Scripts/UIController/ProductScript.cs
+    - Assets/Scripts/UIController/ProductScript.cs.meta
+    - Assets/Scripts/UIController/SliderTimeScript.cs
+    - Assets/Scripts/UIController/SliderTimeScript.cs.meta
+    - Assets/Scripts/UIController/TaskControllerScript.cs
+    - Assets/Scripts/UIController/TaskControllerScript.cs.meta
+    - Assets/Sprites/Buildings/Wheel.meta
+    - "Assets/Sprites/Buildings/Wheel/\u0431\u0435\u043B\u044B\u0439 \u043A\u0440\u0443\u0433.png"
+    - "Assets/Sprites/Buildings/Wheel/\u0431\u0435\u043B\u044B\u0439 \u043A\u0440\u0443\u0433.png.meta"
+    - Assets/Sprites/Hero/Materials.meta
+    - Assets/Sprites/Hero/Materials/black_night 1.mat
+    - Assets/Sprites/Hero/Materials/black_night 1.mat.meta
+    - Assets/Sprites/Hero/Materials/black_night.mat
+    - Assets/Sprites/Hero/Materials/black_night.mat.meta
+    - Assets/Sprites/Icons/Fight/Effects.meta
+    - Assets/Sprites/Icons/Fight/Effects/1.png
+    - Assets/Sprites/Icons/Fight/Effects/1.png.meta
+    - Assets/Sprites/Icons/Fight/Effects/5a29e1a37a9239.5983790215126941795021.png
+    - Assets/Sprites/Icons/Fight/Effects/5a29e1a37a9239.5983790215126941795021.png.meta
+    - Assets/Sprites/Icons/Fight/Effects/kisspng-blood-vampire-sticker-clip-art-blood-5ab7c2e030a4e9.2566573415219924161993.png
+    - Assets/Sprites/Icons/Fight/Effects/kisspng-blood-vampire-sticker-clip-art-blood-5ab7c2e030a4e9.2566573415219924161993.png.meta
+    - Assets/Sprites/Icons/Fight/Effects/kisspng-clip-art-openclipart-computer-icons-illustration-v-mute-sound-windows-off-png-image-picpng-5bf2623ebe3bb6.1124830915426115187792.png
+    - Assets/Sprites/Icons/Fight/Effects/kisspng-clip-art-openclipart-computer-icons-illustration-v-mute-sound-windows-off-png-image-picpng-5bf2623ebe3bb6.1124830915426115187792.png.meta
+    - "Assets/Sprites/Icons/Fight/Effects/\u041A\u0430\u043F\u043B\u044F.png"
+    - "Assets/Sprites/Icons/Fight/Effects/\u041A\u0430\u043F\u043B\u044F.png.meta"
+    - Assets/Sprites/Icons/Resources/SpriteAtlasTexture-uitexture_icon_item-2048x1024-fmt47.png.meta
+    - Assets/Sprites/Icons/SpriteAtlasTexture-model_battlebg_zhandou_21 (Group 1)-1024x1024-fmt45.png.meta
+    - Assets/Sprites/Inventory.meta
+    - "Assets/Sprites/\u0421ampaignBackGround/SpriteAtlasTexture-uitexture_window_mainwindow_hangicon-2048x2048-fmt45
+      #191358.png.meta"
+    - Packages/manifest.json
+    - Packages/packages-lock.json
+    - ProjectSettings/ProjectVersion.txt
+    - ProjectSettings/VersionControlSettings.asset
+    - 
+    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  RevisionSummary: 
+  ChangesSearchValue: 
+  SelectedHistoryRevision: 
+  HistoryPageNumber: 0
+  TabIndex: 0
