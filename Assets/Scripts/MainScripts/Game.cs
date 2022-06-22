@@ -6,8 +6,8 @@ using ObjectSave;
 [System.Serializable]
 public class Game{
 
-	[SerializeField]
-	private int campaignMissionNumComplete;
+	public int maxCountHeroes = 100;
+	[SerializeField] private int campaignMissionNumComplete;
 	public int CampaignMissionNumComplete{get => campaignMissionNumComplete; set => campaignMissionNumComplete = value;}
 
 	public ListResource StoreResources;

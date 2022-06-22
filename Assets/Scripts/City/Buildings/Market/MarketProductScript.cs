@@ -1,41 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class MarketProductScript : ProductScript{
-	public  int countLeftProduct;
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+public class MarketProductScript : MonoBehaviour{
 	public ButtonCostScript buttonCost;
-	private MarketProduct marketProduct;
-	public override void UpdateUI(Product product){
-		this.marketProduct = product as MarketProduct;
-		countLeftProduct   = marketProduct.countMaxProduct;
-		buttonCost.UpdateCost(marketProduct.cost, Buy);
-		UIItem.UpdateUI(this.marketProduct);
+	[OdinSerialize] private MarketProduct marketProduct;
+	public SubjectCellControllerScript cellProduct;
+	public void SetData(MarketProduct<Resource> product){
+		marketProduct = product;
+		buttonCost.UpdateCost(product.cost, Buy);
+		cellProduct.SetItem(product.subject);
+	}
+	public void SetData(MarketProduct<Item> product){
+		marketProduct = product;
+		buttonCost.UpdateCost(product.cost, Buy);
+		cellProduct.SetItem(product.subject);
+	}
+	public void SetData(MarketProduct<Splinter> product){
+		marketProduct = product;
+		buttonCost.UpdateCost(product.cost, Buy);
+		cellProduct.SetItem(product.subject);
+	}
+	private void UpdateUI(){
+
 	}
     public void Buy(int count = 1){
-		if(PlayerScript.Instance.CheckResource( marketProduct.cost )){
-			PlayerScript.Instance.SubtractResource( marketProduct.cost );
-			if(count > countLeftProduct) count = countLeftProduct;
-			countLeftProduct -= count;
-			GetProduct();
-			if(countLeftProduct == 0){
-				buttonCost.Disable();
-			}
+		if((count + marketProduct.CountLeftProduct) > marketProduct.CountMaxProduct) count = marketProduct.CountMaxProduct - marketProduct.CountLeftProduct;
+		marketProduct.GetProduct(count);
+		if(marketProduct.CountLeftProduct == marketProduct.CountMaxProduct){
+			buttonCost.Disable();
 		}
 	}
-	public override void Clear(){
-		countLeftProduct = 0;
-		base.Clear();
+	public void Hide(){
+		gameObject.SetActive(false);
 	}
-}
-
-[System.Serializable]
-public class MarketProduct : Product{
-	public Resource cost;
-	public  int countMaxProduct;
-}
-public enum CycleRecover{
-	Day,
-	Week,
-	Never
 }

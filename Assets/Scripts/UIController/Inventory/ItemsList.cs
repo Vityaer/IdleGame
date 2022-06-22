@@ -7,32 +7,26 @@ using UnityEngine;
 public class ItemsList : ScriptableObject{
 	[Header("Forge")]
 	[Header("Weapons")]
-	[SerializeField]
-	private List<Item> weapons = new List<Item>();
-	[Header("Shield")]
-	[SerializeField]
-	private List<Item> shields = new List<Item>();
-	[Header("Helmet")]
-	[SerializeField]
-	private List<Item> helmets = new List<Item>();
-	[Header("Mittens")]
-	[SerializeField]
-	private List<Item> mittens = new List<Item>();
-	[Header("Armors")]
-	[SerializeField]
-	private List<Item> armors = new List<Item>();
+	[SerializeField] private List<Item> weapons = new List<Item>();
 	[Header("Boots")]
-	[SerializeField]
-	private List<Item> boots = new List<Item>();
+	[SerializeField] private List<Item> boots = new List<Item>();
+	[Header("Armors")]
+	[SerializeField] private List<Item> armors = new List<Item>();
+	[Header("Helmet")]
+	[SerializeField] private List<Item> helmets = new List<Item>();
+	[Header("Shield")]
+	[SerializeField] private List<Item> shields = new List<Item>();
 	[Header("Amulet")]
-	[SerializeField]
-	private List<Item> amulets = new List<Item>();
+	[SerializeField] private List<Item> amulets = new List<Item>();
+	[Header("Mittens")]
+	[SerializeField] private List<Item> mittens = new List<Item>();
 	public Item GetItem(int ID){
 		Item result = GetItemFromList( ID );
 		if(result == null) Debug.Log("не нашли такого предмета "+ ID.ToString()); 
 		return result;
 	}
 	private Item GetItemFromList(int ID){
+		Debug.Log("ищем предмет: " + ID.ToString());
 		Item result = null;
 		int numList = ID / 100;
 		switch(numList){
@@ -56,6 +50,36 @@ public class ItemsList : ScriptableObject{
 				break;
 			case 7:
 				result = mittens.Find(x => (x.ID == ID));
+				break;						
+		}
+		if(result == null) result = FindItemWithoutID(ID);
+		return result;
+	}
+	private Item FindItemWithoutID(int ID){
+		Item result = null;
+		int numList = ID / 100;
+		int num = ID - 100 * numList;
+		switch(numList){
+			case 1:
+				result = weapons[num];
+				break;
+			case 2:
+				result = boots[num];
+				break;
+			case 3:
+				result = armors[num];
+				break;
+			case 4:
+				result = helmets[num];
+				break;
+			case 5:
+				result = shields[num];
+				break;
+			case 6:
+				result = amulets[num];
+				break;
+			case 7:
+				result = mittens[num];
 				break;						
 		}
 		return result;

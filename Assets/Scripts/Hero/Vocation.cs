@@ -16,8 +16,7 @@ public enum Vocation{
 internal class Growth{
 	public static void GrowHero(Characteristics characts, Resistance resistance,IncreaseCharacteristics increaseCharacts, int level = 1){
 		GrowthCharact(ref characts.HP                       , increaseCharacts.increaseHP, level );
-		GrowthCharact(ref characts.Armor                    , increaseCharacts.increaseArmor, level );
-		GrowthCharact(ref characts.Attack                   , increaseCharacts.increaseAttack, level );
+		GrowthCharact(ref characts.Damage                   , increaseCharacts.increaseDamage, level );
 		GrowthCharact(ref characts.Accuracy                 , increaseCharacts.increaseAccuracy, level );
 		GrowthCharact(ref characts.Initiative               , increaseCharacts.increaseInitiative, level );
 		GrowthCharact(ref characts.CleanDamage              , increaseCharacts.increaseCleanDamage, level );
@@ -42,9 +41,8 @@ internal class Growth{
 
 [System.Serializable]
 public class IncreaseCharacteristics : ICloneable{
-	public float increaseAttack;
+	public float increaseDamage;
 	public float increaseHP;
-	public float increaseArmor;
 	public float increaseInitiative;
 	public float increaseProbabilityCriticalAttack;
 	public float increaseDamageCriticalAttack;
@@ -58,9 +56,8 @@ public class IncreaseCharacteristics : ICloneable{
 	public float increasePoisonResistance;
 
 	public object Clone(){
-        return new IncreaseCharacteristics  { 	increaseAttack = this.increaseAttack,
+        return new IncreaseCharacteristics  { 	increaseDamage = this.increaseDamage,
         							 	increaseHP = this.increaseHP,
-        							 	increaseArmor     = this.increaseArmor,
         							 	increaseInitiative  = this.increaseInitiative,
         							 	increaseProbabilityCriticalAttack = this.increaseProbabilityCriticalAttack,
         							 	increaseDamageCriticalAttack = this.increaseDamageCriticalAttack,
@@ -76,10 +73,11 @@ public class IncreaseCharacteristics : ICloneable{
 
 [System.Serializable]
 public class Characteristics : ICloneable{
-	public int limitLevel;
-	public int   Attack;
+	public int   limitLevel;
+	public int   Damage;
 	public int   HP;
-	public int   Armor;
+	public int 	 GeneralAttack;
+	public int   GeneralArmor;
 	public int   Initiative;
 	public float ProbabilityCriticalAttack;
 	public float DamageCriticalAttack;
@@ -88,11 +86,16 @@ public class Characteristics : ICloneable{
 	public float Dodge;
 	public int CountTargetForSimpleAttack = 1;
 	public int CountTargetForSpell = 1;
+	public BaseCharacteristic baseCharacteristic;
+
+
+	//API
 	public object Clone(){
         return new Characteristics  { 	limitLevel = this.limitLevel,
-        							 	Attack = this.Attack,
+        							 	Damage = this.Damage,
         							 	HP     = this.HP,
-        							 	Armor  = this.Armor,
+        							 	GeneralAttack = this.GeneralAttack,
+        							 	GeneralArmor = this.GeneralArmor,
         							 	Initiative = this.Initiative,
         							 	ProbabilityCriticalAttack = this.ProbabilityCriticalAttack,
         							 	DamageCriticalAttack = this.DamageCriticalAttack,
@@ -100,7 +103,8 @@ public class Characteristics : ICloneable{
         							 	CleanDamage = this.CleanDamage,
         							 	Dodge = this.Dodge,
         							 	CountTargetForSimpleAttack = this.CountTargetForSimpleAttack,
-        							 	CountTargetForSpell = this.CountTargetForSpell
+        							 	CountTargetForSpell = this.CountTargetForSpell,
+        							 	baseCharacteristic = this.baseCharacteristic
         							};				
     }
 }
@@ -144,8 +148,6 @@ public class GeneralInfoHero{
 	public Sprite ImageHero{get{
 	 	return Prefab?.GetComponent<SpriteRenderer>().sprite;}}
 	public  int Level;
-	public  bool Mellee;
-	public TypeStrike typeStrike = TypeStrike.Physical;
 	public bool isAlive = true;
 	private GameObject prefab;
 	public  GameObject Prefab{get {if (prefab == null) prefab = Resources.Load<GameObject>( string.Concat("Heroes/", this.idHero.ToString()) ); return prefab;} set => prefab = value;}
@@ -158,14 +160,50 @@ public class GeneralInfoHero{
         							 	rare = this.rare,
         							 	idHero = this.idHero,
         							 	Level = this.Level,
-        							 	Mellee = this.Mellee,
-        							 	isAlive = this.isAlive,
-        							 	typeStrike = this.typeStrike
+        							 	isAlive = this.isAlive
         							};				
     }
 
 }
-
+[System.Serializable]
+public class BaseCharacteristic{
+	public int Attack;
+	public int Defense;
+	public int Speed; 
+	public TypeMovement typeMovement; 
+	public  bool Mellee;
+	public TypeStrike typeStrike;
+}
+public enum TypeMovement{
+	Ground,
+	Fly,
+	Teleport
+}
+public enum TypeCharacteristic{
+	Damage,
+	HP,
+	Defense,
+	Initiative,
+	Attack,
+	ProbabilityCriticalAttack,
+	DamageCriticalAttack,
+	Accuracy,
+	CleanDamage,
+	Dodge,
+	MagicResistance,
+	CritResistance,
+	PoisonResistance,
+	StunResistance,
+	PetrificationResistance,
+	FreezingResistance,
+	AstralResistance,
+	DumbResistance,
+	silinceResistance,
+	EfficiencyHeal,
+	Speed,
+	CountTargetForSimpleAttack,
+	CountTargetForSpell
+}
 public interface ICloneable{
     object Clone();
 }

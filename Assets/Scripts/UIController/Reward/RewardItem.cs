@@ -20,14 +20,14 @@ public class RewardItem : ICloneable{
 	public int min, max, count;
 	private ItemController itemController = null;
 	private bool isCalculate = false; 
-	public ItemController GetReward(int count = 1){
+	public ItemController GetReward(int countReward = 1){
 		int amount = 0;
 		switch(typeIssue){
 			case TypeIssue.Necessarily:
-				amount = this.count;
+				amount = Math.Min(this.count, 1);
 				break;
 			case TypeIssue.Perhaps:
-				int loopCount = count / 200;
+				int loopCount = countReward / 200;
 				for(int i = 0; i < loopCount; i++){
 					if( UnityEngine.Random.Range(0f, 100f) < posibility){
 						amount += 1;
@@ -37,15 +37,17 @@ public class RewardItem : ICloneable{
 				break;
 			case TypeIssue.Range:
 				float rand = UnityEngine.Random.Range(0f, 100f);
-				amount = (int) Mathf.Round(((max - min)*rand/100f + min)/100f);
+				amount = Math.Min((int) Mathf.Round(((max - min)*rand/100f + min)/100f), 1);
 				break;
 			default:
-				amount = count;
+				amount = Math.Min(countReward, 1);
 				break;			
 		}
 		if(amount > 0){
 			itemController = new ItemController(item, amount);		
 			isCalculate = true;
+		}else{
+			itemController = new ItemController(item, 0);
 		}
 		return itemController;
 	}
@@ -59,4 +61,10 @@ public class RewardItem : ICloneable{
         							 	count  = this.count
         							};				
     }
+}
+
+public enum TypeIssue{
+	Necessarily = 0,
+	Perhaps     = 1,
+	Range       = 2
 }

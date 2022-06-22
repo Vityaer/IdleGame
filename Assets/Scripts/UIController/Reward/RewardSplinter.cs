@@ -40,7 +40,7 @@ public class RewardSplinter : ICloneable{
 				amount = count;
 				break;			
 		}
-		if(amount > 0) splinterController = new SplinterController(splinter, amount);
+		if((amount > 0) && (splinter != null)) splinterController = new SplinterController(splinter, amount);
 		return splinterController;
 	}
 	public object Clone(){

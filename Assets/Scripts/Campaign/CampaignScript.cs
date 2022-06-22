@@ -5,7 +5,7 @@ using UnityEngine;
 public class CampaignScript : MonoBehaviour{
 	private Canvas canvasCampaign;
 	private MissionControllerScript infoMission;
-	private Mission mission;
+	private CampaignMission mission;
 	private int currentMission;
 	public Transform missions;
 	public CampaignChapter chapter;
@@ -40,15 +40,15 @@ public class CampaignScript : MonoBehaviour{
 	}
 	public void GetResult(bool win){
 		if(win == true){
-	 		MessageControllerScript.Instance.OpenWin(this.mission.WinReward.GetCaculateReward());
+	 		MessageControllerScript.Instance.OpenWin(this.mission?.WinReward);
 	 		if(infoMission != null){
 	 			infoMission.MissionWin();
 	 		}else{
 	 			Debug.Log("это была не миссия компании");
 	 		}
-		}else{
-	 		MessageControllerScript.Instance.OpenLose(this.mission.DefeatReward.GetCaculateReward());
 		}
+ 		
+		if(mission == null){ WarTableControllerScript.Instance.FinishMission(); }
 		infoMission = null;
 		mission = null;
 	}
@@ -60,7 +60,7 @@ public class CampaignScript : MonoBehaviour{
 		WarTableControllerScript.Instance.RegisterOnOpenCloseMission(this.OnOpenCloseMission);
 		WarTableControllerScript.Instance.Open();
 	}
-	public void SelectMission(Mission mission, List<InfoHero> listHeroes){
+	public void SelectMission(CampaignMission mission, List<InfoHero> listHeroes){
 		WarTableControllerScript.Instance.OpenMission(mission, listHeroes);
 		this.mission = mission;
 	}

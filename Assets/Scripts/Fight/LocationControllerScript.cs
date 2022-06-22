@@ -5,6 +5,9 @@ using UnityEngine;
 public class LocationControllerScript : MonoBehaviour{
 	public List<Location> locations = new List<Location>();
 	private Location curLocation;
+	void Awake(){
+		instance = this;
+	}
 	public void OpenLocation(TypeLocation typeLocation){
 		foreach(Location location in locations){
 			if(location.type == typeLocation){
@@ -27,6 +30,8 @@ public class LocationControllerScript : MonoBehaviour{
 		}
 		return result;
 	}
+	private static LocationControllerScript instance;
+	public static LocationControllerScript Instance{get => instance;}
 }
 
 public enum TypeLocation{

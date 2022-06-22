@@ -52,7 +52,7 @@ namespace ObjectSave{
 		public int Amount;
 		public SplinterSave(SplinterController splinterController){
 			this.ID = splinterController.splinter.ID;
-			this.Amount = splinterController.Amount;
+			this.Amount = splinterController.splinter.Amount;
 		}
 	}
 	[System.Serializable]

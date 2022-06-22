@@ -15,7 +15,7 @@ public class InfoHero : ScriptableObject, ICloneable{
 	[Header("Сharacteristics")]
 	public Characteristics characts;
 
-	public float GetStrength{get => (Mathf.Round( GetCharacteristic("Attack") + GetCharacteristic("HP")/3f ) );}
+	public float GetStrength{get => (Mathf.Round( GetCharacteristic(TypeCharacteristic.Damage) + GetCharacteristic(TypeCharacteristic.HP)/3f ) );}
 
 	[Header("Resistance")]
 	public Resistance resistances;  
@@ -41,7 +41,7 @@ public class InfoHero : ScriptableObject, ICloneable{
 		this.characts        = (Characteristics) Data.characts.Clone();
 		this.resistances     = (Resistance) Data.resistances.Clone();
 		this.generalInfo.Prefab = Resources.Load<GameObject>( string.Concat("Heroes/", this.generalInfo.idHero.ToString()) ); 
-		if(this.generalInfo.Mellee == false) this.prefabArrow = Resources.Load<GameObject>("CreateObjects/Bullet"); 
+		if(this.characts.baseCharacteristic.Mellee == false) this.prefabArrow = Resources.Load<GameObject>("CreateObjects/Bullet"); 
 		this.skills     = Data.skills;
 		this.Evolutions = Data.Evolutions;
 		this.CostumeHero = new CostumeHeroControllerScript();
@@ -69,21 +69,21 @@ public class InfoHero : ScriptableObject, ICloneable{
 			}
 		}
 	}
-	public float GetCharacteristic(string typeBonus){
+	public float GetCharacteristic(TypeCharacteristic typeBonus){
 		float result = 0;
 		switch (typeBonus){
-			case "HP":
+			case TypeCharacteristic.HP:
 				result += characts.HP;
 				break;
-			case "Attack":
-				result += characts.Attack;
+			case TypeCharacteristic.Damage:
+				result += characts.Damage;
 				break;
-			case "Armor":
-				result += characts.Armor;
-				break;
-			case "Initiative":
+			case TypeCharacteristic.Initiative:
 				result += characts.Initiative;
-				break;			
+				break;
+			case TypeCharacteristic.Defense:
+				result += characts.baseCharacteristic.Defense;
+				break;  	
 		}
 		result += CostumeHero.GetBonus(typeBonus);
 		return result;

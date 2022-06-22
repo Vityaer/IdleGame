@@ -54,7 +54,7 @@ public partial class HeroStatusScript : MonoBehaviour{
 		return result;
 	}
 	void OnDestroy(){
-		FightControllerScript.Instance.UnRegisterOnEndRound(RoundFinish);
+		FightControllerScript.Instance.UnregisterOnEndRound(RoundFinish);
 	}
 }
 

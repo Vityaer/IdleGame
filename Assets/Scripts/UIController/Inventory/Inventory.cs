@@ -28,7 +28,7 @@ public class Inventory{
 	public void Add(SplinterController splinterController){
 		SplinterController workSplinter = splinters.Find(x => (x.splinter.objectReward == splinterController.splinter.objectReward));
 		if(workSplinter != null){
-			workSplinter.IncreaseAmount(splinterController.Amount);
+			workSplinter.IncreaseAmount(splinterController.splinter.Amount);
 		}else{
 			splinters.Add((SplinterController) splinterController.Clone());
 		}

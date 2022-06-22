@@ -34,7 +34,8 @@ public class Task : ICloneable{
 
 	public long strTimeStartTask;
 	public StatusTask status = StatusTask.NotStart;
-	public Product reward;
+	[HideInInspector][SerializeField]private Resource reward;
+	public Resource Reward{get => reward; set => reward = value;}
 	public void Start(){
 		status           = StatusTask.InWork;
 		timeStartTask    = DateTime.Now;
@@ -42,6 +43,9 @@ public class Task : ICloneable{
 //API
 	public TimeSpan GetRequireTime(){
 		return new TimeSpan(_requireTime.Hour, 0, 0);
+	}
+	public void GetReward(){
+		PlayerScript.Instance.AddResource( reward );
 	}
 
 	public object Clone(){

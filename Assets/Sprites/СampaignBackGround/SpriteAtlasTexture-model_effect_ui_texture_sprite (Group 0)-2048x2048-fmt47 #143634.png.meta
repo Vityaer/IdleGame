@@ -507,6 +507,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -515,9 +517,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -538,9 +540,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -724,6 +729,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_4: 1123835401397776218
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_2: -4186907652767540588
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_0: 7593611003582170250
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_3: -4332263200702118100
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_1: 5656485964769055419
+      SpriteAtlasTexture-model_effect_ui_texture_sprite (Group 0)-2048x2048-fmt47 #143634_5: -4647734340464413520
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

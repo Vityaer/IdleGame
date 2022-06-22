@@ -8,6 +8,7 @@ public class BossUIScript : MonoBehaviour, IWorkWithWarTable{
 	[SerializeField] private Canvas canvasBuild;
 	[SerializeField] private SliderScript sliderHP;
 	[SerializeField] private Text textHPBoss;
+
 	public void UpdateUI(){
 		MissionEnemy boss = bossController.GetBoss();
 		textHPBoss.text =  boss.CurrentHP.ToString();

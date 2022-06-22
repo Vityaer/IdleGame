@@ -20,7 +20,6 @@ public class ListMyHeroesControllerScript : MonoBehaviour{
 	}
 	void LoadListHeroes(){
 		PlayerScript.Instance.GetListHeroesWithObserver(ref listHeroes, OnChangeListHeroes);
-		Debug.Log(this.listHeroes.Count);
 		listHeroesController.SetList(listHeroes);
 	}
 	public void Open(){

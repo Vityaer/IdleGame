@@ -38,7 +38,7 @@ public class PanelInfoItemScript : MonoBehaviour{
 			textButtonDrop.text = "Снять";
 		}
 		selectItem = item;
-		imageInfoItem.sprite = item.sprite;
+		imageInfoItem.sprite = item.Image;
 		textNameItem.text = item.Name;
 		textTypeItem.text = item.Type.ToString();
 		textBonus.text    = item.GetTextBonuses(); 
@@ -47,7 +47,7 @@ public class PanelInfoItemScript : MonoBehaviour{
 		isOpenInfoPanel = true;
 	}
 	public void OpenInfoAboutItem(Resource res){
-		imageInfoItem.sprite = res.sprite;
+		imageInfoItem.sprite = res.Image;
 		textNameItem.text    = res.Name.ToString();
 		panelInfoItem.SetActive(true);
 	}
@@ -57,11 +57,11 @@ public class PanelInfoItemScript : MonoBehaviour{
 		componentButtonDrop.onClick.RemoveAllListeners();
 		componentButtonDrop.onClick.AddListener( Close );
 		
-		imageInfoItem.sprite = splinterController.splinter.sprite;
+		imageInfoItem.sprite = splinterController.splinter.Image;
 		textNameItem.text    = splinterController.splinter.Name;
 		textTypeItem.text    = "";
 		textBonus.text       = "";
-		componentButtonAction.onClick.AddListener(splinterController.GetReward);
+		componentButtonAction.onClick.AddListener(() => splinterController.GetReward());
 		componentButtonDrop.onClick.AddListener(() => InventoryControllerScript.Instance.DropSplinter(splinterController));
 		textButtonDrop.text = "Выбросить";
 		btnAction.SetActive(true);

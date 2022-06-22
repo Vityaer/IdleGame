@@ -7,7 +7,7 @@ public partial class ActionEffect{
 		switch (simpleAction){
 			case EffectSimpleAction.Damage:
 				foreach (HeroControllerScript heroController in listTarget)
-					heroController.GetDamage(new Strike(amount, typeNumber: typeNumber));
+					heroController.GetDamage(new Strike(amount, heroController.hero.characts.GeneralAttack, typeNumber: typeNumber));
 				break;
 			case EffectSimpleAction.Heal:
 				foreach (HeroControllerScript heroController in listTarget)

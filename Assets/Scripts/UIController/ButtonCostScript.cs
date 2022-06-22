@@ -2,38 +2,52 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class ButtonCostScript : MonoBehaviour{
 	public Text textCost;
 	public Button btn;
 	public Image imgRes;
 	public Resource res;
-	public delegate void Del(int count);
-	public Del delBuyMatter;
+	public Action<int> delBuyMatter;
+	public int countBuy = 1;
 	private bool disable = false;
 	void Start(){
 		if(res.Count > 0){
 			UpdateInfo();
 		}
 	}
-	public void UpdateCost(Resource res, Del d){
-		if(disable == false){
-			delBuyMatter  = d;
-			this.res      = res;
-			UpdateInfo(); 
-		}
+	public void UpdateCost(Resource res, Action<int> d){
+		delBuyMatter  = d;
+		this.res      = res;
+	    UpdateInfo(); 
+	}
+	public void RegisterOnBuy(Action<int> d){
+		delBuyMatter = d;
+		UpdateInfo();
+	}
+	public void UpdateCostWithoutInfo(Resource res, Action<int> d){
+		delBuyMatter  = d;
+		this.res      = res;
+		CheckResource( res );
 	}
 	private void UpdateInfo(){
 		if(disable == false){
-			textCost.text = (res.Count > 0) ? res.ToString() : "Бесплатно";
-			imgRes.sprite = res.sprite;
-			PlayerScript.Instance.RegisterOnChangeResource( CheckResource, res.Name );
+			if(res.Count > 0){
+				textCost.text = res.ToString();
+				imgRes.enabled = true;
+				imgRes.sprite = res.Image;
+				PlayerScript.Instance.RegisterOnChangeResource( CheckResource, res.Name );
+			}else{
+				textCost.text = "Бесплатно";
+				imgRes.enabled = false;
+			}
 			CheckResource( res );
 		}
 	}
 	public void Buy(){
 		if(delBuyMatter != null){
 			SubstractResource();
-			delBuyMatter(1);
+			delBuyMatter(countBuy);
 		}
 	}
 
@@ -46,7 +60,7 @@ public class ButtonCostScript : MonoBehaviour{
 		delBuyMatter     = null;
 		btn.interactable = false;	
 	}
-	public void SubstractResource(){
+	private void SubstractResource(){
 		PlayerScript.Instance.SubtractResource(res);
 	}
 }

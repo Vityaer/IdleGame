@@ -21,30 +21,24 @@ public class ThingUIScript : MonoBehaviour{
 		textAmount.text    = text;
 		imageThing.enabled = true;
 	}
-	public void UpdateUI(Sprite image, Rare rare, int amount, int rating = 0){
+	public void UpdateUI(Sprite image, Rare rare, int amount = 0, int rating = 0){
 		Clear();
 		imageThing.sprite  = image;
-		textAmount.text = amount.ToString();
+		textAmount.text = (amount > 0) ? amount.ToString() : string.Empty;
 		if(ratingThing != null) ratingThing.ShowRating(rating);
-		imageThing.enabled = true;
-	}
-	public void UpdateUI(Product product){
-		Clear();
-		imageThing.sprite  = product.GetImage();
-		textAmount.text    = product.GetCount();
 		imageThing.enabled = true;
 	}
 	public void UpdateUI(Resource res){
 		Clear();
 		Debug.Log(res.ToString());
-		imageThing.sprite  = res.sprite;
+		imageThing.sprite  = res.Image;
 		textAmount.text    = res.ToString();
 		imageThing.enabled = true;
 	}
 	public void UpdateUI(SplinterController splinterController){
 		Clear();
-		imageThing.sprite = splinterController.splinter.sprite;
-		sliderAmount.SetAmount(splinterController.Amount, splinterController.splinter.requireAmount);
+		imageThing.sprite = splinterController.splinter.Image;
+		sliderAmount.SetAmount(splinterController.splinter.Amount, splinterController.splinter.RequireAmount);
 		imageThing.enabled = true;
 	}
 	public void Select(){

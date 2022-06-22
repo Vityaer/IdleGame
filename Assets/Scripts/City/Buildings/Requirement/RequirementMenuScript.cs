@@ -5,9 +5,11 @@ using UnityEngine;
 public class RequirementMenuScript : Building{
 	[SerializeField] private Transform  taskboard;
 	[SerializeField] private GameObject prefabRequirement;
-	[SerializeField] private ListRequirements patternRequirements; 
+	[SerializeField] private ListRequirement patternRequirements; 
+
+	
 	bool isCreate = false;
-	protected override void OpenPage(){
+	protected override void OnStart(){
 		if(isCreate == false){
 			CreateRequrements();
 		}

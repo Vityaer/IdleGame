@@ -26,9 +26,10 @@ MonoBehaviour:
   prefabArrow: {fileID: 0}
   characts:
     limitLevel: 40
-    Attack: 4
+    Damage: 5
     HP: 16
-    Armor: 3
+    GeneralAttack: 0
+    GeneralArmor: 0
     Initiative: 18
     ProbabilityCriticalAttack: 0
     DamageCriticalAttack: 0
@@ -37,6 +38,13 @@ MonoBehaviour:
     Dodge: 0
     CountTargetForSimpleAttack: 1
     CountTargetForSpell: 1
+    baseCharacteristic:
+      Attack: 8
+      Defense: 6
+      Speed: 3
+      typeMovement: 0
+      Mellee: 0
+      typeStrike: 0
   resistances:
     MagicResistance: 0
     CritResistance: 0
@@ -49,9 +57,8 @@ MonoBehaviour:
     silinceResistance: 0
     EfficiencyHeal: 1
   incCharacts:
-    increaseAttack: 1
+    increaseDamage: 2
     increaseHP: 1
-    increaseArmor: 0.2
     increaseInitiative: 0.1
     increaseProbabilityCriticalAttack: 0
     increaseDamageCriticalAttack: 0
@@ -108,9 +115,8 @@ MonoBehaviour:
       newLimitLevel: 32
       newRatingHero: 0
       incCharacts:
-        increaseAttack: 0
+        increaseDamage: 0
         increaseHP: 0
-        increaseArmor: 0
         increaseInitiative: 0
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -131,9 +137,96 @@ MonoBehaviour:
       newLimitLevel: 0
       newRatingHero: 0
       incCharacts:
-        increaseAttack: 0
+        increaseDamage: 0
         increaseHP: 0
-        increaseArmor: 0
+        increaseInitiative: 0
+        increaseProbabilityCriticalAttack: 0
+        increaseDamageCriticalAttack: 0
+        increaseDodge: 0
+        increaseAccuracy: 0
+        increaseCleanDamage: 0
+        increaseMagicResistance: 0
+        increaseCritResistance: 0
+        increasePoisonResistance: 0
+      isSeriousChange: 0
+      newName: 
+      newRace: 0
+      newClassHero: 0
+      IDnewPrefab: 0
+    - numBreakthrough: 0
+      requireLevel: 0
+      heroes: []
+      newLimitLevel: 0
+      newRatingHero: 0
+      incCharacts:
+        increaseDamage: 0
+        increaseHP: 0
+        increaseInitiative: 0
+        increaseProbabilityCriticalAttack: 0
+        increaseDamageCriticalAttack: 0
+        increaseDodge: 0
+        increaseAccuracy: 0
+        increaseCleanDamage: 0
+        increaseMagicResistance: 0
+        increaseCritResistance: 0
+        increasePoisonResistance: 0
+      isSeriousChange: 0
+      newName: 
+      newRace: 0
+      newClassHero: 0
+      IDnewPrefab: 0
+    - numBreakthrough: 0
+      requireLevel: 0
+      heroes: []
+      newLimitLevel: 0
+      newRatingHero: 0
+      incCharacts:
+        increaseDamage: 0
+        increaseHP: 0
+        increaseInitiative: 0
+        increaseProbabilityCriticalAttack: 0
+        increaseDamageCriticalAttack: 0
+        increaseDodge: 0
+        increaseAccuracy: 0
+        increaseCleanDamage: 0
+        increaseMagicResistance: 0
+        increaseCritResistance: 0
+        increasePoisonResistance: 0
+      isSeriousChange: 0
+      newName: 
+      newRace: 0
+      newClassHero: 0
+      IDnewPrefab: 0
+    - numBreakthrough: 0
+      requireLevel: 0
+      heroes: []
+      newLimitLevel: 0
+      newRatingHero: 0
+      incCharacts:
+        increaseDamage: 0
+        increaseHP: 0
+        increaseInitiative: 0
+        increaseProbabilityCriticalAttack: 0
+        increaseDamageCriticalAttack: 0
+        increaseDodge: 0
+        increaseAccuracy: 0
+        increaseCleanDamage: 0
+        increaseMagicResistance: 0
+        increaseCritResistance: 0
+        increasePoisonResistance: 0
+      isSeriousChange: 0
+      newName: 
+      newRace: 0
+      newClassHero: 0
+      IDnewPrefab: 0
+    - numBreakthrough: 0
+      requireLevel: 0
+      heroes: []
+      newLimitLevel: 0
+      newRatingHero: 0
+      incCharacts:
+        increaseDamage: 0
+        increaseHP: 0
         increaseInitiative: 0
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0

@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class Building : MonoBehaviour{
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
+public class Building : SerializedMonoBehaviour{
 
 	protected static Canvas canvasBuilding;
 	[SerializeField] protected GameObject building;
@@ -10,6 +11,11 @@ public class Building : MonoBehaviour{
 	void Start(){
 		if(canvasBuilding == null)
 			canvasBuilding = GameObject.Find("Buildings").GetComponent<Canvas>();
+		OnStart();	
+		if(building != null){
+			canvasBuilding.enabled = false;
+			building.SetActive(false); 
+		}
 	}
 	public virtual void Open(){
 		if(building != null){
@@ -29,7 +35,7 @@ public class Building : MonoBehaviour{
 			building.SetActive(false); 
 		}
 	}
-
+	virtual protected void OnStart(){}
 	virtual protected void OpenPage(){}
 	virtual protected void ClosePage(){}
 }

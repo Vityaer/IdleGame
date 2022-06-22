@@ -21,6 +21,8 @@ public partial class Hero{
 	public List<Skill> skills = new List<Skill>();
 
 	private int currentBreakthrough;
+
+
 	public Hero(InfoHero hero){
 		SetHero(hero);
 	}
@@ -29,10 +31,11 @@ public partial class Hero{
 		this.prefabArrow    = hero.PrefabArrow;
 		this.characts       = (Characteristics)hero.characts.Clone();
 		this.resistances    = (Resistance)hero.resistances.Clone();
-		characts.Attack     = (int) Mathf.Floor(hero.GetCharacteristic("Attack") );
-		characts.Armor      = (int) Mathf.Floor(hero.GetCharacteristic("Armor") );
-		characts.Initiative = (int) Mathf.Floor(hero.GetCharacteristic("Initiative") );
-		characts.HP         = (int) Mathf.Floor(hero.GetCharacteristic("HP") );
+		characts.Damage     = (int) Mathf.Floor(hero.GetCharacteristic(TypeCharacteristic.Damage) );
+		characts.GeneralArmor      = (int) Mathf.Floor(hero.GetCharacteristic(TypeCharacteristic.Defense) );
+		characts.GeneralAttack      = (int) Mathf.Floor(hero.GetCharacteristic(TypeCharacteristic.Attack) );
+		characts.Initiative = (int) Mathf.Floor(hero.GetCharacteristic(TypeCharacteristic.Initiative) );
+		characts.HP         = (int) Mathf.Floor(hero.GetCharacteristic(TypeCharacteristic.HP) );
 		this.MaxHP          = this.characts.HP;
 		this.skills         = hero.skills;
 		currentBreakthrough = hero.Evolutions.currentBreakthrough;

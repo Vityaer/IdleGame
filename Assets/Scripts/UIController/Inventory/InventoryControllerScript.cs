@@ -17,41 +17,36 @@ public class InventoryControllerScript : MonoBehaviour{
 	[Header("Info panel")]
 	public PanelInfoItemScript panelInfoItem;
 
-	public Inventory inventory = new Inventory();
-	private List<InventoryCellControllerScript> cells = new List<InventoryCellControllerScript>();
+	private Inventory inventory = new Inventory();
+	[SerializeField]private List<SubjectCellControllerScript> cells = new List<SubjectCellControllerScript>();
 	private void GetCells(){
-		foreach(Transform cell in grid){
-			cells.Add(cell.GetComponent<InventoryCellControllerScript>());
-		}
+		if(cells.Count == 0)
+			foreach(Transform cell in grid)
+				cells.Add(cell.GetComponent<SubjectCellControllerScript>());
 	}
 	private List<VisualAPI> listForVisual = new List<VisualAPI>();
 	private void FillGrid(List<VisualAPI> list){
-		int i = 0;
-		for(i = 0; i < list.Count; i++){
+		for(int i = 0; i < list.Count; i++){
 			cells[i].SetItem(list[i]);
 		}
-		for(i = list.Count; i < cells.Count; i++){
+		for(int i = list.Count; i < cells.Count; i++){
 			cells[i].Clear();
 		}
 	}
 
 	private void FillGrid(List<ItemController> filterItems){
-		int i = 0;
-		for(i = 0; i < filterItems.Count; i++){
+		for(int i = 0; i < filterItems.Count; i++){
 			cells[i].SetItem(filterItems[i]);
 		}
-		for(i = filterItems.Count; i < cells.Count; i++){
+		for(int i = filterItems.Count; i < cells.Count; i++){
 			cells[i].Clear();
 		}
 	}
 //API
 	//Invenotory
 	public int HowManyThisItems(Item item){
-		int result = 0;
 		ItemController workItem = inventory.items.Find(x => (x.item.ID == item.ID));
-		if(workItem != null) {result = workItem.Amount;}
-
-		return result;
+		return (workItem != null) ? workItem.Amount : 0;
 	}
 	public bool CheckItems(Item item, int count = 1){
 		bool result = false;
@@ -67,28 +62,20 @@ public class InventoryControllerScript : MonoBehaviour{
 			if(workItem.Amount == 0) inventory.items.Remove(workItem);
 		}
 	}
-	public void AddItem(Item item){
-		inventory.Add(new ItemController(item, 1));
-	}
-	public void AddItem(ItemController itemController){
-		inventory.Add(itemController);
-	}
-	public void AddItems(List<ItemController> Items){
-		inventory.Add(Items);
-	}
-	public void AddSplinter(SplinterController splinterController){
-		inventory.Add(splinterController);
-	}
-	public void AddSplinters(List<SplinterController> splinters){
-		inventory.Add(splinters);
-	}
+	public void AddItem(Item item){ inventory.Add(new ItemController(item, 1)); }
+	public void AddItem(ItemController itemController){ inventory.Add(itemController); }
+	public void AddItems(List<ItemController> Items){ inventory.Add(Items); }
+	public void AddItems(List<Item> Items){ 
+		foreach(Item item in Items) AddItem(new ItemController(item)); }
+	public void AddSplinter(SplinterController splinterController){ inventory.Add(splinterController); }
+	public void AddSplinters(List<SplinterController> splinters){ inventory.Add(splinters); }
+	public void AddSplinters(List<Splinter> splinters){
+		foreach(Splinter splinter in splinters) AddSplinter(new SplinterController(splinter));}
 	public void SelectItem(){
 		if(cellItem != null){
 			cellItem.SetItem(selectItem.item);
 			selectItem.DecreaseAmount( 1 );
-			if(selectItem.Amount <= 0){
-				inventory.items.Remove(selectItem);
-			}
+			if(selectItem.Amount <= 0) inventory.items.Remove(selectItem);
 			cellItem = null;
 			selectItem = null;
 		}
@@ -135,6 +122,10 @@ public class InventoryControllerScript : MonoBehaviour{
 		selectItem = itemController;
 		panelInfoItem.OpenInfoAboutItem(itemController.item, this.cellItem);
 	}
+	public void OpenInfoItem(Item item){
+		canvasInventory.enabled = true;
+		panelInfoItem.OpenInfoAboutItem(item, this.cellItem);
+	}
 	public void OpenInfoItem(Resource res){
 		canvasInventory.enabled = true;
 		panelInfoItem.OpenInfoAboutItem(res);
@@ -145,6 +136,7 @@ public class InventoryControllerScript : MonoBehaviour{
 		panelInfoItem.OpenInfoAboutItem(item, this.cellItem, onHero: true);
 	}
 	SplinterController selectSplinter;
+	public void OpenInfoItem(Splinter splinter){ OpenInfoItem(new SplinterController(splinter)); }
 	public void OpenInfoItem(SplinterController splinterController){
 		canvasInventory.enabled = true;
 		selectSplinter = splinterController;
@@ -174,11 +166,6 @@ public class InventoryControllerScript : MonoBehaviour{
 	}
 	void Start(){
 		LoadInformation();
-		if(inventory != null){
-			foreach (ItemController itemController in inventory.items) {
-				itemController?.item?.SetBonus();
-			}
-		}
 	}
 
 	void OnApplicationPause(bool pauseStatus){

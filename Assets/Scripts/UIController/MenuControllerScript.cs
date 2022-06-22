@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class MenuControllerScript : MonoBehaviour{
-	private Canvas canvasMainMenu;
+	[SerializeField] private GameObject canvasMainMenu;
 	public CityControllerScript canvasCity;
 	private static MenuControllerScript instance;
 	public  static MenuControllerScript Instance{get => instance;}
@@ -12,7 +12,6 @@ public class MenuControllerScript : MonoBehaviour{
 	public GameObject background;
 	void Awake(){
 		instance = this;
-		canvasMainMenu = GetComponent<Canvas>();
 	}
 	private List<InfoHero> listHeroes = new List<InfoHero>();
 	void Start(){
@@ -31,11 +30,11 @@ public class MenuControllerScript : MonoBehaviour{
 //API
 
 	public void OpenMainPage(){
-		canvasMainMenu.enabled = true;
+		canvasMainMenu.SetActive(true);
 	}	   
 	public void CloseMainPage(){
 		canvasCity.Close();
-		canvasMainMenu.enabled = false;
+		canvasMainMenu.SetActive(false);
 	}
 	[SerializeField] private Button btnTrainCamp;
 	private void InteractableBtnTrainCamp(bool flag){

@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class TaskGiverScript : Building{
 
 	public static List<Task> tasks = new List<Task>();
-	public Transform taskboard;
+	public RectTransform taskboard;
 	private List<TaskControllerScript> taskControllers = new List<TaskControllerScript>(); 
 	public GameObject prefabTask;
-	public PatternTask patternTasks; 
+	public PatternTask patternTasks;
+	[Header("UI controller")]
+	public ButtonCostScript buttonBuySimpleTask;
+	public ButtonCostScript buttonBuySpecialTask; 
 	protected override void OpenPage(){
 		LoadTasks();
 		if((taskControllers.Count == 0) && (tasks.Count > 0)) FirstCreateTasks();
@@ -22,21 +25,20 @@ public class TaskGiverScript : Building{
 	private void FirstCreateTasks(){
 		for(int i=0; i < tasks.Count; i++){
 			taskControllers.Add(Instantiate(prefabTask, taskboard).gameObject.GetComponent<TaskControllerScript>());
-			taskControllers[i].UpdateUI(tasks[i]);
+			taskControllers[i].SetData(tasks[i]);
 		}
 	}
-	public void CreateSimpleTask(){
+	public void CreateSimpleTask(int count = 1){
 		CreateTask(patternTasks.GetSimpleTask());
 	}
-	public void CreateSprecialTask(){
+	public void CreateSprecialTask(int count = 1){
 		CreateTask(patternTasks.GetSpecialTask());
 	}
 	private void CreateTask(Task newTask){
 		tasks.Add(newTask);
 		TaskControllerScript newTaskController = Instantiate(prefabTask, taskboard).gameObject.GetComponent<TaskControllerScript>();
 		taskControllers.Add(newTaskController);
-		newTaskController.UpdateUI(newTask);
-
+		newTaskController.SetData(newTask);
 	}
 	private static TaskGiverScript instance;
 	public static TaskGiverScript Istance{get => instance;}	
@@ -45,6 +47,8 @@ public class TaskGiverScript : Building{
 		if(instance == null){
 			instance = this;
 			tasks = PlayerScript.Instance.player.PlayerGame.listTasks;
+			buttonBuySimpleTask.RegisterOnBuy(CreateSimpleTask);
+			buttonBuySpecialTask.RegisterOnBuy(CreateSprecialTask);
 		}else{
 			Debug.Log("double task giver");
 		}
@@ -53,6 +57,7 @@ public class TaskGiverScript : Building{
 		if(isLoadedTask == false){
 			if(PlayerScript.Instance.flagLoadedGame == true){
 				tasks = PlayerScript.Instance.player.PlayerGame.listTasks;
+				foreach(Task task in tasks) if(task.Reward == null) task.Reward = patternTasks.GetRandomReward(task.rating); 
 				isLoadedTask = true;
 			}
 		}

@@ -30,7 +30,11 @@ public class ListResource : ICloneable{
 			GetResource(res.Name).AddResource(res);
 		}
 	}
-
+	public void AddResource(List<Resource> listResource){
+		foreach (Resource res in listResource){
+			GetResource(res.Name).AddResource(res);
+		}
+	}
 	public void SubtractResource(Resource res){
 		SubtractResource(new ListResource(res));
 	}
@@ -39,7 +43,11 @@ public class ListResource : ICloneable{
 			GetResource(res.Name).SubtractResource(res);
 		}
 	}
-
+	public void SubtractResource(List<Resource> resources){
+		foreach (Resource res in resources){
+			GetResource(res.Name).SubtractResource(res);
+		}
+	}
 	public void SetResource(Resource resource){
 		Resource selectResource = GetResource(resource.Name);
 		selectResource = resource;

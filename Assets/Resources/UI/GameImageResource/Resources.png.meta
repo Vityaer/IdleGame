@@ -63,6 +63,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -72,8 +73,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -94,6 +95,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -400,7 +403,7 @@ TextureImporter:
         width: 77
         height: 80
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -408,6 +411,69 @@ TextureImporter:
       bones: []
       spriteID: 01011139aacaf3f30800000000000000
       internalID: 4557551196534018064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GenePet
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 166
+        width: 79
+        height: 82
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e82ef73f37b658e4ca00d982608e63a8
+      internalID: -926635953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DopePet
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 243
+        width: 68
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7995ad2821d84f4b9e77a62d3640c6e
+      internalID: 40568531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SimpleStoneReplacement
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 177
+        width: 87
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cf1c96b45d730c4e988a0f91c1939f0
+      internalID: -2046673571
       vertices: []
       indices: 
       edges: []
@@ -422,6 +488,23 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      GenePet: 40568531
+      SpecialHireCard: 7871495015514009198
+      TicketOnArena: -2190828563271380868
+      Diamond: 522416265914234524
+      CoinFortune: 1414478694623257066
+      ForceStone: -8937251575758773851
+      ContinuumStone: -6291728694041167770
+      Exp: 1848216903799394968
+      SimpleHireCard: -8439866776918605826
+      SpecialTask: 2107215887564933441
+      RaceHireCard: 4557551196534018064
+      Gold: -1419259163969335966
+      Requirements: 5861370308471173288
+      SimpleStoneReplacement: -2046673571
+      DopePet: 40568531
+      SimpleTask: -6400913422314380486
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

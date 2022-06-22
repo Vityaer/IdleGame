@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class AltarScript : BuildingWithHeroesList{
 
 
@@ -22,6 +22,7 @@ public class AltarScript : BuildingWithHeroesList{
 	}
 	public void MusterOut(){
 		List<InfoHero> heroes = new List<InfoHero>();
+		OnDissamble(selectedHeroCards.Count);
 		foreach(CardScript card in selectedHeroCards) {
 			heroes.Add(card.hero);
 			card.UnSelected();
@@ -53,6 +54,10 @@ public class AltarScript : BuildingWithHeroesList{
 		cardHero.UnSelected();
 	}
 	
+//Observers
+	private Action<BigDigit> observerDissamble;
+	public void RegisterOnDissamble(Action<BigDigit> d){observerDissamble += d;}	 
+	private void OnDissamble(int amount) {if(observerDissamble != null) observerDissamble(new BigDigit(amount));}	 
 
 
 }

@@ -6,7 +6,7 @@ public partial class HeroStatusScript : MonoBehaviour{
 	public SliderScript sliderStamina;
 	private Vector2 delta = new Vector2(0, 30), posUI;
 	private HeroControllerScript heroController;
-	private GameObject panelStatus;
+	// private GameObject panelStatus;
 	void Awake(){
 		Vector2 TopLeft = GameObject.Find("CornerTopLeft").GetComponent<Transform>().position;
 		Vector2 BottomRight = GameObject.Find("CornerBottomRight").GetComponent<Transform>().position;
@@ -15,14 +15,15 @@ public partial class HeroStatusScript : MonoBehaviour{
 		posUI.x = 720 * (pos.x/(BottomRight.x - TopLeft.x));
 		posUI.y = 1280 * (pos.y/(TopLeft.y - BottomRight.y)) + delta.y; 
 		posUI += delta;
-		panelStatus = Instantiate(Resources.Load<GameObject>("UI/HeroStatus"), GameObject.Find("FightUI/BoxSliderHeroes").transform);
-		panelStatus.GetComponent<RectTransform>().anchoredPosition = posUI;
-		sliderHP      = panelStatus.transform.Find("SliderHP").GetComponent<SliderScript>();
-		sliderStamina = panelStatus.transform.Find("SliderStamina").GetComponent<SliderScript>();
+		// panelStatus = Instantiate(Resources.Load<GameObject>("UI/HeroStatus"), GameObject.Find("FightUI/BoxSliderHeroes").transform);
+		// panelStatus.GetComponent<RectTransform>().anchoredPosition = posUI;
+		// sliderHP      = panelStatus.transform.Find("SliderHP").GetComponent<SliderScript>();
+		// sliderStamina = panelStatus.transform.Find("SliderStamina").GetComponent<SliderScript>();
 		heroController = GetComponent<HeroControllerScript>();
 	}
 	void Start(){
 		FightControllerScript.Instance.RegisterOnEndRound(RoundFinish);
+		gameObject.transform.Find("CanvasHeroesStatus").gameObject.SetActive(true);
 	}
 //Helth	
 	private float currentHP;
@@ -46,9 +47,6 @@ public partial class HeroStatusScript : MonoBehaviour{
 	public void Death(){
 		sliderHP.Death();
 		sliderStamina.Death();
-	}
-	public void Delete(){
-		Destroy(panelStatus);
 	}
 //Stamina
 	private float stamina = 25;

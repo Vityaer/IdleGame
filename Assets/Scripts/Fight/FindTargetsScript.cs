@@ -13,11 +13,9 @@ public partial class FightControllerScript : MonoBehaviour{
  		if(countTarget > 0){
 	 		switch(typeSelect){
 	 			case TypeSelect.FirstLine:
-	 				workTeam = workTeam.FindAll(x => (x.typeLine == TypeLine.First) );
 	 				for(int i = 0; i < workTeam.Count; i++) listTarget.Add(workTeam[i].heroController);
 		 			break;
 			 	case TypeSelect.SecondLine:
-	 				workTeam = workTeam.FindAll(x => (x.typeLine == TypeLine.Second) );
 	 				for(int i = 0; i < workTeam.Count; i++) listTarget.Add(workTeam[i].heroController);
 		 			break;
 			 	case TypeSelect.All:
@@ -151,12 +149,9 @@ public partial class FightControllerScript : MonoBehaviour{
 
 [System.Serializable]
 public class Warrior{
-	public int ID{get => place.ID;}
-	public TypeLine typeLine{get => place.typeLine;}
 	public HeroControllerScript heroController = null;
-	public PlaceHero place;
-	public Warrior(HeroControllerScript heroController, PlaceHero place){
-		this.place = place;
+	public HexagonCellScript Cell{get => heroController.Cell;}
+	public Warrior(HeroControllerScript heroController){
 		this.heroController = heroController;
 	}
 
@@ -174,9 +169,9 @@ public class WarriorHPComparer : IComparer<Warrior>{
 
 public class WarriorAttackComparer : IComparer<Warrior>{
     public int Compare(Warrior w1, Warrior w2){
-        if (w1.heroController.hero.characts.Attack < w2.heroController.hero.characts.Attack)
+        if (w1.heroController.hero.characts.Damage < w2.heroController.hero.characts.Damage)
             return 1;
-        else if (w1.heroController.hero.characts.Attack > w2.heroController.hero.characts.Attack)
+        else if (w1.heroController.hero.characts.Damage > w2.heroController.hero.characts.Damage)
             return -1;
         else
             return 0;
@@ -195,9 +190,9 @@ public class WarriorInitiativeComparer : IComparer<Warrior>{
 } 
 public class WarriorArmorComparer : IComparer<Warrior>{
     public int Compare(Warrior w1, Warrior w2){
-        if (w1.heroController.hero.characts.Armor < w2.heroController.hero.characts.Armor)
+        if (w1.heroController.hero.characts.GeneralArmor < w2.heroController.hero.characts.GeneralArmor)
             return 1;
-        else if (w1.heroController.hero.characts.Armor > w2.heroController.hero.characts.Armor)
+        else if (w1.heroController.hero.characts.GeneralArmor > w2.heroController.hero.characts.GeneralArmor)
             return -1;
         else
             return 0;

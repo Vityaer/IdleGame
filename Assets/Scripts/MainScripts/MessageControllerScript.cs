@@ -13,16 +13,19 @@ public class MessageControllerScript : MonoBehaviour{
 		instance = this;
 	}
 	public WinLosePanelScript winPanelScript, losePanelScript;
-	public void OpenWin(CalculatedReward reward, string message = ""){
-		PlayerScript.Instance.AddReward(reward);
-		
-		winPanelScript.OpenPanel(reward, message);
-		canvas.enabled = true;
+	public void OpenWin(Reward reward, string message = ""){
+		if(reward != null){
+			PlayerScript.Instance.AddReward(reward);
+			winPanelScript.OpenPanel(reward, message);
+			canvas.enabled = true;
+		}
 	}
-	public void OpenLose(CalculatedReward reward, string message = ""){
-		PlayerScript.Instance.AddReward(reward);
-		losePanelScript.OpenPanel(reward, message);
-		canvas.enabled = true;
+	public void OpenLose(Reward reward, string message = ""){
+		if(reward != null){
+			PlayerScript.Instance.AddReward(reward);
+			losePanelScript.OpenPanel(reward, message);
+			canvas.enabled = true;
+		}
 	}
 
 	public void AddMessage(string newMessage, bool isLong = false){

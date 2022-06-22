@@ -17,17 +17,15 @@ public class MissionControllerScript : MonoBehaviour{
 	public RewardUIControllerScript rewardController;
  	[Header("Contollers")]
 	public StatusMission statusMission;
-	public Mission mission;
-	public LocationControllerScript locationController;
+	public CampaignMission mission;
 	private int numMission;
 
 	
 //API
-	public void SetMission(Mission mission, int numMission){
-		this.mission    = (Mission) mission.Clone();
+	public void SetMission(CampaignMission mission, int numMission){
+		this.mission    = (CampaignMission) mission.Clone();
 		this.numMission = numMission; 
-		if(locationController   == null) locationController = GameObject.Find("LocationFight").GetComponent<LocationControllerScript>();
-    	backgoundMission.sprite = locationController.GetBackgroundForMission(this.mission.location);
+    	backgoundMission.sprite = LocationControllerScript.Instance.GetBackgroundForMission(this.mission.location);
     	textNameMission.text    = numMission.ToString();
     	if( (int) statusMission < 1 ){
     		blockPanel.SetActive(true);
@@ -52,9 +50,9 @@ public class MissionControllerScript : MonoBehaviour{
 	public void UpdateAutoRewardUI(){
 		if((statusMission == StatusMission.Complete) || (statusMission == StatusMission.InAutoFight)){
 			infoFotter.SetActive(true);
-			textAutoRewardGold.text       = string.Concat(this.mission.AutoFightReward.ListRewardResource.Find(x => x.GetRes.Name == TypeResource.Gold).GetRes.ToString(), "/ 5sec");
-			textAutoRewardExperience.text = string.Concat(this.mission.AutoFightReward.ListRewardResource.Find(x => x.GetRes.Name == TypeResource.Exp).GetRes.ToString(), "/ 5sec");
-			textAutoRewardStone.text      = string.Concat(this.mission.AutoFightReward.ListRewardResource.Find(x => x.GetRes.Name == TypeResource.ContinuumStone).GetRes.ToString(), "/ 5sec");
+			textAutoRewardGold.text       = string.Concat(this.mission.AutoFightReward.resources.List.Find(x => x.Name == TypeResource.Gold).ToString(), "/ 5sec");
+			textAutoRewardExperience.text = string.Concat(this.mission.AutoFightReward.resources.List.Find(x => x.Name == TypeResource.Exp).ToString(), "/ 5sec");
+			textAutoRewardStone.text      = string.Concat(this.mission.AutoFightReward.resources.List.Find(x => x.Name == TypeResource.ContinuumStone).ToString(), "/ 5sec");
 		}
 
 	}
@@ -92,17 +90,13 @@ public class MissionControllerScript : MonoBehaviour{
 				rewardController.CloseReward();
 				break;
     		case StatusMission.Open:
-		    	rewardController.SetReward(this.mission.WinReward.GetCaculateReward());
+		    	rewardController.ShowReward(this.mission.WinReward);
 				rewardController.OpenReward();
 				textBtnGoFight.text = "Вызвать";
 				break;
 			case StatusMission.Complete:
-		    	rewardController.SetReward(this.mission.AutoFightReward.GetCaculateReward());
-				rewardController.OpenReward();
-				textBtnGoFight.text = "Авто";
-				break;
 			case StatusMission.InAutoFight:
-				rewardController.SetReward(this.mission.AutoFightReward.GetCaculateReward());
+				rewardController.ShowAutoReward(this.mission.AutoFightReward);
 				rewardController.OpenReward();	
 				textBtnGoFight.text = "Авто";
 				break;	

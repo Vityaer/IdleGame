@@ -7,8 +7,8 @@ using HelpFuction;
 using DG.Tweening;
 
 public class GoldHeapScript : MonoBehaviour{
-	[SerializeField] private Reward autoReward;
-	[SerializeField] private CalculatedReward calculatedReward;
+	[SerializeField] private AutoReward autoReward;
+	[SerializeField] private Reward calculatedReward;
 	public DateTime previousDateTime;
 	[SerializeField] private RectTransform imageGoldRectTransform;
 	[SerializeField] private Image imageHeap;
@@ -23,9 +23,9 @@ public class GoldHeapScript : MonoBehaviour{
 		calculatedReward = autoReward.GetCaculateReward(CalculateTact());
 		previousDateTime = DateTime.Now;
 	}
-	public void SetNewReward(Reward reward){
-		if(reward != null){
-			this.autoReward = reward;
+	public void SetNewReward(AutoReward newAutoReward){
+		if(newAutoReward != null){
+			this.autoReward = newAutoReward;
 		}
 	} 
 	public void OnClickHeap(){

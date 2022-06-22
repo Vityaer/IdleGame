@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SplinterController : ItemController, VisualAPI, ICloneable{
-
-	private Splinter _splinter;
+public class SplinterController : VisualAPI, ICloneable{
+	[SerializeField]private Splinter _splinter;
 	public Splinter splinter{get => _splinter;}
 	public void ClickOnItem(){
 		InventoryControllerScript.Instance.OpenInfoItem(this);
 	}
-	public SplinterController(Splinter splinter, int amount) : base(splinter, amount){
+	public SplinterController(Splinter splinter, int amount){
 		this._splinter = splinter;
-		this.amount = amount;
+		this._splinter.SetAmount(amount);
+	}
+	public SplinterController(Splinter splinter){
+		this._splinter = splinter;
+		this._splinter.SetAmountRequire();
 	}
 	public SplinterController() : base(){
 		_splinter = null;
 	}
+	protected ThingUIScript UI;
 	public void SetUI(ThingUIScript UI){
 		this.UI = UI;
 		UpdateUI();
@@ -30,15 +34,14 @@ public class SplinterController : ItemController, VisualAPI, ICloneable{
 	public VisualAPI GetVisual(){
 		return (this as VisualAPI);
 	}
-	public void GetReward(){
-		amount -= splinter.GetReward(Amount);
-		if(Amount == 0){
+	public void GetReward(int count = 1){
+		splinter.GetReward(count);
+		if(splinter.Amount == 0){
 			InventoryControllerScript.Instance.DropSplinter(this);
 		}
 	}
+	public void IncreaseAmount(int count){ splinter.AddAmount(count); }
 	public object Clone(){
-        return new SplinterController  { 	_splinter  = this._splinter,
-        							 	    amount        = this.amount
-        							};				
+        return new SplinterController  { _splinter  = this._splinter };				
     }
 }

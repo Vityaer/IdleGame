@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BoxAllRewards : Building{
     public RewardUIControllerScript rewardController;
-    public void ShowAll(CalculatedReward reward){
-    	rewardController.SetReward(reward.Clone());
+    public void ShowAll(Reward reward){
+    	rewardController.ShowAllReward(reward);
     	Open();
     }
     public override void Close(){
@@ -18,7 +18,6 @@ public class BoxAllRewards : Building{
     private static BoxAllRewards instance;
     public static BoxAllRewards Instance{ get => instance;}
     void Start(){
-        Debug.Log(gameObject.name);
     	instance = this;
     }
 }

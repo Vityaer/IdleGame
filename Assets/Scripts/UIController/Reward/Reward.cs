@@ -1,55 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 [System.Serializable]
-public class Reward  : ICloneable{
-	[SerializeField]
-	private List<RewardResource> listRewardResource = new List<RewardResource>();
-	public List<RewardResource> ListRewardResource{get => listRewardResource;}
+public class Reward{
+    [SerializeField] private ListResource resources = new ListResource();
+    [SerializeField] private List<Item> items = new List<Item>();
+    [SerializeField] private List<Splinter> splinters = new List<Splinter>();
 
-	[SerializeField]
-	private List<RewardItem> listRewardItem = new List<RewardItem>();
-	public List<RewardItem> ListRewardItem{get => listRewardItem;}
-
-	[SerializeField]
-	private List<RewardSplinter> listRewardSplinter = new List<RewardSplinter>();
-	public List<RewardSplinter> ListRewardSplinter{get => listRewardSplinter;}
-
-	//API
-	public CalculatedReward GetCaculateReward(int count = 1){
-		CalculatedReward result = new CalculatedReward();
-		ListResource rewardResources = new ListResource();
-		foreach(RewardResource res in listRewardResource)
-			result.GetListResource.AddResource(res.GetReward(count));
-		foreach(RewardItem rewardItem in listRewardItem)
-			result.GetItems.Add(rewardItem.GetReward(count));
-		foreach(RewardSplinter rewardSplinter in listRewardSplinter){
-			result.GetSplinters.Add(rewardSplinter.GetReward(count));
-		}	
-		return result;
-	}
-	public int Count{get => (ListRewardResource.Count + ListRewardItem.Count + ListRewardSplinter.Count);}
-
-	public object Clone(){
-		List<RewardResource> _listRewardResource = new List<RewardResource>();
-		List<RewardItem> _listRewardItem = new List<RewardItem>();
-		List<RewardSplinter> _listRewardSplinter = new List<RewardSplinter>();
-
-		this.listRewardResource.ForEach(x => {_listRewardResource.Add((RewardResource) x.Clone());}); 
-		this.listRewardItem.ForEach(x => {_listRewardItem.Add((RewardItem) x.Clone());}); 
-		this.listRewardSplinter.ForEach(x => {_listRewardSplinter.Add((RewardSplinter) x.Clone());}); 
-        return new Reward  { 	
-        							 	listRewardResource     = _listRewardResource,
-        							 	listRewardItem         = _listRewardItem,
-        							 	listRewardSplinter     = _listRewardSplinter
-        							};				
+	public int Count{
+        get{
+            if(generalList.Count == 0) PrepareRewardForShow();
+            return generalList.Count;
+        }
     }
+    private List<BaseObject> generalList = new List<BaseObject>();
+    public List<BaseObject> GetList{
+        get{
+            if(generalList.Count == 0) PrepareRewardForShow();
+            return generalList;
+        }
+    }
+	public Reward Clone(){
+        ListResource listRes = (ListResource) resources.Clone();
+        List<Item> cloneItems = new List<Item>();
+        List<Splinter> cloneSplinters = new List<Splinter>();
+        foreach(Item item in this.items){ cloneItems.Add((Item) item.Clone());}
+        foreach(Splinter splinter in this.splinters){ cloneSplinters.Add((Splinter) splinter.Clone());}
+        return new Reward(listRes, cloneItems, cloneSplinters);			
+    }
+    public Reward(ListResource resources, List<Item> items, List<Splinter> splinters){
+        this.resources = resources;
+        this.items = items;
+        this.splinters = splinters;
+    }
+    public Reward(){}
+    private void PrepareRewardForShow(){
+        for(int i = 0; i < resources.List.Count; i++) generalList.Add(resources.List[i]);
+        for(int i = 0; i < items.Count; i++) generalList.Add(items[i]);
+        for(int i = 0; i < splinters.Count; i++) generalList.Add(splinters[i]);
+
+    }
+    public ListResource GetListResource{get => resources;}
+	public List<Item> GetItems{get => items;}
+	public List<Splinter> GetSplinters{get => splinters;}
 }
 
-
-public enum TypeIssue{
-	Necessarily = 0,
-	Perhaps     = 1,
-	Range       = 2
-}

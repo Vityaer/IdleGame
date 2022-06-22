@@ -29,9 +29,9 @@ public partial class Hero{
 	}
 	public void ChangePhysicalAttack(int amount, TypeNumber typeNumber, List<Round> rounds){
 		if(typeNumber == TypeNumber.Num){
-			characts.Attack += amount; 
+			characts.Damage += amount; 
 		}else{
-			characts.Attack = (int) Mathf.Floor(characts.Attack * ( 1 + amount / 100f) );
+			characts.Damage = (int) Mathf.Floor(characts.Damage * ( 1 + amount / 100f) );
 		}
 	}
 	public void ChangeInitiative(int amount, TypeNumber typeNumber, List<Round> rounds){
@@ -43,9 +43,9 @@ public partial class Hero{
 	}
 	public void ChangeArmor(int amount, TypeNumber typeNumber, List<Round> rounds){
 		if(typeNumber == TypeNumber.Num){
-			characts.Armor += amount; 
+			characts.GeneralArmor += amount; 
 		}else{
-			characts.Armor = (int) Mathf.Floor(characts.Armor * ( 1 + amount / 100f) );
+			characts.GeneralArmor = (int) Mathf.Floor(characts.GeneralArmor * ( 1 + amount / 100f) );
 		}
 	}
 	public void ChangeProbabilityCriticalAttack(float amount, List<Round> rounds){
@@ -90,19 +90,20 @@ public partial class Hero{
 //Core
 	private float CalculateDamage(Strike strike){
 		float result = 0;
-		result = strike.GetDamage();
 		switch (strike.type){
 			case TypeStrike.Physical:
-				result = (result > characts.Armor ) ? result -  characts.Armor : 0;
+				result = strike.GetDamage(characts.GeneralArmor);
 				break;
 			case TypeStrike.Critical:
+				result = strike.GetDamage();
 				result *=  (1 - resistances.CritResistance);
-				result = (result > characts.Armor ) ? result -  characts.Armor : 0;
 				break;
 			case TypeStrike.Magical:
+				result = strike.GetDamage();
 				result *=  (1 - resistances.MagicResistance);
 				break;
 			case TypeStrike.Poison:
+				result = strike.GetDamage();
 				result *=  (1 - resistances.PoisonResistance);
 				break;
 

@@ -18,7 +18,7 @@ public class CellItemHeroScript : MonoBehaviour{
 		image = GetComponent<Image>();
 	} 
 	void Start(){
-		if(item?.sprite != null) {SetBonus(); }else{ DefaulfView();}
+		if(item?.Image != null) {SetBonus(); }else{ DefaulfView();}
 	}
 
 
@@ -34,7 +34,7 @@ public class CellItemHeroScript : MonoBehaviour{
 	}
 
 	private void UpdateUI(){
-		image.sprite =  item.sprite;
+		image.sprite =  item.Image;
 		image.color  = new Color(255, 255, 255, 1); 
 		ratingController?.ShowRating(item.Rating);
 	}
@@ -58,6 +58,7 @@ public class CellItemHeroScript : MonoBehaviour{
 	}
 
 	public void ClickOnCell(){
+		Debug.Log("ckick");
 		if(item != null) {
 			InventoryControllerScript.Instance.OpenInfoItem(item, typeCell, this);
 		}else{

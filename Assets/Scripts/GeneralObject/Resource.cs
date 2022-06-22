@@ -25,98 +25,36 @@ public enum TypeResource{
 
 
 [System.Serializable]
-public class Resource : ICloneable, VisualAPI{
+public class Resource : BaseObject, ICloneable, VisualAPI{
 	public TypeResource Name;
-	[SerializeField]
-	protected float count = 0;
-	public float Count{ get => count; set => count = value; }
-	[SerializeField]
-	protected int e10 = 0;
-	public int E10{get => e10;  set => e10 = value;}
+	[SerializeField] protected BigDigit amount;
+	public BigDigit Amount{get => amount; set => amount = value;}
+	public float Count{get => Amount.Count; set => Amount.Count = value;}
+	public int E10{get => Amount.E10; set => Amount.E10 = value;}
 	public Resource(){
 		Name  = TypeResource.Gold;
-		count = 0;
-		e10   = 0;
+		Amount = new BigDigit();
 	}
 	public Resource(TypeResource name, float count = 0f, int e10 = 0){
 		this.Name  = name;
-		this.count = count;
-		this.e10   = e10;
-		NormalizeResource();
+		Amount = new BigDigit(count, e10);
+	}
+	public Resource(TypeResource name, BigDigit amount){
+		this.Name = name;
+		this.Amount = amount;
 	}
 	
-	private void NormalizeResource(){
-		while(this.count > 1000){
-			this.e10   += 3;  
-			this.count *= 0.001f;
-		}
-		while ((this.count < 1) && (e10 > 0)){
-			this.e10 -= 3;
-			this.count *= 1000f;
-		}
-	}
 //API
-	public override string ToString(){
-		return FunctionHelp.BigDigit(this.count, this.E10);
-	}
-	public bool CheckCount(int count, int e10){
-		bool result = false;
-		if(this.e10 != e10){
-			if(this.e10 > e10){
-				if(this.count * (float) Mathf.Pow(10, this.e10 - e10) >= count)
-					result = true;
-			}else{
-				if(this.count >= count * (float) Mathf.Pow(10, e10 - this.e10))
-					result = true;
-			}
-		}else{
-			if(this.count >= count){
-				result = true;
-			}
-		}
-		return result;
-	}
-	public void AddResource(float count, float e10){
-		if((count > 0) && (e10 >= 0)){
-			this.count += count * (float) Mathf.Pow(10f, e10 - this.e10);
-			NormalizeResource();
-		}
-	}
-	public void SubtractResource(float count, float e10){
-		if((count > 0) && (e10 >= 0)){
-			this.count -= count * (float) Mathf.Pow(10f, e10 - this.e10); 
-			NormalizeResource();
-		}
-	}
-	public bool CheckCount(Resource res){
-		bool result = false;
-		if(this.e10 != res.E10){
-			if(this.e10 > res.E10){
-				if(this.count * (float) Mathf.Pow(10, this.e10 - res.E10) >= res.Count)
-					result = true;
-			}else{
-				if(this.count >= res.Count * (float) Mathf.Pow(10, res.E10 - this.e10))
-					result = true;
-			}
-		}else{
-			if(this.count >= res.Count){
-				result = true;
-			}
-		}
-		return result;
-	}
-	public void AddResource(Resource res){
-			this.count += res.Count * (float) Mathf.Pow(10f, res.E10 - this.E10);
-			NormalizeResource();
-	}
-	public void SubtractResource(Resource res){
-		this.count -= res.Count * (float) Mathf.Pow(10f, res.E10 - this.E10); 
-		NormalizeResource();
-	}
-	public void Clear(){
-		this.count = 0;
-		this.e10   = 0;
-	}
+	public override string GetTextAmount(){return Amount.ToString();}
+	public override string ToString(){ return Amount.ToString(); }
+	public bool CheckCount(int count, int e10){ return Amount.CheckCount(count, e10);}
+	public bool CheckCount(Resource res){ return Amount.CheckCount(res.Count, res.E10); }
+	public void AddResource(float count, float e10 = 0){ Amount.Add(count, e10); }
+	public void AddResource(Resource res){ this.Amount.Add(res.Count, res.E10); }
+	public void SubtractResource(float count, float e10 = 0){ Amount.Subtract(count, e10); }
+	public void SubtractResource(Resource res){ this.Amount.Subtract(res.Count, res.E10); }
+	public void Clear(){ Amount.Clear(); }
+
 	public void ClearUI(){
 		this.UI = null;
 	}
@@ -131,37 +69,35 @@ public class Resource : ICloneable, VisualAPI{
 	}	
 //Image
 	private static Sprite[] spriteAtlas;   
-	private Sprite image;
-	public Sprite sprite{ 
+	public Sprite Image{ 
 							get{ 
-								if(image == null){
+								if(sprite == null){
 									if(spriteAtlas == null) spriteAtlas = Resources.LoadAll<Sprite>("UI/GameImageResource/Resources");
 									for(int i=0; i < spriteAtlas.Length; i++){
 										if((Name.ToString()).Equals(spriteAtlas[i].name)){
-											image = spriteAtlas[i];
+											sprite = spriteAtlas[i];
 											break;
 										}
 									}
 								}
-								return image;
+								return sprite;
 							}
 						}
 	public object Clone(){
         return new Resource  { 
         	Name = this.Name,
-        	Count = this.count,
-        	E10  = this.e10
+        	Amount = this.Amount
         };
     }   
 //UI
+	public override string GetName(){return Name.ToString();}
 	public void ClickOnItem(){ InventoryControllerScript.Instance.OpenInfoItem(this); }
-	protected ThingUIScript UI;
 	public void SetUI(ThingUIScript UI){
 		this.UI = UI;
 		UpdateUI();
 	}
 	public void UpdateUI(){
-		UI?.UpdateUI(sprite, Rare.C, ToString());
+		UI?.UpdateUI(Image, Rare.C, ToString());
 	}
 
 }

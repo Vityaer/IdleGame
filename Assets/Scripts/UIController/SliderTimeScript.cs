@@ -15,13 +15,14 @@ public class SliderTimeScript : MonoBehaviour{
 	}
 	public Color lowValue;
 	public Color fillValue;
+	int waitSeconds = 0;
 	public void ChangeValue(){
 		DateTime deltaTime = requireTime - (DateTime.Now - startTime);
 		TimeSpan interval  = new TimeSpan(deltaTime.Hour, deltaTime.Minute, deltaTime.Second);
 		TimeSpan generalInterval = new TimeSpan(requireTime.Hour, requireTime.Minute, requireTime.Second);  
-		int value = (int) interval.TotalSeconds;
-		if(value == 0) StopTimer();
-		float t =  1f - (float) (value / generalInterval.TotalSeconds);
+		waitSeconds = (int) interval.TotalSeconds;
+		if(waitSeconds == 0) StopTimer();
+		float t =  1f - (float) (waitSeconds / generalInterval.TotalSeconds);
 		fillImage.color = Color.Lerp(lowValue, fillValue, t);
 		slider.value = t;
 		textTime.text = String.Concat(interval.Hours.ToString(), "h ", interval.Minutes.ToString(), "m"); 
@@ -54,7 +55,7 @@ public class SliderTimeScript : MonoBehaviour{
 	 IEnumerator StartTimer(){
 	 	while(true){
 	 		ChangeValue();
-			yield return new WaitForSeconds(1f);
+			yield return new WaitForSeconds((waitSeconds <= 60) ? 1f : waitSeconds % 60);
 	 	}
     }
 }

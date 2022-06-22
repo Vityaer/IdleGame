@@ -8,6 +8,12 @@ using UnityEngine;
 public class SplintersList : ScriptableObject{
 	[SerializeField]
 	private List<Splinter> list = new List<Splinter>();
-	public Splinter GetItem(int ID){ return list.Find(x => (x.ID == ID)); }
+	public Splinter GetItem(int ID){
+		if(ID > 1000){
+			return new Splinter(ID);
+		}else{
+			return list.Find(x => (x.ID == ID));
+		}
+	}
 
 }

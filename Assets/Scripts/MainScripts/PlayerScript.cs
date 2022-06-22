@@ -23,6 +23,7 @@ public class PlayerScript : MonoBehaviour{
 		}
 		CampaignScript.Instance.OpenMissions(player.PlayerGame.CampaignMissionNumComplete);
 		UpdateAllResource();
+		RegisterOnChange();
 		flagLoadedGame = true;
 	}
 	void OnDestroy(){
@@ -43,6 +44,14 @@ public class PlayerScript : MonoBehaviour{
 	}
 //API List Heroes
 	public Action<InfoHero> observerChangeListHeroes;
+	public Action observerChangeCountHeroes;
+	public void RegisterOnChangeCountHeroes(Action d){observerChangeCountHeroes += d;}
+	public void AddMaxCountHeroes(int amount){
+		player.PlayerGame.maxCountHeroes += amount;
+		if(observerChangeCountHeroes != null) observerChangeCountHeroes();
+	}
+	public int GetMaxCountHeroes{get => player.PlayerGame.maxCountHeroes;}
+	public int GetCurrentCountHeroes{get => listHeroes.Count;}
 	public void GetListHeroesWithObserver(ref List<InfoHero> listHeroes, Action<InfoHero> d){
 		observerChangeListHeroes += d;
 		listHeroes = this.listHeroes;
@@ -58,8 +67,8 @@ public class PlayerScript : MonoBehaviour{
 		OnChangeListHeroes(removeHero);
 	}	
 	private void OnChangeListHeroes(InfoHero hero){
-		if(observerChangeListHeroes != null)
-			observerChangeListHeroes(hero);
+		if(observerChangeListHeroes != null) observerChangeListHeroes(hero);
+		if(observerChangeCountHeroes != null) observerChangeCountHeroes();
 	}
 //API mine
 	public Mine LoadMine(int ID){
@@ -73,7 +82,7 @@ public class PlayerScript : MonoBehaviour{
 		SaveGame();
 	}
 //API resources	
-	public void AddReward(CalculatedReward reward){
+	public void AddReward(Reward reward){
 		Debug.Log("add reward");
 		PlayerScript.Instance.AddResource(reward.GetListResource);
 		InventoryControllerScript.Instance.AddItems(reward.GetItems);
@@ -82,7 +91,6 @@ public class PlayerScript : MonoBehaviour{
 	public bool CheckResource(Resource res){
 		return CheckResource(new ListResource(res));
 	}
-	
 	public bool CheckResource(ListResource listResource){
 		return player.PlayerGame.StoreResources.CheckResource(listResource);
 	}
@@ -94,12 +102,19 @@ public class PlayerScript : MonoBehaviour{
 		player.PlayerGame.StoreResources.AddResource(listResource);
 		UpdateAllResource();
 	}
-
+	public void AddResource(List<Resource> listResource){
+		player.PlayerGame.StoreResources.AddResource(listResource);
+		UpdateAllResource();
+	}
 	public void SubtractResource(params Resource[] resources){
 		for(int i = 0; i < resources.Length; i++)
 			SubtractResource(new ListResource(resources[i]));
 	}
 	public void SubtractResource(ListResource listResource){
+		player.PlayerGame.StoreResources.SubtractResource(listResource);
+		UpdateAllResource();
+	}
+	public void SubtractResource(List<Resource> listResource){
 		player.PlayerGame.StoreResources.SubtractResource(listResource);
 		UpdateAllResource();
 	}
@@ -151,6 +166,14 @@ public class PlayerScript : MonoBehaviour{
 			}
 		}
 	}
+	public void RegisterOnLevelUP(Action<BigDigit> d){ player.RegisterOnLevelUP(d); }
+//Level
+	private void RegisterOnChange(){
+		RegisterOnChangeResource(AddExp, TypeResource.Exp);
+	}
+	public void AddExp(Resource newExp){ player.AddExp(newExp); }
+
+
 	void OnApplicationFocus(bool hasFocus){
 		#if UNITY_ANDROID && !UNITY_EDITOR
         SaveGame();

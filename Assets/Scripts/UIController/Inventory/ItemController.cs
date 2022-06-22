@@ -8,17 +8,21 @@ public class ItemController : VisualAPI, ICloneable{
 	public Item item{get => _item; set => _item = value;} 
 	protected int amount;
 	public int Amount{get => amount;}
-	protected InventoryCellControllerScript cell = null;
-	public InventoryCellControllerScript cellInvenroty{get => cell; set => cell = value;}
+	protected SubjectCellControllerScript cell = null;
+	public SubjectCellControllerScript cellInvenroty{get => cell; set => cell = value;}
 	public void ClickOnItem(){
 		InventoryControllerScript.Instance.OpenInfoItem(this);
 	}
 
+	public ItemController(Item item){
+		this.item = item;
+		this.amount = (item.Amount > 0) ? item.Amount : 1;
+	}
 	public ItemController(Item item, int amount){
 		this.item = item;
-		this.amount = amount;
+		this.amount = (amount > 0) ? amount : 1;
 	}
-	public ItemController(){}
+	public ItemController(){this.amount = 1;}
 	protected ThingUIScript UI;
 	public void SetUI(ThingUIScript UI){
 		this.UI = UI;
@@ -26,7 +30,7 @@ public class ItemController : VisualAPI, ICloneable{
 	}
 	public void UpdateUI(){
 		if(item != null)
-			UI?.UpdateUI(item.sprite, Rare.C, Amount);
+			UI?.UpdateUI(item.Image, Rare.C, Amount);
 	}
 	public VisualAPI GetVisual(){
 		return (this as VisualAPI);

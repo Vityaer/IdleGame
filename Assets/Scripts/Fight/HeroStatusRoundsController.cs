@@ -82,7 +82,7 @@ public class Debuff{
 		}
 		public void RoundFinish(HeroControllerScript heroController){
 			if(rounds.Count > 0){
-				heroController.GetDamage(new Strike(rounds[0].amount, rounds[0].typeNumber, TypeStrike.Clean) );
+				heroController.GetDamage(new Strike(rounds[0].amount, 0, rounds[0].typeNumber, TypeStrike.Clean) );
 				rounds.RemoveAt(0);
 			}
 		}

@@ -44,7 +44,6 @@ public class HeroLocalization{
 	public List<SkillLocalization> Skills = new List<SkillLocalization>(); 
 	public SkillLevelLocalization GetDescriptionSkill(string ID, int numSkill){
 		SkillLevelLocalization result = Skills[ numSkill ].levels[0];
-		Debug.Log(result.image);
 		return result;
 	}
 }

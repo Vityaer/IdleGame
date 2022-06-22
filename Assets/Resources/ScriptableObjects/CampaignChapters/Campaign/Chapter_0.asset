@@ -24,2034 +24,2034 @@ MonoBehaviour:
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 100
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 10
-          count: 50
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 80
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter:
-      - ID: 2101
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 24
-    isRrouletteWinReward: 0
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 2"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
     - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 3
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 3
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 120
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 100
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 2
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
-    autoFightReward:
-      listRewardResource:
-      - res:
-          Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 3"
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
+    autoFightReward:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
+          Name: 0
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 2
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
     - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 5
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 5
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 52c304ac76765c34cb4525814ae007aa, type: 2}
-      level: 5
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 52c304ac76765c34cb4525814ae007aa, type: 2}
-      level: 5
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 150
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 10
-          count: 150
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 150
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 4"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
     - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 8
+      level: 1
       rating: 1
       position: 0
       HP: 0
+    winReward:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
+          Name: 0
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 2
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
+    autoFightReward:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
+          Name: 0
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 2
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
+    location: 0
+    _listEnemy:
     - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
-      level: 8
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 89a1aaff38f0cb748b68ab19430c4142, type: 2}
-      level: 8
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 89a1aaff38f0cb748b68ab19430c4142, type: 2}
-      level: 8
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 89a1aaff38f0cb748b68ab19430c4142, type: 2}
-      level: 12
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 89a1aaff38f0cb748b68ab19430c4142, type: 2}
-      level: 12
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 121
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 121
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 121
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 201
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 1
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 5"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 5b1a632530945774fb7ad7e5e06f37e4, type: 2}
-      level: 30
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: f2d82d330979e9441a57b8f7b4dd5782, type: 2}
-      level: 30
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
-          Name: 10
-          count: 140
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 140
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 140
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 100
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 1
-      listRewardSplinter:
-      - ID: 2101
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 1
-    isRrouletteWinReward: 0
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 6"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 101
-        typeIssue: 2
-        posibility: 0
-        min: 1
-        max: 4
-        count: 1
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
-    autoFightReward:
-      listRewardResource:
-      - res:
-          Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 100
-        typeIssue: 1
-        posibility: 40
-        min: 0
-        max: 0
-        count: 30
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 7"
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
+    autoFightReward:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
+          Name: 0
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 2
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 102
-        typeIssue: 2
-        posibility: 0
-        min: 1
-        max: 2
-        count: 1
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
-    autoFightReward:
-      listRewardResource:
-      - res:
-          Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 200
-        typeIssue: 1
-        posibility: 40
-        min: 0
-        max: 0
-        count: 30
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 8"
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
+    autoFightReward:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
+          Name: 0
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 2
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
+          Name: 10
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 300
-        typeIssue: 1
-        posibility: 40
-        min: 0
-        max: 0
-        count: 30
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 9"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 25
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 600
-        typeIssue: 1
-        posibility: 40
-        min: 0
-        max: 0
-        count: 30
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0
+  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 1"
     location: 0
     _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
+    - enemyPrefab: {fileID: 11400000, guid: 7805ddfe7f206ef48888207f27467065, type: 2}
+      level: 1
       rating: 1
       position: 0
       HP: 0
     winReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 100
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 50
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
+          amount:
+            count: 30
+            e10: 0
+      items:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 101
+        description: 
+        rating: 0
+        type: 0
+        set: 0
+        ListBonuses: []
+        rare: 0
+      splinters:
+      - sprite: {fileID: 0}
+        amount: 0
+        name: 
+        id: 1201
+        description: 
+        rating: 0
+        typeSplinter: 0
+        race: 0
+        requireAmount: 0
+        objectReward: {fileID: 0}
+        rare: 0
     autoFightReward:
-      listRewardResource:
-      - res:
+      resources:
+        resources:
+        - sprite: {fileID: 0}
           Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 5
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
+          amount:
+            count: 4
+            e10: 0
+        - sprite: {fileID: 0}
           Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
-  - name: "\u0423\u0440\u043E\u0432\u0435\u043D\u044C 10"
-    location: 0
-    _listEnemy:
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    - enemyPrefab: {fileID: 11400000, guid: 94635f36d6c0fb749b15a0dcc9e9403b, type: 2}
-      level: 70
-      rating: 1
-      position: 0
-      HP: 0
-    winReward:
-      listRewardResource:
-      - res:
-          Name: 0
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 2
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 10
-          count: 200
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteWinReward: 0
-    autoFightReward:
-      listRewardResource:
-      - res:
-          Name: 0
-          count: 5
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 2
-          count: 4
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      - res:
-          Name: 10
-          count: 3
-          e10: 0
-        typeIssue: 0
-        posibility: 0
-        min: 0
-        max: 0
-        count: 0
-      listRewardItem:
-      - ID: 301
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 201
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 601
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      - ID: 101
-        typeIssue: 1
-        posibility: 30
-        min: 0
-        max: 0
-        count: 10
-      listRewardSplinter: []
-    defeatReward:
-      listRewardResource: []
-      listRewardItem: []
-      listRewardSplinter: []
-    isRrouletteDefeatReward: 0
-    saveResult: 0
+          amount:
+            count: 3
+            e10: 0
+      listPosibleResources:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          Name: 7
+          amount:
+            count: 1
+            e10: 0
+      listPosibleItems:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 101
+          description: 
+          rating: 0
+          type: 0
+          set: 0
+          ListBonuses: []
+          rare: 0
+      listPosibleSplinters:
+      - posibility: 100
+        subject:
+          sprite: {fileID: 0}
+          amount: 0
+          name: 
+          id: 2401
+          description: 
+          rating: 0
+          typeSplinter: 0
+          race: 0
+          requireAmount: 0
+          objectReward: {fileID: 0}
+          rare: 0

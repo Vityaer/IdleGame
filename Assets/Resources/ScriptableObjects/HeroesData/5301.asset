@@ -26,9 +26,10 @@ MonoBehaviour:
   prefabArrow: {fileID: 0}
   characts:
     limitLevel: 40
-    Attack: 12
+    Damage: 5
     HP: 40
-    Armor: 8
+    GeneralAttack: 0
+    GeneralArmor: 0
     Initiative: 12
     ProbabilityCriticalAttack: 0
     DamageCriticalAttack: 0
@@ -37,6 +38,13 @@ MonoBehaviour:
     Dodge: 0
     CountTargetForSimpleAttack: 1
     CountTargetForSpell: 1
+    baseCharacteristic:
+      Attack: 8
+      Defense: 6
+      Speed: 3
+      typeMovement: 0
+      Mellee: 0
+      typeStrike: 0
   resistances:
     MagicResistance: 0
     CritResistance: 0
@@ -49,9 +57,8 @@ MonoBehaviour:
     silinceResistance: 0
     EfficiencyHeal: 1
   incCharacts:
-    increaseAttack: 1.3
+    increaseDamage: 2
     increaseHP: 1.1
-    increaseArmor: 1.4
     increaseInitiative: 0.12
     increaseProbabilityCriticalAttack: 0
     increaseDamageCriticalAttack: 0
@@ -136,9 +143,8 @@ MonoBehaviour:
       newLimitLevel: 30
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 7
+        increaseDamage: 0
         increaseHP: 7
-        increaseArmor: 6
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -159,9 +165,8 @@ MonoBehaviour:
       newLimitLevel: 50
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 7
+        increaseDamage: 0
         increaseHP: 7
-        increaseArmor: 6
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -182,9 +187,8 @@ MonoBehaviour:
       newLimitLevel: 70
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 6.5
+        increaseDamage: 0
         increaseHP: 6.5
-        increaseArmor: 5.5
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -205,9 +209,8 @@ MonoBehaviour:
       newLimitLevel: 90
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 6
+        increaseDamage: 0
         increaseHP: 6
-        increaseArmor: 5
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -228,9 +231,8 @@ MonoBehaviour:
       newLimitLevel: 120
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 4.5
+        increaseDamage: 0
         increaseHP: 4.5
-        increaseArmor: 3
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -251,9 +253,8 @@ MonoBehaviour:
       newLimitLevel: 150
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 4
+        increaseDamage: 0
         increaseHP: 4
-        increaseArmor: 3
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0
@@ -274,9 +275,8 @@ MonoBehaviour:
       newLimitLevel: 200
       newRatingHero: 3
       incCharacts:
-        increaseAttack: 2.5
+        increaseDamage: 0
         increaseHP: 2.5
-        increaseArmor: 1.5
         increaseInitiative: 0.1
         increaseProbabilityCriticalAttack: 0
         increaseDamageCriticalAttack: 0

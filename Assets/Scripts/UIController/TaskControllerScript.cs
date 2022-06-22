@@ -14,12 +14,12 @@ public class TaskControllerScript : MonoBehaviour{
 	public Button btnTaskController;
 	public Text textBtnTaskController;
 	public RatingHeroScript ratingController;
-	public ProductScript productController;
-	public void UpdateUI(Task task){
+	public SubjectCellControllerScript rewardUIController;
+	public void SetData(Task task){
 		this.task = task;
 		name.text = task.name;
 		ratingController.ShowRating(task.rating);
-		productController.UpdateUI(task.reward);
+		rewardUIController.SetItem(task.Reward);
 		UpdateStatus();
 	}
 
@@ -62,7 +62,7 @@ public class TaskControllerScript : MonoBehaviour{
 		UpdateStatus();
 	}
 	public void GetReward(){
-		Debug.Log("get reward");
+		task.GetReward();
 	}
 
 }

@@ -11,12 +11,12 @@ public enum Race{
     God = 11,
 	DarkGod = 12}
 public enum Rare{
-	C,
-	R,
-	SR,
-	SSR,
-	UR,
-	LR}
+	C = 0,
+	R = 1,
+	SR = 2,
+	SSR = 3,
+	UR = 4,
+	LR = 5}
 public enum Attachment{
 	People = 0,
 	Elf = 1,

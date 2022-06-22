@@ -20,7 +20,7 @@ public class PanelInfoMine : MonoBehaviour{
 	}
 	private void UpdateUI(){
 		if(mine.FirstResource == null) {Debug.Log("нет русурсов");}else{Debug.Log("ресурсы есть");}
-		image.sprite = mine.FirstResource.sprite;
+		image.sprite = mine.FirstResource.Image;
 		textNameMine.text = mine.FirstResource.Name.ToString();
 		textLevelMine.text = string.Concat("Уровень ", mine.level.ToString()); 
 		buttonCost.UpdateCost(new Resource(TypeResource.Gold, 10f * mine.level, 0), LevelUP);

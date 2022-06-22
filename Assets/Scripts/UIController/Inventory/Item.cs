@@ -5,6 +5,89 @@ using UnityEngine.UI;
 using System;
 
 
+
+[System.Serializable]
+public class Item : PlayerObject, VisualAPI{
+	private static Sprite[] spriteAtlas;   
+	public override Sprite Image{ get{ 	if(sprite == null) {
+										if(spriteAtlas == null) spriteAtlas = Resources.LoadAll<Sprite>("Items/Items");
+										LoadData();
+										for(int i=0; i < spriteAtlas.Length; i++){
+											if(Name.Equals(spriteAtlas[i].name)){
+												sprite = spriteAtlas[i];
+												break;
+											}
+										}
+									}
+									return sprite;
+								}}
+	
+	[SerializeField]private TypeItem type;
+	[SerializeField]public SetItems set;
+	[SerializeField] public List<Bonus> ListBonuses;
+	[SerializeField] private Rare rare;
+
+	public TypeItem Type{get => type;}
+	public SetItems Set{get => set;}
+	public Rare GetRare{get => rare;}
+	public void LoadData(){
+		Item loadedItem = GetItem(ID);
+		name = loadedItem.Name;
+		this.type = loadedItem.Type;
+		this.set = loadedItem.Set;
+		this.ListBonuses = loadedItem.ListBonuses;
+	}
+    private static ItemsList itemsList;
+	public static Item GetItem(int ID){
+    	if(itemsList == null) itemsList = Resources.Load<ItemsList>("Items/ListItems"); 
+		return itemsList.GetItem(ID);
+	}
+//API
+
+	public string GetTextBonuses(){
+		string result = "";
+		foreach (Bonus bonus in ListBonuses)
+			result = string.Concat(result, GetText(bonus.Count, Name.ToString()));
+		return result;
+
+		
+	}
+	private string GetText(float bonus, string who){
+		string result = "";
+		result = string.Concat(result, (bonus > 0) ? "<color=green>+" : "<color=red>", Math.Round(bonus, 1).ToString(), "</color> ", who,"\n");
+		return result;
+	}
+	public float GetBonus(TypeCharacteristic typeBonus){
+		float result = 0;
+		Bonus bonus = ListBonuses.Find(x => x.Name == typeBonus);
+		if(bonus != null) result = bonus.Count;
+		return result;
+	}
+
+//Visial API
+	public override void ClickOnItem(){ InventoryControllerScript.Instance.OpenInfoItem(this); }
+	public override void SetUI(ThingUIScript UI){
+		this.UI = UI;
+		UpdateUI();
+	}
+	public override void UpdateUI(){
+		Debug.Log("update ui");
+		UI?.UpdateUI(Image, rare, GetTextAmount());
+	}	
+
+//Constructors
+	public Item(int ID){
+		base.id = ID;
+		LoadData();
+	}	
+	public Item(){base.id = 0;}
+
+	public override BaseObject Clone(){return new Item(this.ID);}
+}
+
+
+
+
 public enum TypeItem{
 		Weapon,
 		Shield,
@@ -36,87 +119,3 @@ public enum SetItems{
 	Archangel,
 	Titan,
 	God}
-
-[System.Serializable]
-public class Item{
-	[SerializeField]
-	protected string name;
-	public string Name{get => name; set => name = value;}
-
-	public string description;
-
-	public int ID;
-	private static Sprite[] spriteAtlas;   
-	protected Sprite image;
-	public virtual Sprite sprite{ get{ 	if(image == null) {
-									if(spriteAtlas == null) spriteAtlas = Resources.LoadAll<Sprite>("Items/Items");
-										for(int i=0; i < spriteAtlas.Length; i++){
-											if(Name.Equals(spriteAtlas[i].name)){
-												image = spriteAtlas[i];
-												break;
-											}
-										}
-									}
-									return image;
-								}}
-	
-	[SerializeField]
-	private TypeItem type;
-	public TypeItem Type{get => type;}
-
-	[SerializeField]
-	protected int rating;
-	public int Rating{get => rating; set => rating = value;}
-	
-	[SerializeField]
-	public SetItems set;
-	public SetItems Set{get => set;}
-
-	public Dictionary<string, float> bonuses = new Dictionary<string, float>();
-	
-	[SerializeField]
-	public List<Bonus> ListBonuses;
-//API
-	public void SetBonus(){
-		bonuses.Clear();
-		for(int i=0; i < ListBonuses.Count; i++) {
-			if(!bonuses.ContainsKey( ListBonuses[i].Name.ToString() ) ){
-				bonuses.Add(ListBonuses[i].Name.ToString(), ListBonuses[i].Count);
-			}else{
-				bonuses[ListBonuses[i].Name.ToString()] += ListBonuses[i].Count;
-			}
-		}
-	}
-	public bool IsNull(){
-		return (sprite == null);
-	}
-	public string GetTextBonuses(){
-		string result = "";
-		foreach (KeyValuePair<string, float> keyValue in bonuses){
-			if(keyValue.Value != 0){
-				result = string.Concat(result, GetText(keyValue.Value, keyValue.Key));
-			}
-		}
-		return result;
-
-		
-	}
-	private string GetText(float bonus, string who){
-		string result = "";
-		result = string.Concat(result, (bonus > 0) ? "<color=green>+" : "<color=red>", Math.Round(bonus, 1).ToString(), "</color> ", who,"\n");
-		return result;
-	}
-	public float GetBonus(string typeBonus){
-		if(bonuses.Count == 0) SetBonus();
-		float result = 0;
-		if(bonuses.ContainsKey(typeBonus)){
-			result = bonuses[typeBonus];
-		}
-		return result;
-	}
-
-	public void UpdateUI(){
-		
-	}
-
-}

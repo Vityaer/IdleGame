@@ -20,6 +20,12 @@ public class ItemSliderControllerScript : MonoBehaviour{
 		textSlider.text = string.Concat(currentAmount.ToString(), " / ", maxAmount.ToString());
     	Show();
     }
+    public void SetAmount(BigDigit currentAmount, BigDigit maxAmount){
+        slider.maxValue = 1f;
+        slider.value = (currentAmount/maxAmount).ToFloat();
+        textSlider.text = string.Concat(currentAmount.ToString(), " / ", maxAmount.ToString());
+        Show();
+    }
     public void Hide(){
     	gameObject.SetActive(false);
     }

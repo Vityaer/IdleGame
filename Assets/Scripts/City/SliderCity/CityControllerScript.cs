@@ -11,7 +11,7 @@ public class CityControllerScript : MonoBehaviour{
 	public FooterButtonScript btnOpenClose;
 	public GameObject background;
 	[Header("UI Button")]
-	[SerializeField] Canvas canvasButtonsUI; 
+	[SerializeField] GameObject canvasButtonsUI; 
 	void Awake(){
 		canvasCity = GetComponent<Canvas>();
 		btnOpenClose.RegisterOnChange(Change);
@@ -22,12 +22,12 @@ public class CityControllerScript : MonoBehaviour{
 	public void Open(){
 		canvasCity.enabled = true;
 		sliderCity.enabled = true;
-		canvasButtonsUI.enabled = true;
+		canvasButtonsUI.SetActive(true);
 		BackGroundControllerScript.Instance.OpenBackground(background);
 	}
 	public void Close(){
 		canvasCity.enabled = false;
 		sliderCity.enabled = false;	
-		canvasButtonsUI.enabled = false;
+		canvasButtonsUI.SetActive(false);
 	}
 }

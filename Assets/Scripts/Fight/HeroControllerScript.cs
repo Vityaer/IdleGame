@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class HeroControllerScript : MonoBehaviour{
 	public HeroStatusScript statusState;
 	private Transform tr;
-	private PlaceHero homePlace;
+	private HexagonCellScript myPlace;
 	public List<HeroControllerScript> listTarget = new List<HeroControllerScript>();
 	private Animator anim;
 	public float speedMove = 2f;
@@ -14,109 +14,135 @@ public class HeroControllerScript : MonoBehaviour{
 	public Hero hero;
 	public Side side = Side.Left;
 	private Vector3 delta = new Vector2(-0.6f, 0f);
+	public int maxCountCounterAttack = 1;
+	private int currentCountCounterAttack = 1;
 	public enum StageAction{
 		MoveToTarget,
 		Attack,
 		MoveHome,
 		Spell
 	}
-	public StageAction action; 
+	public StageAction action;
+
+	public HexagonCellScript Cell{get => myPlace;}
+	public bool Mellee{get => hero.characts.baseCharacteristic.Mellee;}
+	public TypeStrike typeStrike{get => hero.characts.baseCharacteristic.typeStrike;}
 	void Awake(){
 		statusState = GetComponent<HeroStatusScript>();
-		tr = GetComponent<Transform>();
-		rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+		tr          = GetComponent<Transform>();
+		rb          = GetComponent<Rigidbody2D>();
+        anim        = GetComponent<Animator>();
 	}
 	void Start(){
 		hero.PrepareSkills(this);
 		OnStartFight();
+		FightControllerScript.Instance.RegisterOnEndRound(RefreshOnEndRound);
 	}
 	public void DoAction(){
 		if((isDeath == false) && statusState.GetCanAction()){
 			listTarget.Clear();
-			if(statusState.Stamina < 100){
-				ChooseEnemies(listTarget, hero.characts.CountTargetForSimpleAttack);
-				action      = ChooseAction();
-			}else{
-				GetListForSpell(listTarget); 
-				action = StageAction.Spell;
-			}
-			if(listTarget.Count > 0){
-				DoStage();
-			}else{
-				EndAction();
-			}
+			myPlace.StartCheckMove(hero.characts.baseCharacteristic.Speed, playerCanController: !AIController.Instance.CheckMeOnSubmission(side));
+			HexagonCellScript.RegisterOnClick(SelectHexagonCell);
+
+			OnStartAction();
+			// if(statusState.Stamina < 100){
+			// 	ChooseEnemies(listTarget, hero.characts.CountTargetForSimpleAttack);
+			// 	action      = ChooseAction();
+			// }else{
+			// 	GetListForSpell(listTarget); 
+			// 	action = StageAction.Spell;
+			// }
+			// if(listTarget.Count > 0){
+			// 	DoStage();
+			// }else{
+			// 	EndAction();
+			// }
 
 		}else{
 			EndAction();
 		}
 	}
-	private void DoStage(){
-		switch (action){
-			case StageAction.MoveToTarget:
-					MoveToPoint(listTarget[0].GetPosition() + delta);
-				break;
-			case StageAction.Attack:
-					Attack();
-				break;
-			case StageAction.Spell:
-					DoSpell();
-				break;	
+	HexagonCellScript cellTarget;
+	HeroControllerScript selectHero;
+	public void SelectHexagonCell(HexagonCellScript cell){
+		if(cell.availableMove){
+			StartMelleeAttackOtherHero(cell, null);
+		}else{
+			if(cell.Hero != null){
+				if(CanAttackHero(cell.Hero) && (cell.GetCanAttackCell || (hero.characts.baseCharacteristic.Mellee == false)) ){
+					selectHero = cell.Hero;
+					if((hero.characts.baseCharacteristic.Mellee == true) && cell.GetCanAttackCell){
+						cell.RegisterOnSelectDirection(SelectDirectionAttack);
+					}else if((hero.characts.baseCharacteristic.Mellee == false)){
+						StartDistanceAttackOtherHero(selectHero);
+					}
+				}
+			}
 		}
 	}
-	private void NextStage(){
-		switch (action){
-			case StageAction.MoveToTarget:
-				action = StageAction.Attack;
-				Attack();
-				break;
-			case StageAction.Attack:
-				action = StageAction.MoveHome;
-				MoveToPoint(homePlace.tr.position);
-				break;	
-			case StageAction.MoveHome:
-				EndAction();
-				break;	
-		}
+	public void SelectDirectionAttack(HexagonCellScript targetCell){
+		StartMelleeAttackOtherHero(targetCell, selectHero);
 	}
-//Move to point	
-	Coroutine coroutineMove;
-	private void MoveToPoint(Vector3 target){
-        coroutineMove = null;
-		coroutineMove = StartCoroutine(IMove(target));
+	public void SelectDirectionAttack(HexagonCellScript targetCell, HeroControllerScript otherHero){
+		StartMelleeAttackOtherHero(targetCell, otherHero);
 	}
-	IEnumerator IMove(Vector3 target){
+//Attack
+	Coroutine coroutineAttackEnemy;
+ 	private void StartMelleeAttackOtherHero(HexagonCellScript targetCell, HeroControllerScript enemy){
+        coroutineAttackEnemy = null;
+		coroutineAttackEnemy = StartCoroutine(IMelleeAttackOtherHero(targetCell, enemy));
+ 	}
+ 	public void StartDistanceAttackOtherHero(HeroControllerScript enemy){
+ 		CreateArrow(new List<HeroControllerScript>(){enemy});
+ 	}
+	IEnumerator IMelleeAttackOtherHero(HexagonCellScript targetCell, HeroControllerScript enemy){
+		myPlace.ClearSublject();
+		Vector3 target = targetCell.Position;
 		Vector2 dir = target - tr.position; 
         dir.Normalize();
         rb.velocity = dir * speedMove;
         float dist = Vector2.Distance(tr.position, target); 
-        while(dist > 0.25f){
+        while(dist > 0.05f){
     		dist = Vector2.Distance(tr.position, target);
 			yield return null;
         }
+        myPlace = targetCell;
+        myPlace.SetHero(this);
         rb.velocity = new Vector2();
-        NextStage();
- 	} 	
-//Attack
+        if(enemy != null){
+			statusState.ChangeStamina(30f);
+			anim.Play("Attack");
+			enemy.GetDamage(new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: typeStrike));
+        }
+        EndAction();
+ 	} 
+
 	private void Attack(){
-		statusState.ChangeStamina(30f);
-		if(hero.generalInfo.Mellee){
-			anim.Play("Attack");
+		if(Mellee){
 			OnStrike();
-			listTarget[0].GetDamage(new Strike(hero.characts.Attack, typeStrike: hero.generalInfo.typeStrike));
-			NextStage();
+			// enemy.GetDamage(new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: hero.generalInfo.typeStrike));
 		}else{
-			anim.Play("Attack");
 			CreateArrow(listTarget);		
 		}
 	}
+	private void CouterAttack(){
+		if(currentCountCounterAttack > 0){
+			HeroControllerScript otherHero = FightControllerScript.Instance.GetCurrentHero();
+			if(otherHero.PermissionCoutnerAttack()){
+				anim.Play("Attack");
+				otherHero.GetDamage(new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: typeStrike));
+			}			
+		}
+	}
+	private bool permissionCoutnerAttack = true;
+	public bool PermissionCoutnerAttack(){ return permissionCoutnerAttack; }
 
 	void CreateArrow(List<HeroControllerScript> listTarget){
 		GameObject arrow;
 		hitCount = 0;
 		foreach (HeroControllerScript target in listTarget) {
 			arrow = Instantiate(Resources.Load<GameObject>("CreateObjects/Bullet"), tr.position, Quaternion.identity);
-			arrow.GetComponent<ArrowScript>().SetTarget(target, new Strike(hero.characts.Attack, typeStrike: hero.generalInfo.typeStrike));
+			arrow.GetComponent<ArrowScript>().SetTarget(target, new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: typeStrike));
 			arrow.GetComponent<ArrowScript>().RegisterOnCollision(HitCount);
 		}
 	}
@@ -124,10 +150,12 @@ public class HeroControllerScript : MonoBehaviour{
 	public void HitCount(){
 		OnStrike();
 		hitCount += 1;
-		if(hitCount == listTarget.Count) { NextStage(); }
+		if(hitCount == listTarget.Count) { 
+			// NextStage();
+			 }
 	}
 	protected virtual void DoSpell(){
-		anim.Play("Attack");
+		anim.Play("SpecialAttack");
 		OnSpell();
 		Debug.Log("do spell");
 		EndAction();
@@ -143,7 +171,7 @@ public class HeroControllerScript : MonoBehaviour{
 
  	}
  	private StageAction ChooseAction(){
- 		if(hero.generalInfo.Mellee){
+ 		if(Mellee){
 	 		return StageAction.MoveToTarget;
  		}else{
 	 		return StageAction.Attack;
@@ -151,6 +179,8 @@ public class HeroControllerScript : MonoBehaviour{
  	}
 //End action 	
 	public void EndAction(){
+		HexagonCellScript.UnregisterOnClick(SelectHexagonCell);
+		OnEndAction();
 		anim.Play("Idle");
 		FightControllerScript.Instance.NextHero();
 	}
@@ -161,10 +191,11 @@ public class HeroControllerScript : MonoBehaviour{
 		delta = (side == Side.Left) ? new Vector2(-0.6f, 0f) : new Vector2(0.6f, 0f);
 		if(side == Side.Right) FlipX();
 	}
-	public void SetHero(InfoHero hero, PlaceHero place){
-		homePlace = place;
-		IsSide(place.side);
-		this.hero.SetHero(hero);
+	public void SetHero(InfoHero infoHero, HexagonCellScript place, Side side){
+		myPlace = place;
+		place.SetHero(this);
+		IsSide(side);
+		this.hero.SetHero(infoHero);
 		statusState.SetMaxHealth(this.hero.characts.HP);
 	}
 	public Vector3 GetPosition(){
@@ -176,7 +207,13 @@ public class HeroControllerScript : MonoBehaviour{
 			hero.GetDamage(strike);
 			statusState.ChangeHP(hero.characts.HP);
 			statusState.ChangeStamina(10f);
-			if(hero.characts.HP == 0) Death();
+			if(hero.characts.HP == 0){
+				Death();
+			}else{
+				if(strike.isMellee && (this != FightControllerScript.Instance.GetCurrentHero())){
+					CouterAttack();
+				}
+			}	
 		}
 	}
 	public void GetHeal(float heal, TypeNumber typeNumber = TypeNumber.Num){
@@ -198,17 +235,23 @@ public class HeroControllerScript : MonoBehaviour{
 		DeleteHero();
 	}
 	public void DeleteHero(){
-		statusState.Delete();
-		if(coroutineMove != null) StopCoroutine(coroutineMove);
-		coroutineMove = null;
+		if(coroutineAttackEnemy != null) StopCoroutine(coroutineAttackEnemy);
+		coroutineAttackEnemy = null;
 		DeleteAllDelegate();
 		Destroy(gameObject);
 	}	
-
+	void OnDestroy(){
+		FightControllerScript.Instance.UnregisterOnEndRound(RefreshOnEndRound);
+	}
+	public void ClickOnMe(){
+		myPlace?.ClickOnMe();
+	}
 	public bool isDeath = false;
 	public bool IsDeath{get => isDeath;}
 	private void Death(){
 		statusState.Death();
+		anim.Play("Death");
+		FightControllerScript.Instance.DeleteHero(this);
 		GetComponent<SpriteRenderer>().enabled = false;
 		isDeath = true;
 	}
@@ -269,12 +312,40 @@ public class HeroControllerScript : MonoBehaviour{
 			DelListTarget delsOnListSpell = null;
 		}
 
+		private static Action<HeroControllerScript> observerStartAction;
+		public static void RegisterOnStartAction(Action<HeroControllerScript> d){ observerStartAction += d;}
+		public static void UnregisterOnStartAction(Action<HeroControllerScript> d){ observerStartAction -= d;}
+		private void OnStartAction(){if(observerStartAction != null) observerStartAction(this);}
 
+		private static Action observerEndAction;
+		public static void RegisterOnEndAction(Action d){ observerEndAction += d;}
+		public static void UnregisterOnEndAction(Action d){ observerEndAction -= d;}
+		private void OnEndAction(){if(observerEndAction != null) observerEndAction();}
 
 	private void FlipX(){
 		Vector3 locScale = transform.localScale;
 		locScale.x *= -1;
 		transform.localScale = locScale; 
 	} 
+//Fight helps
+	private bool CanAttackHero(HeroControllerScript otherHero){
+		if(this.side != otherHero.side){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	private void RefreshOnEndRound(){
+		currentCountCounterAttack = maxCountCounterAttack;
+	}
+}
 
+
+
+
+
+public enum Side{
+	Left,
+	Right,
+	All
 }

@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 public class ForgeScript : Building{
 
 	[Header("General")]
 	public ForgeItemVisual leftItem, rightItem;
-	public GameObject workbench;
-	private List<ForgeItemVisual> listPlace = new List<ForgeItemVisual>();
+	[SerializeField] private List<ForgeItemVisual> listPlace = new List<ForgeItemVisual>();
 	private List<ItemSynthesis> workList;
 	[Header("Data")]
 	[SerializeField] private List<ItemSynthesis> weapons, armors, necklace, shield, boots, helmets, mittens;
@@ -15,9 +15,6 @@ public class ForgeScript : Building{
 
 
 	protected override void OpenPage(){
-		if(listPlace.Count == 0)
-			foreach(Transform child in workbench.transform)
-				listPlace.Add(child.GetComponent<ForgeItemVisual>());
 		OpenList(TypeSynthesis.Weapon);
 	}
 	public void OpenList(int numList){
@@ -83,6 +80,7 @@ public class ForgeScript : Building{
 				PlayerScript.Instance.SubtractResource(currentItem.requireResource);
 				InventoryControllerScript.Instance.RemoveItems(currentItem.requireItem, currentItem.countRequireItem);
 				InventoryControllerScript.Instance.AddItem(currentItem.reward);
+				OnCraft(1);
 			}	
 		}
 		currentCell.UIItem.SwitchDoneForUse( InventoryControllerScript.Instance.HowManyThisItems( currentItem.requireItem) >= currentItem.countRequireItem );
@@ -100,6 +98,13 @@ public class ForgeScript : Building{
 	void Awake(){
 		instance = this;
 	}
+
+
+//Observers
+	private Action<BigDigit> observerCraft;
+	public void RegisterOnCraft(Action<BigDigit> d){observerCraft += d;}	 
+	private void OnCraft(int amount) {if(observerCraft != null) observerCraft(new BigDigit(amount));}	 
+
 }
 
 [System.Serializable]
@@ -111,7 +116,6 @@ public class ItemSynthesis{
 	[Header("Reward")]
 	public int IDReward;
 
-    private static ItemsList itemsList;
     private Item _reward = null; 
     public Item reward{ 
     	get {
@@ -127,8 +131,7 @@ public class ItemSynthesis{
     	}
     }
     private Item GetItem(int ID){
-    	if(itemsList == null) itemsList = Resources.Load<ItemsList>("Items/ListItems"); 
-		return itemsList.GetItem(ID);
+		return Item.GetItem(ID);
     }
 
 }

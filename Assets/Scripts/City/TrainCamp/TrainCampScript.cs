@@ -54,10 +54,10 @@ public class TrainCampScript : MonoBehaviour{
 	} 
 	public void UpdateTextAboutHero(){
 		textLevel.text      =  hero.generalInfo.Level.ToString();
-		textHP.text         = (hero.GetCharacteristic("HP")        ).ToString();
-		textAttack.text     = (hero.GetCharacteristic("Attack")    ).ToString();
-		textArmor.text      = (hero.GetCharacteristic("Armor")     ).ToString();
-		textInitiative.text = (hero.GetCharacteristic("Initiative")).ToString();
+		textHP.text         = (hero.GetCharacteristic(TypeCharacteristic.HP)        ).ToString();
+		textAttack.text     = (hero.GetCharacteristic(TypeCharacteristic.Damage)    ).ToString();
+		textArmor.text      = (hero.GetCharacteristic(TypeCharacteristic.Defense)   ).ToString();
+		textInitiative.text = (hero.GetCharacteristic(TypeCharacteristic.Initiative)).ToString();
 		textStrengthHero.text  = hero.GetStrength.ToString(); 
 		hero.PrepareSkillLocalization();
 		skillController.ShowSkills(hero.skills);
@@ -75,7 +75,8 @@ public class TrainCampScript : MonoBehaviour{
 	}
 	public void SelectHero(CardScript card){
 		numSelectHero = listHeroes.FindIndex(x => x == card.hero);
-		OpenTrainCamp();
+		SelectHero(numSelectHero);
+		if(isOpen == false) OpenTrainCamp();
 	}
 	public InfoHero ReturnSelectHero(){
 		return listHeroes[numSelectHero];
@@ -90,16 +91,16 @@ public class TrainCampScript : MonoBehaviour{
 	}
 	public void PreviousHero(){
 		SelectHero(numSelectHero - 1);
-	}	
-	public void OpenTrainCamp(){
+	}
+	private void OpenTrainCamp(){
 		isOpen = true;
-		if(listHeroes.Count == 0) PlayerScript.Instance.GetListHeroesWithObserver(ref listHeroes, OnChangeListHeroes);
-		if(listHeroes.Count > 0){
-			SelectHero(numSelectHero);
-		}
 		ListCard.Close();
-		MenuControllerScript.Instance.CloseMainPage();
 		trainCanvas.enabled = true;
+		MenuControllerScript.Instance.CloseMainPage();
+	}	
+	public void Open(){
+		if(listHeroes.Count == 0) PlayerScript.Instance.GetListHeroesWithObserver(ref listHeroes, OnChangeListHeroes);
+		ListCard.Open();
 	}
 	public void CloseTrainCamp(){
 		isOpen = false;

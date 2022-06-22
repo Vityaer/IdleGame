@@ -2,49 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 public class WheelFortuneScript : Building{
 
-	[Header("Images reward")]
-	public List<Image> images = new List<Image>();
-	public List<Text> texts = new List<Text>();
+	[Header("Controller")]
+	[SerializeField] private ButtonCostScript buttonOneRotate, buttonTenRotate;
+ 	[Header("Images reward")]
+	public List<SubjectCellControllerScript> places = new List<SubjectCellControllerScript>();
 
 	[Header("List reward")]
-	public List<FortuneReward> rewards = new List<FortuneReward>();
+	private List<FortuneReward> rewards = new List<FortuneReward>();
 
-	[Header("Buttons")]
-	public Button btnSimpleOneCoin;
+	public List<FortuneReward<Resource>> resources = new List<FortuneReward<Resource>>();
+	public List<FortuneReward<Item>>     items     = new List<FortuneReward<Item>>();
+	public List<FortuneReward<Splinter>> splinters = new List<FortuneReward<Splinter>>();
 
 	[Header("Arrow")]
 	public RectTransform arrowRect;
 	public float arrowSpeed;
-	private float t;
 	private float previousTilt = 0f;
 
 	private float generalProbability = 0f;
-
+	[Header("Test")]
+	public float testRandom = 0;
 	protected override void OpenPage(){
 		FillWheelFortune();
 		CalculateProbability();
-		CheckResourceForButton(TypeResource.CoinFortune, 1, btnSimpleOneCoin);
 
 	}
+	private Quaternion startRotation;
+	Coroutine coroutineRotate;
 	public void PlaySimpleRoulette(int coin = 1){
-		StartCoroutine(IRotateArrow(GetRandom()));
-		PlayerScript.Instance.SubtractResource(new Resource(TypeResource.CoinFortune, 1));
-		CheckResourceForButton(TypeResource.CoinFortune, 1, btnSimpleOneCoin);
+		coroutineRotate = StartCoroutine(IRotateArrow(GetRandom()));
+		OnSimpleRotate(coin);
 	}
 	int numReward = 0;
 	private float GetRandom(){
 		float result = 0f;
 		int k = 0;
-		float rand = Random.Range(0f, generalProbability);
+		float rand = UnityEngine.Random.Range(0f, generalProbability);
 		for(int i = 0; i < rewards.Count; i++){
 			result += rewards[i].probability;
 			if(result < rand){ k++; } else { break; } 
 		}
 		numReward = k;
-		return (k * 36f + 360f);
+		return (k * 45f + UnityEngine.Random.Range(-22.4f, 22.4f));
 	}
 	private void CalculateProbability(){
 		generalProbability = 0f;
@@ -53,45 +55,130 @@ public class WheelFortuneScript : Building{
 	}
 	private void FillWheelFortune(){
 		for(int i = 0; i < rewards.Count; i++){
-			images[i].sprite = rewards[i].GetImage();
-			texts[i].text = rewards[i].GetCount();
+			switch(rewards[i]){
+				case FortuneReward<Resource> product:
+					places[i].SetItem((product as FortuneReward<Resource>).subject);
+					break;
+				case FortuneReward<Item> product:
+					places[i].SetItem(product.subject);
+					break;
+				case FortuneReward<Splinter> product:
+					places[i].SetItem(product.subject);
+					break;		
+
+			}
 		}
-	}
-	private void CheckResourceForButton(TypeResource typeResource, int targetCount, Button button){
-		button.interactable = PlayerScript.Instance.CheckResource( new Resource(typeResource, targetCount) );
 	}
 
     IEnumerator IRotateArrow(float targetTilt){
-    	Debug.Log(previousTilt.ToString() + " to " + targetTilt.ToString());
-    	targetTilt += previousTilt;
-	    float rand = Random.Range(-4f, 4f);
-	    t = 0;
+    	float startTilt = (((int) (previousTilt / 360)) + 360f);
+    	targetTilt = startTilt + targetTilt;
+		float t = 0;
+		Debug.Log("rotate stage 0");
+		while(previousTilt > startTilt) previousTilt -= 360f;
+		float delta = (startTilt - previousTilt)/360;
+    	while(t <= 1){
+		    arrowRect.rotation = Quaternion.Euler(0, 0, - Mathf.Lerp(previousTilt, startTilt, t) );
+		    if(t < 0.36){
+		    	t += Time.deltaTime * arrowSpeed * (1f/delta) * Mathf.Max(t, 0.1f);
+		    }else{
+		    	t += Time.deltaTime * arrowSpeed * (1f/delta);
+		    }
+	    	yield return null; 
+		}
+		Debug.Log("rotate stage 1");
+		t = 0;
 		while(t <= 1){
-		    arrowRect.rotation = Quaternion.Euler(0, 0, - Mathf.Lerp(previousTilt, targetTilt, t) );
+		    arrowRect.rotation = Quaternion.Euler(0, 0, - Mathf.Lerp(startTilt, 360 + startTilt, t) );
 		    t += Time.deltaTime * arrowSpeed;
 	    	yield return null; 
 		}
-
+		Debug.Log("rotate stage 2");
+		t = 0;
+		while(startTilt > targetTilt) startTilt -= 360f;
+		delta = (targetTilt - startTilt)/360;
+		while(t <= 1){
+		    arrowRect.rotation = Quaternion.Euler(0, 0, - Mathf.Lerp(startTilt, targetTilt, t ) );
+		    if(t < 0.64){
+				t += Time.deltaTime * arrowSpeed * (1f/delta);
+		    }else{
+		    	t += Time.deltaTime * arrowSpeed * (1f/delta) * Mathf.Max(1 - t, 0.01f);
+		    }
+	    	yield return null; 
+		}
+		Debug.Log("finish rotate");
     	previousTilt = targetTilt;
     	GetReward(); 
 	}
 	private void GetReward(){
-		switch(rewards[numReward].typeProduct){
-			case TypeProduct.Resource:
-				PlayerScript.Instance.AddResource( rewards[numReward].rewardResource );
-				MessageControllerScript.Instance.AddMessage("Поздравляем! Награда - " + rewards[numReward].rewardResource.ToString() +" " + rewards[numReward].rewardResource.Name.ToString() );
+		switch( rewards[numReward] ){
+			case FortuneReward<Resource> res:
+				Resource rewardRes = (rewards[numReward] as FortuneReward<Resource>).subject as Resource;
+				PlayerScript.Instance.AddResource( rewardRes );
+				MessageControllerScript.Instance.AddMessage("Поздравляем! Награда - " + rewardRes.GetTextAmount() +" " + rewardRes.GetName() );
 				break;
-			case TypeProduct.Item:
+			case FortuneReward<Item> item:
+				Item rewardItem = (rewards[numReward] as FortuneReward<Item>).subject as Item;
 				MessageControllerScript.Instance.AddMessage("Поздравляем! Награда - предмет" );
-				InventoryControllerScript.Instance.AddItem(rewards[numReward].GetItem);
+				InventoryControllerScript.Instance.AddItem(rewardItem);
 				break;
-			case TypeProduct.Splinter:
+			case FortuneReward<Splinter> splinter:
 			break;
 		}
-	}	
+	}
+	private void OneRotate(int count){
+		PlaySimpleRoulette(1);
+	}
+	private void TenRotate(int count){
+		PlaySimpleRoulette(10);
+	}
+
+	protected override void OnStart(){
+		buttonOneRotate.RegisterOnBuy(OneRotate);
+		buttonTenRotate.RegisterOnBuy(TenRotate);
+
+		for(int i = 0; i < resources.Count; i++) rewards.Add(resources[i]);
+		for(int i = 0; i < items.Count; i++) rewards.Add(items[i]);
+		for(int i = 0; i < splinters.Count; i++) rewards.Add(splinters[i]);
+		FortuneReward x = null;
+		for(int i = 0; i < rewards.Count - 1; i++){
+			for(int j = i + 1; j < rewards.Count; j++){
+				if(rewards[i].posID > rewards[j].posID){
+					x = rewards[i];
+					rewards[i] = rewards[j];
+					rewards[j] = x;
+				}
+			}
+		}
+		startRotation = arrowRect.rotation;
+	}
+	[ContextMenu("StartPosition")]
+	public void StartPosition(){
+		arrowRect.rotation = startRotation;
+		if(coroutineRotate != null){
+			StopCoroutine(coroutineRotate);
+			coroutineRotate = null;
+		}
+
+	}
+	private static WheelFortuneScript instance;
+	public static WheelFortuneScript Instance{get => instance;}
+	void Awake(){
+		instance  = this;
+	}
+//Observers
+	private Action<BigDigit> observerSimpleRotate;
+	public void RegisterOnSimpleRotate(Action<BigDigit> d){observerSimpleRotate += d;}	 
+	private void OnSimpleRotate(int amount) {if(observerSimpleRotate != null) observerSimpleRotate(new BigDigit(amount));}	 
+
 }
 
 [System.Serializable]
-public class FortuneReward : Product{
+public class FortuneReward{
 	public float probability;
+	public int posID;
 }
+[System.Serializable]
+public class FortuneReward<T>: FortuneReward where T : BaseObject{
+	public T subject;
+} 

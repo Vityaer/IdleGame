@@ -37,11 +37,10 @@ public class CostumeHeroControllerScript{
     	}
     	return result;
     }
-    public float GetBonus(string typeBonus){
+    public float GetBonus(TypeCharacteristic type){
     	float result = 0f;
-    	foreach(Item item in items){
-			result += item.GetBonus(typeBonus); 
-		}
+    	foreach(Item item in items)
+			result += item.GetBonus(type); 
 		return result;
     }
     private static ItemsList itemsList;

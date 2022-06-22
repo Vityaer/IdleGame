@@ -6,12 +6,12 @@ public class WinLosePanelScript : MonoBehaviour{
 
 	public Transform listReward;
 	public GameObject panelReward;
-	private CalculatedReward reward;
+	private Reward reward;
 	public RewardUIControllerScript rewardController;
-	public void OpenPanel(CalculatedReward reward, string message){
+	public void OpenPanel(Reward reward, string message){
 		int k = 0;
 		this.reward = reward;
-		rewardController.SetReward(reward, lengthReward: true);
+		rewardController.ShowAllReward(reward);
 		panelReward.SetActive(true);
 	}
 
