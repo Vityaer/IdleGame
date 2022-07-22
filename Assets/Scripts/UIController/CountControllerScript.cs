@@ -41,4 +41,16 @@ public class CountControllerScript : MonoBehaviour{
 		if(observerOnCount != null)
 			observerOnCount(count);
 	}
+
+//API
+	public void SetMax(int newMax){
+		maxCount = newMax;
+		if(count > newMax) count = newMax;
+		OnChangeCount();
+	}
+	public void SetMin(int newMin){
+		minCount = newMin;
+		if(count < newMin) count = newMin;
+		OnChangeCount();
+	}	
 }

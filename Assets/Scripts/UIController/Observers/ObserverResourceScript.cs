@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ObserverResourceScript : MonoBehaviour{
 	[Header("General")]
 	public TypeResource typeResource;
-	public bool         isMyabeBuy;
+	private bool         isMyabeBuy;
 	public int          cost;
 	private Resource resource;
-
 	[Header("UI")]
 	public GameObject btnAddResource;
 	public Image imageResource;
-	public Text countResource;
+	public TextMeshProUGUI countResource;
 	void Start(){
+		isMyabeBuy = MarketResourceScript.Instance.GetCanSellThisResource(typeResource);
 		resource             = new Resource(typeResource);
 		imageResource.sprite = resource.Image;
 		btnAddResource.SetActive(isMyabeBuy);
@@ -33,5 +33,8 @@ public class ObserverResourceScript : MonoBehaviour{
 			PanelBuyResourceScript.StandartPanelBuyResource.Open(
 				product.subject, product.cost
 				);
+	}
+	void OnDestroy(){
+		PlayerScript.Instance.UnRegisterOnChangeResource(UpdateUI, typeResource);
 	}
 }

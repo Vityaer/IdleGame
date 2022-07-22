@@ -5,10 +5,10 @@ using UnityEngine.UI;
 using System;
 public class InventoryControllerScript : MonoBehaviour{
 
-	private Canvas canvasInventory;
+	[SerializeField] private Canvas canvasInventory;
 	private TypeItem typeItems;
 	public Transform grid;
-	public CellItemHeroScript cellItem      = null;
+	private CellItemHeroScript cellItem      = null;
 	private ItemController selectItem = null;
 	[Header("Panel Inventory")]
 	public GameObject panelInventory;
@@ -16,6 +16,7 @@ public class InventoryControllerScript : MonoBehaviour{
 	public GameObject panelController;
 	[Header("Info panel")]
 	public PanelInfoItemScript panelInfoItem;
+	public PanelInfoSplinterScript panelInfoSplinter;
 
 	private Inventory inventory = new Inventory();
 	[SerializeField]private List<SubjectCellControllerScript> cells = new List<SubjectCellControllerScript>();
@@ -71,6 +72,7 @@ public class InventoryControllerScript : MonoBehaviour{
 	public void AddSplinters(List<SplinterController> splinters){ inventory.Add(splinters); }
 	public void AddSplinters(List<Splinter> splinters){
 		foreach(Splinter splinter in splinters) AddSplinter(new SplinterController(splinter));}
+	public void RemoveSplinter(Splinter splinterForDelete){ inventory.RemoveSplinter(splinterForDelete); }	
 	public void SelectItem(){
 		if(cellItem != null){
 			cellItem.SetItem(selectItem.item);
@@ -104,6 +106,10 @@ public class InventoryControllerScript : MonoBehaviour{
 		FillGrid(listForVisual);
 		panelController.SetActive(true);
 	}
+	public void Refresh(){
+		inventory.GetAll(listForVisual);
+		FillGrid(listForVisual);
+	}
 	public void Open(string str){
 		TypeItem curType = (TypeItem) Enum.Parse(typeof(TypeItem), str); 
 		Open(curType, cellItem: null);
@@ -118,32 +124,30 @@ public class InventoryControllerScript : MonoBehaviour{
 		isOpenInventory = true;
 	}
 	public void OpenInfoItem(ItemController itemController){
-		canvasInventory.enabled = true;
 		selectItem = itemController;
 		panelInfoItem.OpenInfoAboutItem(itemController.item, this.cellItem);
 	}
 	public void OpenInfoItem(Item item){
-		canvasInventory.enabled = true;
 		panelInfoItem.OpenInfoAboutItem(item, this.cellItem);
 	}
 	public void OpenInfoItem(Resource res){
-		canvasInventory.enabled = true;
 		panelInfoItem.OpenInfoAboutItem(res);
 	}
 	public void OpenInfoItem(Item item, TypeItem typeItems, CellItemHeroScript cellItem){
-		canvasInventory.enabled = true;
+		// canvasInventory.enabled = true;
 		this.cellItem = cellItem;
 		panelInfoItem.OpenInfoAboutItem(item, this.cellItem, onHero: true);
 	}
 	SplinterController selectSplinter;
-	public void OpenInfoItem(Splinter splinter){ OpenInfoItem(new SplinterController(splinter)); }
-	public void OpenInfoItem(SplinterController splinterController){
-		canvasInventory.enabled = true;
+	public void OpenInfoItem(Splinter splinter){ OpenInfoItem(new SplinterController(splinter), withControl : false); }
+	public void OpenInfoItem(SplinterController splinterController, bool withControl){
 		selectSplinter = splinterController;
-		panelInfoItem.OpenInfoAboutItem(splinterController);
+		panelInfoSplinter.OpenInfoAboutSplinter(splinterController, withControl);
 	}
+	[ContextMenu("Close")]
 	public void Close(){
 		panelInfoItem.Close();
+		panelInfoSplinter.Close();
 		if(isOpenInventory){
 			panelInventory.SetActive(false);
 			isOpenInventory = false;
@@ -160,7 +164,6 @@ public class InventoryControllerScript : MonoBehaviour{
 	private static InventoryControllerScript instance;
 	public static InventoryControllerScript Instance{get => instance;}
 	void Awake(){
-		canvasInventory = GetComponent<Canvas>();
 		instance = this;
 		GetCells();
 	}

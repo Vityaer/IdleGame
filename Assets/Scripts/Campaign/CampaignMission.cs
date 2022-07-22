@@ -5,9 +5,7 @@ using Sirenix.OdinInspector;
 using Sirenix.Serialization;
 [System.Serializable]
 public class CampaignMission : Mission, ICloneable{
-    [Header("Win reward")]
-	[SerializeField] protected Reward winReward;
-	public Reward WinReward{get => winReward;}
+
 
 	[Header("Auto fight reward")]
 	[SerializeField] private AutoReward autoFightReward;

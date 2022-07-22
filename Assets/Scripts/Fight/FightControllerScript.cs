@@ -11,23 +11,27 @@ public partial class FightControllerScript : MonoBehaviour{
 	public List<HexagonCellScript> leftTeamPos  = new List<HexagonCellScript>();
 	public List<HexagonCellScript> rightTeamPos = new List<HexagonCellScript>();
 
-	public  List<Warrior> leftTeam  = new List<Warrior>(); 
-	public  List<Warrior> rightTeam = new List<Warrior>(); 
+	[SerializeField]private  List<Warrior> leftTeam  = new List<Warrior>(); 
+	[SerializeField]private  List<Warrior> rightTeam = new List<Warrior>(); 
 
-	[Header("Initiative List")]	
-	public List<HeroControllerScript> listInitiative  = new List<HeroControllerScript>();
+	private List<HeroControllerScript> listInitiative  = new List<HeroControllerScript>();
 
 	[Header("Location")]
 	public LocationControllerScript locationController;
 
+
+	public List<Warrior> GetLeftTeam{get => leftTeam;}
+	public List<Warrior> GetRightTeam{get => rightTeam;}
 //Create Teams
-	public void SetMission(Mission mission){
+	public void SetMission(Mission mission, List<WarriorPlaceScript> leftWarriorPlace, List<WarriorPlaceScript> rightWarriorPlace){
 		this.mission = mission;
 		locationController.OpenLocation( mission.location );
+		HexagonGridScript.Instance.OpenGrid();
 		Debug.Log("begin AI!!!!");
 		AIController.Instance.StartAIFight();
+		CreateTeams(leftWarriorPlace, rightWarriorPlace);
 	}
-    public void CreateTeams(List<WarriorPlaceScript> leftWarriorPlace, List<WarriorPlaceScript> rightWarriorPlace){
+    private void CreateTeams(List<WarriorPlaceScript> leftWarriorPlace, List<WarriorPlaceScript> rightWarriorPlace){
     	Screen.orientation = ScreenOrientation.LandscapeRight;
     	canvasFightUI.enabled = true;
     	CreateTeam(leftTeamPos,  leftWarriorPlace,  Side.Left );
@@ -35,16 +39,14 @@ public partial class FightControllerScript : MonoBehaviour{
     	listInitiative.Sort(new HeroInitiativeComparer());
     	StartCoroutine(StartFightCountdown());
     }
-	Text textTimer;
     IEnumerator StartFightCountdown(){
     	for (int i = 3; i>0; i--){
-	    	textTimer.text = i.ToString();
+	    	textNumRound.text = i.ToString();
 			yield return new WaitForSeconds(0.75f);
 		}
-		textTimer.text = "Fight!";
+		textNumRound.text = "Fight!";
 		yield return new WaitForSeconds(0.5f);
 		textNumRound.text = string.Concat("Round 1"); 
-		textTimer.text = "";
  		isFightFinish = false;
  		PlayDelegateOnStartFight();
 		StartFight();
@@ -113,40 +115,42 @@ public partial class FightControllerScript : MonoBehaviour{
  	}
  	Mission mission;
  	IEnumerator FinishFightCountdown(Side side){
-		textTimer.text = "Конец боя!";
-		if(side != Side.Left) CheckSaveResult();
-		yield return new WaitForSeconds(4f);
-		if(side == Side.Left){
-	 		CampaignScript.Instance.GetResult(win: true);
- 		}else{
-	 		CampaignScript.Instance.GetResult(win: false);
- 		}
-		textTimer.text = "";
+		textNumRound.text = "Конец боя!";
+		if(side == Side.Right) CheckSaveResult();
+		yield return new WaitForSeconds(2.5f);
+ 		FightResult fightResult = (side == Side.Left) ? FightResult.Win : FightResult.Defeat; 
+ 		OnFightResult(result: fightResult);
+		textNumRound.text = string.Empty;
+    	CloseFigthUI();
  		ClearAll();
     }
-    public void CloseFigthUI(){
+    private void CloseFigthUI(){
  		WarTableControllerScript.Instance.FinishMission();
+ 		HexagonGridScript.Instance.CloseGrid();
  		canvasFightUI.enabled = false;
     }
  	void ClearAll(){
- 		for (int i = rightTeam.Count - 1; i >= 0;  i-- ){
- 			rightTeam[i].heroController?.DeleteHero();
- 			rightTeam[i].heroController = null;
-		}
-		for (int i = leftTeam.Count - 1; i >= 0;  i-- ){
- 			leftTeam[i].heroController?.DeleteHero();
- 			leftTeam[i].heroController = null;
-		}
+ 		Debug.Log("clear all");
+ 		DeleteTeam(rightTeam);
+ 		DeleteTeam(leftTeam);
 		listInitiative.Clear();
 		currentHero = -1; 
 		round = 1;
+ 	}
+ 	void DeleteTeam(List<Warrior> team){
+ 		Debug.Log("delete team");
+ 		for (int i = 0; i < team.Count;  i++){
+ 			Debug.Log(i);
+ 			Debug.Log(team[i].heroController == null);
+ 			team[i].heroController.DeleteHero();
+		}
+		team.Clear();
  	}
  	void CheckSaveResult(){ if((mission is BossMission)) (mission as BossMission).SaveResult(); }
  	private static FightControllerScript instance;
 	public  static FightControllerScript Instance{get => instance;}
 	void Awake(){
 		instance = this;
-		textTimer = GameObject.Find("TimerText").GetComponent<Text>();
 	}
 
 //API
@@ -179,4 +183,14 @@ public partial class FightControllerScript : MonoBehaviour{
 	public void UnregisterOnFinishFight(Action d){ delsOnFinishFight -= d; }
 	private void PlayDelegateOnFinishFight(){ if(delsOnFinishFight != null) delsOnFinishFight(); }
 
+	private Action<FightResult> delsFightResult;
+	public void RegisterOnFightResult(Action<FightResult> d){ delsFightResult += d;}
+	public void UnregisterOnFightResult(Action<FightResult> d){ delsFightResult -= d;}
+	public void OnFightResult(FightResult result){if(delsFightResult != null){ delsFightResult(result); delsFightResult = null; }}
+
+}
+
+public enum FightResult{
+	Defeat = 0,
+	Win = 1
 }

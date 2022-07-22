@@ -12,13 +12,13 @@ public class RewardUIControllerScript : MonoBehaviour{
 		this.reward  = reward;
 		if(cells.Count == 0) GetCells();
 		if(btnAllReward != null) btnAllReward.SetActive((reward.Count > 4) && (lengthReward == false));
-		for(int i = 0; (i < 4) && (i < reward.Count); i++) cells[i].SetItem(reward.GetList[i]);
+		for(int i = 0; (i < 4) && (i < reward.Count); i++) cells[i].SetItem(reward.GetList[i] as VisualAPI);
 		for(int i = reward.Count; i < cells.Count; i++) cells[i].OffCell();
 	}
 	public void ShowAllReward(Reward reward){
 		this.reward  = reward;
 		if(cells.Count == 0) GetCells();
-		for(int i = 0; i < reward.Count; i++) cells[i].SetItem(reward.GetList[i]);
+		for(int i = 0; i < reward.Count; i++){cells[i].SetItem(reward.GetList[i]);}
 		for(int i = reward.Count; i < cells.Count; i++) cells[i].OffCell();
 	}
 	public void ShowAutoReward(AutoReward autoReward){

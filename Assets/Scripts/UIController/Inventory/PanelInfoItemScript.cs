@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class PanelInfoItemScript : MonoBehaviour{
    	[Header("PanelInfo Item")]
 	public GameObject panelInfoItem;
 	public Image imageInfoItem;
-	public Text textNameItem, textTypeItem, textBonus;
+	public TextMeshProUGUI textNameItem, textTypeItem, textGeneralInfo, textAddactiveInfo;
 	private bool isOpenInfoPanel = false;
 	private Item selectItem = null;
-	public GameObject btnAction, btnOpenInventory, btnDrop, btnClose; 
-	private Button componentButtonAction, componentButtonDrop;
-	private Text textButtonAction, textButtonDrop;
+	[Header("Controllers")]
+	public GameObject btnAction;
+	public GameObject btnOpenInventory, btnDrop, btnClose; 
+	private Button componentButtonAction, componentButtonDrop, buttonSwapItems;
+	public TextMeshProUGUI textButtonAction, textButtonDrop;
 
 	void Awake(){
 		GetComponents();
 	}
+
+	void Start(){
+		buttonSwapItems.onClick.AddListener(() => Close());
+		buttonSwapItems.onClick.AddListener(() => InventoryControllerScript.Instance.Open(cellItem.typeCell, cellItem));
+	}
 	private CellItemHeroScript cellItem; 
 	//Panel InfoAboutItem  
 	public void OpenInfoAboutItem(Item item, CellItemHeroScript cellItem, bool onHero = false){
-		if(componentButtonAction == null) GetComponents();
-		componentButtonAction.onClick.RemoveAllListeners();
-		componentButtonDrop.onClick.RemoveAllListeners();
+		RemoveAllListenersOnButtons();
 		componentButtonAction.onClick.AddListener( Close );
 		componentButtonDrop.onClick.AddListener( Close );
 		this.cellItem = cellItem;
 		btnOpenInventory.SetActive(onHero);
-		btnAction.SetActive( (cellItem == null) ? false : true );
+		btnAction.SetActive( cellItem != null );
 		if(onHero == false){
 			componentButtonAction.onClick.AddListener(InventoryControllerScript.Instance.SelectItem);
 			componentButtonDrop.onClick.AddListener(InventoryControllerScript.Instance.DropItem);
@@ -34,37 +40,40 @@ public class PanelInfoItemScript : MonoBehaviour{
 			textButtonAction.text = "Снарядить";
 		}else{
 			componentButtonDrop.onClick.AddListener( () => cellItem.SetItem(null) );
-			componentButtonDrop.onClick.AddListener( () => TrainCampScript.Instance.TakeOff(item) );
+			componentButtonDrop.onClick.AddListener(() => InventoryControllerScript.Instance.Close());
 			textButtonDrop.text = "Снять";
 		}
 		selectItem = item;
-		imageInfoItem.sprite = item.Image;
-		textNameItem.text = item.Name;
-		textTypeItem.text = item.Type.ToString();
-		textBonus.text    = item.GetTextBonuses(); 
-		panelInfoItem.SetActive(true);
-		btnClose.SetActive(true);
-		isOpenInfoPanel = true;
+		UpdateUIInfo(item.Image, item.Name, type: item.Type.ToString(), generalInfo: item.GetTextBonuses());
+		OpenPanel();
 	}
 	public void OpenInfoAboutItem(Resource res){
 		imageInfoItem.sprite = res.Image;
 		textNameItem.text    = res.Name.ToString();
 		panelInfoItem.SetActive(true);
 	}
-	public void OpenInfoAboutItem(SplinterController splinterController){
-		if(componentButtonAction == null) GetComponents();
-		componentButtonAction.onClick.RemoveAllListeners();
-		componentButtonDrop.onClick.RemoveAllListeners();
+	public void OpenInfoAboutSplinter(SplinterController splinterController, bool withControl = false){
+		Debug.Log("open splinter");
+		RemoveAllListenersOnButtons();
 		componentButtonDrop.onClick.AddListener( Close );
 		
-		imageInfoItem.sprite = splinterController.splinter.Image;
-		textNameItem.text    = splinterController.splinter.Name;
-		textTypeItem.text    = "";
-		textBonus.text       = "";
-		componentButtonAction.onClick.AddListener(() => splinterController.GetReward());
-		componentButtonDrop.onClick.AddListener(() => InventoryControllerScript.Instance.DropSplinter(splinterController));
-		textButtonDrop.text = "Выбросить";
-		btnAction.SetActive(true);
+		UpdateUIInfo(splinterController.splinter.Image, splinterController.splinter.Name);
+		if(withControl){
+			componentButtonAction.onClick.AddListener(() => splinterController.GetReward());
+			componentButtonDrop.onClick.AddListener(() => InventoryControllerScript.Instance.DropSplinter(splinterController));
+			textButtonDrop.text = "Выбросить";
+			btnAction.SetActive(true);
+		}
+		OpenPanel();
+	}
+	void UpdateUIInfo(Sprite image, string name, string type = "", string generalInfo = "", string addactInfo = ""){
+		imageInfoItem.sprite   = image;
+		textNameItem.text      = name;
+		textTypeItem.text      = type;
+		textGeneralInfo.text   = generalInfo;
+		textAddactiveInfo.text = addactInfo;
+	}
+	void OpenPanel(){
 		panelInfoItem.SetActive(true);
 		btnClose.SetActive(true);
 		isOpenInfoPanel = true;
@@ -72,8 +81,12 @@ public class PanelInfoItemScript : MonoBehaviour{
 	void GetComponents(){
 		componentButtonAction = btnAction.GetComponent<Button>(); 
 		componentButtonDrop   = btnDrop.GetComponent<Button>();
-		textButtonAction      = btnAction.transform.Find("Text").GetComponent<Text>();
-		textButtonDrop        = btnDrop.transform.Find("Text").GetComponent<Text>();
+		buttonSwapItems       = btnOpenInventory.GetComponent<Button>();
+	}
+	void RemoveAllListenersOnButtons(){
+		if(componentButtonAction == null) GetComponents();
+		componentButtonAction.onClick.RemoveAllListeners();
+		componentButtonDrop.onClick.RemoveAllListeners();
 	}
 	public void OpenInventory(){
 		InventoryControllerScript.Instance.Open(cellItem.typeCell, cellItem);
@@ -82,5 +95,8 @@ public class PanelInfoItemScript : MonoBehaviour{
 	public void Close(){
 		panelInfoItem.SetActive(false);
 		btnClose.SetActive(false);
+		btnAction.SetActive(false);
+		ClearInfo();
 	}
+	void ClearInfo(){ UpdateUIInfo(null, string.Empty); }
 }

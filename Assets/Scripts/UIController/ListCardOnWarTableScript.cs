@@ -116,4 +116,16 @@ public class ListCardOnWarTableScript : MonoBehaviour{
 		}
 	}
 	public void RemoveCardFromList(CardScript card){ listCard.Remove(card); }
+
+	public void SelectCards(List<InfoHero> selectedCard){
+		CardScript currentCard = null;
+		InfoHero currentHero = null;
+		for(int i= 0; i < selectedCard.Count; i++){
+			currentHero = selectedCard[i]; 
+			currentCard = listCard.Find(x => x.hero == currentHero);
+			if(currentCard != null){
+				currentCard.Selected();
+			}
+		}
+	}
 }

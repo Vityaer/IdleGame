@@ -10,14 +10,11 @@ public class BoxAllRewards : Building{
     }
     public override void Close(){
         ClosePage();
-        if(building != null){
-            canvasBuilding.enabled = false;
-            building.SetActive(false); 
-        }
+        if(building != null){ CanvasBuildingsUI.Instance.CloseBuilding(building);  }
     }
     private static BoxAllRewards instance;
     public static BoxAllRewards Instance{ get => instance;}
-    void Start(){
+    void Awake(){
     	instance = this;
     }
 }

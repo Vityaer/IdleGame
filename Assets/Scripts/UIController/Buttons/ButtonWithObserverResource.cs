@@ -9,15 +9,15 @@ public class ButtonWithObserverResource : MonoBehaviour{
 	public ButtonCostScript buttonCostComponent;
 	public Resource cost;
 	public void ChangeCost(Resource cost){
-		resourceObserver.SetInfo(cost);		
+		resourceObserver.SetData(cost);		
 	}
 	public void ChangeCost(Action<int> d){
-		resourceObserver.SetInfo(this.cost);	
+		resourceObserver.SetData(this.cost);	
 		buttonCostComponent.UpdateCostWithoutInfo(this.cost, d);
 
 	}
 	public void ChangeCost(Resource cost, Action<int> d){
-		resourceObserver.SetInfo(cost);	
+		resourceObserver.SetData(cost);	
 		buttonCostComponent.UpdateCostWithoutInfo(cost, d);
 
 	}

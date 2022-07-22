@@ -2,48 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using IdleGame.Touch;
 public class SliderCityScript : MonoBehaviour{
-    private Vector3 startPosition;
-	private Vector3 endPosition;
-	private float dragDistance;
+
 	void Start(){
-		dragDistance = Screen.width*30/100;
 		curSheet = ListCitySheet.Count / 2;
 		SetStartPosition();
+		MainTouchControllerScript.Instance?.RegisterOnObserverSwipe(OnSwipe);
 	}
-	void Update(){
-		if (Input.GetMouseButtonDown(0)){
-			startPosition  = Input.mousePosition;
-		}
-		if (Input.GetMouseButtonUp(0)){
-			endPosition  = Input.mousePosition;
-			if(Mathf.Abs(endPosition.y - startPosition.y) < dragDistance){
-				if(endPosition.x - startPosition.x > dragDistance){
-					SwipeLeft();
-				}else if(startPosition.x - endPosition.x > dragDistance){
-					SwipeRight();
-				}
-			}
+	private void OnSwipe(TypeSwipe typeSwipe){
+		switch(typeSwipe){
+			case TypeSwipe.Left:
+				SwipeLeft();
+				break;
+			case TypeSwipe.Right:
+				SwipeRight();
+				break;	
 		}
 	}
+	void OnDisable(){
+		MainTouchControllerScript.Instance.UnregisterOnObserverSwipe(OnSwipe);
+	}
+    void OnEnable(){
+		MainTouchControllerScript.Instance?.RegisterOnObserverSwipe(OnSwipe);
+    }
 	public int curSheet;
+	public float scaleX = 3f, timeAnimMove = 0.25f;
 	public List<RectTransform> ListCitySheet = new List<RectTransform>();
 	public void SwipeLeft(){
-			ListCitySheet[curSheet].DOAnchorPos(new Vector2(Screen.width, 0f), 0.25f);
+			ListCitySheet[curSheet].DOAnchorPos(new Vector2(Screen.width * scaleX, 0f), timeAnimMove);
 			if(curSheet > 0) curSheet--;
-			ListCitySheet[curSheet].DOAnchorPos(Vector2.zero, 0.25f);
+			ListCitySheet[curSheet].DOAnchorPos(Vector2.zero, timeAnimMove);
 	}
 	public void SwipeRight(){
-			ListCitySheet[curSheet].DOAnchorPos(new Vector2(-Screen.width, 0f), 0.25f);
+			ListCitySheet[curSheet].DOAnchorPos(new Vector2(-Screen.width * scaleX, 0f), timeAnimMove);
 			if(curSheet < ListCitySheet.Count - 1) curSheet++;
-			ListCitySheet[curSheet].DOAnchorPos(Vector2.zero, 0.25f);
+			ListCitySheet[curSheet].DOAnchorPos(Vector2.zero, timeAnimMove);
 	}
 	private void SetStartPosition(){
 		for(int i=0; i < curSheet; i++){
-			ListCitySheet[i].DOAnchorPos(new Vector2(-Screen.width, 0f), 0f);
+			ListCitySheet[i].DOAnchorPos(new Vector2(-Screen.width * scaleX, 0f), 0f);
 		}
 		for(int i=curSheet + 1; i < ListCitySheet.Count; i++){
-			ListCitySheet[i].DOAnchorPos(new Vector2(Screen.width, 0f), 0f);
+			ListCitySheet[i].DOAnchorPos(new Vector2(Screen.width * scaleX, 0f), 0f);
 		}
 	}
 

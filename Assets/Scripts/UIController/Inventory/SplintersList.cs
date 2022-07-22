@@ -8,12 +8,16 @@ using UnityEngine;
 public class SplintersList : ScriptableObject{
 	[SerializeField]
 	private List<Splinter> list = new List<Splinter>();
-	public Splinter GetItem(int ID){
-		if(ID > 1000){
-			return new Splinter(ID);
+	public Splinter GetSplinter(int ID){
+		Splinter result = null;
+		if(ID >= 1000){
+			InfoHero hero = TavernScript.Instance.GetInfoHero(ID);
+			result = new Splinter(hero);
 		}else{
-			return list.Find(x => (x.ID == ID));
+			result = list.Find(x => (x.ID == ID));
 		}
+		if(result == null){ Debug.Log("Not found splinter with id = " + ID.ToString()); result = list[0];}
+		return result;
 	}
 
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using HelpFuction;
 
+using System;
 public class AutoFightScript : MonoBehaviour{
 	public Canvas canvasAutoFight;
 	public MissionControllerScript missionAutoFight;
@@ -34,7 +35,9 @@ public class AutoFightScript : MonoBehaviour{
 		btnOpenClose.RegisterOnChange(Change);
 	}
 
+
 	void Change(bool isOpen){
 		if(isOpen){ Open(); }else{ Close(); }
 	}
+
 }

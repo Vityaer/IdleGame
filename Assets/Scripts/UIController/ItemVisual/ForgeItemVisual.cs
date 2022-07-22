@@ -16,11 +16,11 @@ public class ForgeItemVisual : MonoBehaviour{
 	public void SetItem(ItemSynthesis item){
 		thing = item;
 		if(thing.reward != null)
-			UIItem.UpdateUI(thing.reward.Image, Rare.C, item.reward.Rating);
+			UIItem.UpdateUI(thing.reward.Image, Rare.C, rating: item.reward.Rating);
 	}
 	public void SetItem(Item item){
 		this.item = item;
-		UIItem.UpdateUI(item.Image, Rare.C, item.Rating);
+		UIItem.UpdateUI(item.Image, Rare.C, rating: item.Rating);
 	}
 	public void SetItem(Item item, int amount){
 		SetItem(item);
@@ -28,7 +28,7 @@ public class ForgeItemVisual : MonoBehaviour{
 	}
 	public void SetResource(Resource res){
 		UIItem.UpdateUI(res.Image, Rare.C, 1);
-		resourceCost.SetInfo(res);
+		resourceCost.SetData(res);
 	}
 
 	public void SelectItem(){

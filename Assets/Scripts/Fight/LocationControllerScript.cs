@@ -9,26 +9,14 @@ public class LocationControllerScript : MonoBehaviour{
 		instance = this;
 	}
 	public void OpenLocation(TypeLocation typeLocation){
-		foreach(Location location in locations){
-			if(location.type == typeLocation){
-				curLocation = location;
-				BackGroundControllerScript.Instance.OpenBackground(curLocation.backgroundForFight);
-				break;
-			}
-		}
+		curLocation = locations.Find(x => x.type == typeLocation);
+		BackGroundControllerScript.Instance.OpenBackground(curLocation.backgroundForFight);
 	}
 	// public void CloseLocation(){
 	// 	curLocation.backgroundForFight.SetActive(false);
 	// }
 	public Sprite GetBackgroundForMission(TypeLocation typeLocation){
-		Sprite result = null;
-		foreach(Location location in locations){
-			if(location.type == typeLocation){
-				result = location.backgroundForMission;
-				break;
-			}
-		}
-		return result;
+		return locations.Find(x => x.type == typeLocation).backgroundForMission;
 	}
 	private static LocationControllerScript instance;
 	public static LocationControllerScript Instance{get => instance;}

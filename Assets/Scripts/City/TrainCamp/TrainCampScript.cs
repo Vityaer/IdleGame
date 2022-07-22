@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using IdleGame.Touch;
 using UnityEngine;
 using UnityEngine.UI;
 public class TrainCampScript : MonoBehaviour{
@@ -13,7 +14,6 @@ public class TrainCampScript : MonoBehaviour{
 	public GameObject btnToLeftList;
 	public GameObject btnToRightList;
 	public Button btnLevelUP;
-	public Text textLevelUp;
 	public ListCardOnWarTableScript listCardPanel;
 	public ListMyHeroesControllerScript ListCard;
 	public CostLevelUp costLevelObject;
@@ -78,9 +78,7 @@ public class TrainCampScript : MonoBehaviour{
 		SelectHero(numSelectHero);
 		if(isOpen == false) OpenTrainCamp();
 	}
-	public InfoHero ReturnSelectHero(){
-		return listHeroes[numSelectHero];
-	}
+	public InfoHero ReturnSelectHero(){ return listHeroes[numSelectHero]; }
 	public void LevelUpHero(){
 		PlayerScript.Instance.SubtractResource( costLevelObject.GetCostForLevelUp(hero.generalInfo.Level) );
 		hero.LevelUP();
@@ -93,6 +91,7 @@ public class TrainCampScript : MonoBehaviour{
 		SelectHero(numSelectHero - 1);
 	}
 	private void OpenTrainCamp(){
+		MainTouchControllerScript.Instance.RegisterOnObserverSwipe(OnSwipe);
 		isOpen = true;
 		ListCard.Close();
 		trainCanvas.enabled = true;
@@ -103,43 +102,36 @@ public class TrainCampScript : MonoBehaviour{
 		ListCard.Open();
 	}
 	public void CloseTrainCamp(){
+		MainTouchControllerScript.Instance.UnregisterOnObserverSwipe(OnSwipe);
 		isOpen = false;
 		trainCanvas.enabled = false;
 		MenuControllerScript.Instance.OpenMainPage();
 		PlayerScript.Instance.SaveGame();
 	} 
 
-	private Vector3 startPosition;
-	private Vector3 endPosition;
-	private float dragDistance;
 	private bool isOpen = false;
-	void Update(){
-		if(isOpen == true){
-			if (Input.GetMouseButtonDown(0)){
-				startPosition  = Input.mousePosition;
-			}
-			if (Input.GetMouseButtonUp(0)){
-				endPosition  = Input.mousePosition;
-				if(Mathf.Abs(endPosition.y - startPosition.y) < dragDistance){
-					if(endPosition.x - startPosition.x > dragDistance){
-						PreviousHero();
-					}else if(startPosition.x - endPosition.x > dragDistance){
-						NextHero();
-					}
-				}
-			}
-		}
-	}
-
 	private static TrainCampScript instance;
 	public static TrainCampScript Instance{get => instance;}
 	void Awake(){
 		instance = this;
 		trainCanvas = GetComponent<Canvas>();
+		if(trainCanvas.enabled){
+			isOpen = false;
+			trainCanvas.enabled = false;
+		}
 	} 
 	void Start(){
 		listCardPanel.RegisterOnSelect(SelectHero);
-		dragDistance = Screen.width*30/100;
+	}
+	private void OnSwipe(TypeSwipe typeSwipe){
+		switch(typeSwipe){
+			case TypeSwipe.Left:
+				PreviousHero();
+				break;
+			case TypeSwipe.Right:
+				NextHero();
+				break;	
+		}
 	}
 	void OnChangeListHeroes(InfoHero hero){
 		listCardPanel.ChangeList(hero);

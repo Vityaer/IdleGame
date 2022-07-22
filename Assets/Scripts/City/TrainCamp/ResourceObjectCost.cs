@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 public class ResourceObjectCost : MonoBehaviour{
     public Image image;
-    public Text textAmount;
+    public TextMeshProUGUI textAmount;
 	private Resource costResource;
 	private Resource storeResource; 
 
-	public void SetInfo(Resource res){
+	public void SetData(Resource res){
 		this.costResource = res;
 		CheckResource();
 		image.sprite = this.costResource.Image;
+		gameObject.SetActive(true);
 	}
 	public bool CheckResource(){
 		storeResource = PlayerScript.Instance.GetResource(costResource.Name);
@@ -22,6 +24,9 @@ public class ResourceObjectCost : MonoBehaviour{
 		textAmount.text = result;
 		OnCheckResource(flag);
 		return flag;
+	}
+	public void Hide(){
+		gameObject.SetActive(false);
 	}
 	private Action<bool> observerCanBuy;
 	public void RegisterOnCanBuy(Action<bool> d){observerCanBuy += d;} 

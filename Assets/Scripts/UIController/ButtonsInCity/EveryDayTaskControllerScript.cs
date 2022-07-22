@@ -1,19 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ObjectSave;
 
-public class EveryDayTaskControllerScript : Building{
-    [SerializeField] private Transform  taskboard;
-	[SerializeField] private GameObject prefabEveryDayTask;
-	[SerializeField] private List<EveryDayTask> generalEveryDayTask = new List<EveryDayTask>(); 
-
-	
-	protected override void OnStart(){
-		CreateTasks();
+public class EveryDayTaskControllerScript : RequirementMenuScript{
+	protected override void OnLoadGame(){
+		LoadData(PlayerScript.GetPlayerGame.saveEveryTimeTasks);
 	}
-	void CreateTasks(){
-		foreach(EveryDayTask task in generalEveryDayTask){
-			Instantiate(prefabEveryDayTask, taskboard).GetComponent<RequirementUI>().SetData(task as Requirement);
-		}
+	protected override void SaveData(){
+		PlayerScript.GetPlayerGame.SaveEveryTimeTask(listRequirement);
+		SaveGame();
 	}
 }

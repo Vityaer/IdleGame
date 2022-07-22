@@ -13,8 +13,7 @@ public class SliderTimeScript : MonoBehaviour{
 		slider = GetComponent<Slider>();
 		slider.maxValue = 1f;
 	}
-	public Color lowValue;
-	public Color fillValue;
+	public Color lowValue, fillValue;
 	int waitSeconds = 0;
 	public void ChangeValue(){
 		DateTime deltaTime = requireTime - (DateTime.Now - startTime);

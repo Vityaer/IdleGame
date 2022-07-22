@@ -7,15 +7,14 @@ public class SplinterController : VisualAPI, ICloneable{
 	[SerializeField]private Splinter _splinter;
 	public Splinter splinter{get => _splinter;}
 	public void ClickOnItem(){
-		InventoryControllerScript.Instance.OpenInfoItem(this);
+		InventoryControllerScript.Instance.OpenInfoItem(this, withControl : true);
 	}
 	public SplinterController(Splinter splinter, int amount){
-		this._splinter = splinter;
+		this._splinter = (Splinter) splinter.Clone();
 		this._splinter.SetAmount(amount);
 	}
 	public SplinterController(Splinter splinter){
-		this._splinter = splinter;
-		this._splinter.SetAmountRequire();
+		this._splinter = (Splinter) splinter.Clone();
 	}
 	public SplinterController() : base(){
 		_splinter = null;
@@ -44,4 +43,6 @@ public class SplinterController : VisualAPI, ICloneable{
 	public object Clone(){
         return new SplinterController  { _splinter  = this._splinter };				
     }
+    public int CountReward{get => splinter.CountReward;}
+    public bool IsCanUse{get => splinter.IsCanUse; }
 }

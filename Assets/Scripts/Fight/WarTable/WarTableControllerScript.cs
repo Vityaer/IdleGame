@@ -131,7 +131,15 @@ public class WarTableControllerScript : MonoBehaviour{
 		FillListHeroes(listHeroes);
 		Open();
 	}
-	public void Close(){
+	public void OpenMission(Mission mission, Action<bool> del){
+		RegisterOnOpenCloseMission(del);
+		OpenMission(mission, PlayerScript.Instance.GetListHeroes);
+	}
+	public void ReturnBack(){
+		OnOpenMission(false);
+		Close();
+	}
+	private void Close(){
 		listCardPanel.EventClose();
 		warTableCanvas.enabled = false;
 		strengthLeftTeam  = 0;
@@ -150,15 +158,13 @@ public class WarTableControllerScript : MonoBehaviour{
 	}
 	public void StartFight(){
 		Close();
-		FightControllerScript.Instance.SetMission(mission);
-		FightControllerScript.Instance.CreateTeams(leftTeam, rightTeam);
+		FightControllerScript.Instance.SetMission(mission, leftTeam, rightTeam);
 	}
 
 	public void FinishMission(){OnOpenMission(false);}
-	public delegate void Del(bool isOpen);
-	private Del observerOpenCloseMission;
-	public void RegisterOnOpenCloseMission(Del d){observerOpenCloseMission += d;}
-	public void UnregisterOnOpenCloseMission(Del d){observerOpenCloseMission -= d;}
+	private Action<bool> observerOpenCloseMission;
+	public void RegisterOnOpenCloseMission(Action<bool> d){ observerOpenCloseMission += d;}
+	public void UnregisterOnOpenCloseMission(Action<bool> d){ observerOpenCloseMission -= d;}
 	private void OnOpenMission(bool isOpen){if(observerOpenCloseMission != null) observerOpenCloseMission(isOpen);}
 	private static WarTableControllerScript instance;
 	public  static WarTableControllerScript Instance{get => instance;}

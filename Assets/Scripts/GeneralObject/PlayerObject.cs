@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerObject : BaseObject{
-	[SerializeField] protected int amount;
-	public int Amount{get => amount;}
+	[SerializeField] private int amount;
+	public int Amount{get => amount; set => amount = value;}
 	[SerializeField] protected string name = string.Empty;
 	public string Name{get => name;}
 	[SerializeField] protected int id;

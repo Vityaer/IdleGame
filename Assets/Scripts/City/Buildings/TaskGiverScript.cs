@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ObjectSave;
 using UnityEngine.UI;
 public class TaskGiverScript : Building{
 
-	public static List<Task> tasks = new List<Task>();
+	[HideInInspector] public List<Task> tasks = new List<Task>();
 	public RectTransform taskboard;
 	private List<TaskControllerScript> taskControllers = new List<TaskControllerScript>(); 
 	public GameObject prefabTask;
@@ -28,12 +29,8 @@ public class TaskGiverScript : Building{
 			taskControllers[i].SetData(tasks[i]);
 		}
 	}
-	public void CreateSimpleTask(int count = 1){
-		CreateTask(patternTasks.GetSimpleTask());
-	}
-	public void CreateSprecialTask(int count = 1){
-		CreateTask(patternTasks.GetSpecialTask());
-	}
+	public void CreateSimpleTask(int count = 1){ CreateTask(patternTasks.GetSimpleTask()); }
+	public void CreateSprecialTask(int count = 1){ CreateTask(patternTasks.GetSpecialTask()); }
 	private void CreateTask(Task newTask){
 		tasks.Add(newTask);
 		TaskControllerScript newTaskController = Instantiate(prefabTask, taskboard).gameObject.GetComponent<TaskControllerScript>();
@@ -46,7 +43,6 @@ public class TaskGiverScript : Building{
 	void Start(){
 		if(instance == null){
 			instance = this;
-			tasks = PlayerScript.Instance.player.PlayerGame.listTasks;
 			buttonBuySimpleTask.RegisterOnBuy(CreateSimpleTask);
 			buttonBuySpecialTask.RegisterOnBuy(CreateSprecialTask);
 		}else{
@@ -55,12 +51,14 @@ public class TaskGiverScript : Building{
 	}
 	void LoadTasks(){
 		if(isLoadedTask == false){
-			if(PlayerScript.Instance.flagLoadedGame == true){
-				tasks = PlayerScript.Instance.player.PlayerGame.listTasks;
-				foreach(Task task in tasks) if(task.Reward == null) task.Reward = patternTasks.GetRandomReward(task.rating); 
-				isLoadedTask = true;
-			}
+			foreach(Task task in tasks) if(task.Reward == null) task.Reward = patternTasks.GetRandomReward(task.rating); 
+			isLoadedTask = true;
 		}
 
+	}
+	private TaskGiverBuilding taskGiverBuilding;
+	protected override void OnLoadGame(){
+		taskGiverBuilding = PlayerScript.GetCitySave.taskGiverBuilding;
+		tasks = taskGiverBuilding.tasks;
 	}	
 }

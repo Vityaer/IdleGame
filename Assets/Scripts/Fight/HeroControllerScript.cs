@@ -65,18 +65,24 @@ public class HeroControllerScript : MonoBehaviour{
 	HexagonCellScript cellTarget;
 	HeroControllerScript selectHero;
 	public void SelectHexagonCell(HexagonCellScript cell){
-		if(cell.availableMove){
+		if(cell.CanStand){
 			StartMelleeAttackOtherHero(cell, null);
 		}else{
 			if(cell.Hero != null){
-				if(CanAttackHero(cell.Hero) && (cell.GetCanAttackCell || (hero.characts.baseCharacteristic.Mellee == false)) ){
+				if(CanAttackHero(cell.Hero) ){
 					selectHero = cell.Hero;
-					if((hero.characts.baseCharacteristic.Mellee == true) && cell.GetCanAttackCell){
-						cell.RegisterOnSelectDirection(SelectDirectionAttack);
-					}else if((hero.characts.baseCharacteristic.Mellee == false)){
+					HexagonCellScript.UnregisterOnClick(SelectHexagonCell);
+					if((hero.characts.baseCharacteristic.Mellee == true)){
+						if(cell.GetCanAttackCell){
+							cell.RegisterOnSelectDirection(SelectDirectionAttack);
+						}else{
+							Debug.Log("i can't attak him");
+						}
+					}else{
+						Debug.Log("i can shoot in him");
 						StartDistanceAttackOtherHero(selectHero);
 					}
-				}
+				}	
 			}
 		}
 	}
@@ -93,22 +99,38 @@ public class HeroControllerScript : MonoBehaviour{
 		coroutineAttackEnemy = StartCoroutine(IMelleeAttackOtherHero(targetCell, enemy));
  	}
  	public void StartDistanceAttackOtherHero(HeroControllerScript enemy){
+		HexagonCellScript.UnregisterOnClick(SelectHexagonCell);
+		OnEndSelectCell();
  		CreateArrow(new List<HeroControllerScript>(){enemy});
  	}
+ 	private bool onGround = true;
+ 	Stack<HexagonCellScript> way = new Stack<HexagonCellScript>();
 	IEnumerator IMelleeAttackOtherHero(HexagonCellScript targetCell, HeroControllerScript enemy){
+		HexagonCellScript.UnregisterOnClick(SelectHexagonCell);
+		OnEndSelectCell();
 		myPlace.ClearSublject();
-		Vector3 target = targetCell.Position;
-		Vector2 dir = target - tr.position; 
-        dir.Normalize();
-        rb.velocity = dir * speedMove;
-        float dist = Vector2.Distance(tr.position, target); 
-        while(dist > 0.05f){
-    		dist = Vector2.Distance(tr.position, target);
-			yield return null;
-        }
+		way = HexagonGridScript.Instance.FindWay(myPlace, targetCell, onGround: onGround);
+		Vector3 target;
+		Vector2 dir;
+		HexagonCellScript currentCell;
+		while(way.Count > 0){
+			currentCell = way.Pop();
+			Debug.Log(currentCell.gameObject.name);
+			target = currentCell.Position;
+			dir = target - tr.position; 
+	        dir.Normalize();
+	        rb.velocity = dir * speedMove;
+	        float dist = Vector2.Distance(tr.position, target); 
+	        while(dist > 0.05f){
+	    		dist = Vector2.Distance(tr.position, target);
+				yield return null;
+	        }
+	        rb.velocity = Vector2.zero;
+		}
         myPlace = targetCell;
         myPlace.SetHero(this);
-        rb.velocity = new Vector2();
+        rb.velocity = Vector2.zero;
+		yield return new WaitForSeconds(0.5f);
         if(enemy != null){
 			statusState.ChangeStamina(30f);
 			anim.Play("Attack");
@@ -140,19 +162,21 @@ public class HeroControllerScript : MonoBehaviour{
 	void CreateArrow(List<HeroControllerScript> listTarget){
 		GameObject arrow;
 		hitCount = 0;
+		this.listTarget = listTarget;
 		foreach (HeroControllerScript target in listTarget) {
 			arrow = Instantiate(Resources.Load<GameObject>("CreateObjects/Bullet"), tr.position, Quaternion.identity);
-			arrow.GetComponent<ArrowScript>().SetTarget(target, new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: typeStrike));
+			arrow.GetComponent<ArrowScript>().SetTarget(target, new Strike(hero.characts.Damage, hero.characts.GeneralAttack, typeStrike: typeStrike, isMellee: false));
 			arrow.GetComponent<ArrowScript>().RegisterOnCollision(HitCount);
 		}
 	}
 	public int hitCount = 0;
 	public void HitCount(){
+		Debug.Log("distance hit");
 		OnStrike();
 		hitCount += 1;
 		if(hitCount == listTarget.Count) { 
-			// NextStage();
-			 }
+			EndAction();
+		}
 	}
 	protected virtual void DoSpell(){
 		anim.Play("SpecialAttack");
@@ -179,7 +203,6 @@ public class HeroControllerScript : MonoBehaviour{
  	}
 //End action 	
 	public void EndAction(){
-		HexagonCellScript.UnregisterOnClick(SelectHexagonCell);
 		OnEndAction();
 		anim.Play("Idle");
 		FightControllerScript.Instance.NextHero();
@@ -235,14 +258,13 @@ public class HeroControllerScript : MonoBehaviour{
 		DeleteHero();
 	}
 	public void DeleteHero(){
+		Debug.Log("delete hero");
 		if(coroutineAttackEnemy != null) StopCoroutine(coroutineAttackEnemy);
 		coroutineAttackEnemy = null;
+		FightControllerScript.Instance.UnregisterOnEndRound(RefreshOnEndRound);
 		DeleteAllDelegate();
 		Destroy(gameObject);
 	}	
-	void OnDestroy(){
-		FightControllerScript.Instance.UnregisterOnEndRound(RefreshOnEndRound);
-	}
 	public void ClickOnMe(){
 		myPlace?.ClickOnMe();
 	}
@@ -321,6 +343,11 @@ public class HeroControllerScript : MonoBehaviour{
 		public static void RegisterOnEndAction(Action d){ observerEndAction += d;}
 		public static void UnregisterOnEndAction(Action d){ observerEndAction -= d;}
 		private void OnEndAction(){if(observerEndAction != null) observerEndAction();}
+
+		private static Action observerEndSelectCell;
+		public static void RegisterOnEndSelectCell(Action d){ observerEndSelectCell += d;}
+		public static void UnregisterOnEndSelectCell(Action d){ observerEndSelectCell -= d;}
+		private void OnEndSelectCell(){if(observerEndSelectCell != null) observerEndSelectCell();}
 
 	private void FlipX(){
 		Vector3 locScale = transform.localScale;

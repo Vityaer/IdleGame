@@ -31,6 +31,7 @@ public class Item : PlayerObject, VisualAPI{
 	public SetItems Set{get => set;}
 	public Rare GetRare{get => rare;}
 	public void LoadData(){
+		if(ID == 0) {Debug.Log("ID item = 0"); id = 101;}
 		Item loadedItem = GetItem(ID);
 		name = loadedItem.Name;
 		this.type = loadedItem.Type;
@@ -71,18 +72,24 @@ public class Item : PlayerObject, VisualAPI{
 		UpdateUI();
 	}
 	public override void UpdateUI(){
-		Debug.Log("update ui");
 		UI?.UpdateUI(Image, rare, GetTextAmount());
 	}	
 
 //Constructors
-	public Item(int ID){
+	public Item(int ID, int amount = 1){
+		Amount = amount;
 		base.id = ID;
 		LoadData();
 	}	
 	public Item(){base.id = 0;}
 
 	public override BaseObject Clone(){return new Item(this.ID);}
+
+
+//Operators
+	public static Item operator* (Item item, int k){
+		return new Item(item.ID, k);
+	}	
 }
 
 

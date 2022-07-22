@@ -20,13 +20,14 @@ public class ItemsList : ScriptableObject{
 	[SerializeField] private List<Item> amulets = new List<Item>();
 	[Header("Mittens")]
 	[SerializeField] private List<Item> mittens = new List<Item>();
+	[Header("Artifact")]
+	[SerializeField] private List<Item> artifacts = new List<Item>();
 	public Item GetItem(int ID){
 		Item result = GetItemFromList( ID );
 		if(result == null) Debug.Log("не нашли такого предмета "+ ID.ToString()); 
 		return result;
 	}
 	private Item GetItemFromList(int ID){
-		Debug.Log("ищем предмет: " + ID.ToString());
 		Item result = null;
 		int numList = ID / 100;
 		switch(numList){
@@ -83,5 +84,8 @@ public class ItemsList : ScriptableObject{
 				break;						
 		}
 		return result;
+	}
+	public Item GetArtifact(int ID){
+		return artifacts.Find(x => (x.ID == ID));
 	}
 }

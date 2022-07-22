@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class HexagonGridScript : MonoBehaviour{
 
+	public GameObject grid;
 	[SerializeField] private List<HexagonCellScript> cells = new List<HexagonCellScript>(); 
 	private void FindAllCell(){
 		cells.Clear();
@@ -29,10 +30,18 @@ public class HexagonGridScript : MonoBehaviour{
 	void Awake(){
 		instance = this;
 	}
-	void Start(){
-		FindNeighbours();
+	public void OpenGrid(){
+		grid.SetActive(true);
 		FightControllerScript.Instance.RegisterOnStartFight(StartFight);
 		FightControllerScript.Instance.RegisterOnFinishFight(FinishFight);
+	}
+	public void CloseGrid(){
+		grid.SetActive(false);
+		FightControllerScript.Instance.UnregisterOnStartFight(StartFight);
+		FightControllerScript.Instance.UnregisterOnFinishFight(FinishFight);
+	}
+	void Start(){
+		FindNeighbours();
 	}
 	bool fighting = false;
 	Coroutine coroutineCheckClick = null;
@@ -61,5 +70,33 @@ public class HexagonGridScript : MonoBehaviour{
  	}
 	void FinishFight(){
 		fighting = false;
+
 	}
+//Find Way	
+	Stack<HexagonCellScript> way = new Stack<HexagonCellScript>();
+	HexagonCellScript PreviousCell = null;
+	public Stack<HexagonCellScript> FindWay(HexagonCellScript startCell, HexagonCellScript finishCell, bool onGround = true){
+		Debug.Log("start: " + startCell.gameObject.name + " to finish: " + finishCell.gameObject.name);
+		way.Clear();
+		PreviousCell = null;
+		startCell.FindWay(previousCell: null, target: finishCell, onGround : onGround);
+		way.Push(finishCell);
+		do{
+			if(finishCell != null){
+				PreviousCell = finishCell.PreviousCell;
+				if(PreviousCell != null) way.Push(PreviousCell);
+			}
+			finishCell = PreviousCell;
+		} while((finishCell != startCell) && (finishCell != null));
+		OnFoundWay();
+		// Debug.Log("way length: " + way.Count.ToString());
+		// foreach (HexagonCellScript cell in way){
+		// 	Debug.Log(cell.gameObject.name);
+		// }
+		return way;
+	}
+	Action observerFoundWay;
+	public void RegisterOnFoundWay(Action d){observerFoundWay += d;}
+	public void UnregisterOnFoundWay(Action d){observerFoundWay -= d;}
+	void OnFoundWay(){if(observerFoundWay != null) observerFoundWay();} 
 }

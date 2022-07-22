@@ -12,9 +12,11 @@ public class SubjectCellControllerScript : MonoBehaviour{
 	private ItemController item;
 	private SplinterController splinter;
 	private void SetVisual(VisualAPI visual){
+		CheckCell();
 		this.visual = visual;
 	}
 	public void SetItem(VisualAPI visual){
+		CheckCell();
 		this.visual = visual;
 		visual.SetUI(UIItem);
 		visual.UpdateUI();
@@ -52,15 +54,17 @@ public class SubjectCellControllerScript : MonoBehaviour{
 		}
 	}
 	public void SetItem(PosibleRewardObject rewardObject){
+		CheckCell();
+		Debug.Log("posible object");
 		switch(rewardObject){
-			case PosibleRewardObject<Resource> reward:
-				UIItem.UpdateUI(reward.subject.Image, Rare.R);
+			case PosibleRewardResource reward:
+				UIItem.UpdateUI(reward.GetResource.Image, Rare.R, string.Empty);
 				break;
-			case PosibleRewardObject<Item> reward:
-				UIItem.UpdateUI(reward.subject.Image, reward.subject.GetRare);
+			case PosibleRewardItem reward:
+				UIItem.UpdateUI(reward.GetItem.Image, reward.GetItem.GetRare);
 				break;
-			case PosibleRewardObject<Splinter> reward:
-				UIItem.UpdateUI(reward.subject.Image, reward.subject.GetRare);
+			case PosibleRewardSplinter reward:
+				UIItem.UpdateUI(reward.GetSplinter.Image, reward.GetSplinter.GetRare);
 				break;		
 		}
 	}

@@ -46,6 +46,7 @@ public class CellItemHeroScript : MonoBehaviour{
 	public void SetItem(Item newItem){
 		if(item != null) {
 			InventoryControllerScript.Instance.AddItem(item);
+			TrainCampScript.Instance.TakeOff(item);
 		}
 		if(newItem != null){
 			if(newItem.Type == typeCell){
@@ -58,7 +59,6 @@ public class CellItemHeroScript : MonoBehaviour{
 	}
 
 	public void ClickOnCell(){
-		Debug.Log("ckick");
 		if(item != null) {
 			InventoryControllerScript.Instance.OpenInfoItem(item, typeCell, this);
 		}else{

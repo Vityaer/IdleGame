@@ -53,6 +53,7 @@ public class InfoHeroEditor:Editor{
         // DrawDefaultInspector ();
     }
    public static void ShowSkills (SerializedProperty list) {
+   	GUILayout.Label("skill", EditorStyles.boldLabel);
 	   	EditorGUILayout.PropertyField(list, false);
 		EditorGUI.indentLevel += 1;
 		if (list.isExpanded) {

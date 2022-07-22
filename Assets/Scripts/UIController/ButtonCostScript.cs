@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using TMPro;
 public class ButtonCostScript : MonoBehaviour{
-	public Text textCost;
+	public TextMeshProUGUI textCost;
 	public Button btn;
 	public Image imgRes;
 	public Resource res;
@@ -45,7 +46,7 @@ public class ButtonCostScript : MonoBehaviour{
 		}
 	}
 	public void Buy(){
-		if(delBuyMatter != null){
+		if((delBuyMatter != null) && (disable == false)){
 			SubstractResource();
 			delBuyMatter(countBuy);
 		}
@@ -57,8 +58,11 @@ public class ButtonCostScript : MonoBehaviour{
 	public void Disable(){
 		disable          = true;
 		PlayerScript.Instance.UnRegisterOnChangeResource( CheckResource, res.Name );
-		delBuyMatter     = null;
 		btn.interactable = false;	
+	}
+	public void EnableButton(){
+		disable          = false;
+		PlayerScript.Instance.RegisterOnChangeResource( CheckResource, res.Name );
 	}
 	private void SubstractResource(){
 		PlayerScript.Instance.SubtractResource(res);

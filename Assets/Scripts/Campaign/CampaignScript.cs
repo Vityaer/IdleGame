@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using ObjectSave;
+using System;
 public class CampaignScript : MonoBehaviour{
 	private Canvas canvasCampaign;
 	private MissionControllerScript infoMission;
+	[SerializeField] private List<MissionControllerScript> missionControllers = new List<MissionControllerScript>();
 	private CampaignMission mission;
 	private int currentMission;
 	public Transform missions;
 	public CampaignChapter chapter;
 	public GameObject background;
+	
+	private const string NAME_RECORD_NUM_CURRENT_MISSION = "CurrentMission"; 
 //API
 	public void OpenMissions(int numOpenMission){
 		int current = 0;
@@ -31,15 +35,15 @@ public class CampaignScript : MonoBehaviour{
 	}
 	public void OpenNextMission(){
 		OpenMission(currentMission + 1);
+		campaingSaveObject.SetRecordInt(NAME_RECORD_NUM_CURRENT_MISSION, currentMission + 1);
 		PlayerScript.Instance.SaveGame();
 	}
 	public void OpenMission(int num){
 		currentMission = num;
-		missions.GetChild(num).GetComponent<MissionControllerScript>().OpenMission();
-		PlayerScript.Instance.player.PlayerGame.CampaignMissionNumComplete = currentMission;
+		missionControllers[num].OpenMission();
 	}
-	public void GetResult(bool win){
-		if(win == true){
+	public void OnResultFight(FightResult result){
+		if(result == FightResult.Win){
 	 		MessageControllerScript.Instance.OpenWin(this.mission?.WinReward);
 	 		if(infoMission != null){
 	 			infoMission.MissionWin();
@@ -56,16 +60,11 @@ public class CampaignScript : MonoBehaviour{
 	public void SelectMission(MissionControllerScript infoMission, List<InfoHero> listHeroes){
 		this.infoMission = infoMission;
 		this.mission = infoMission.mission;
-		WarTableControllerScript.Instance.OpenMission(infoMission.mission, listHeroes);
-		WarTableControllerScript.Instance.RegisterOnOpenCloseMission(this.OnOpenCloseMission);
-		WarTableControllerScript.Instance.Open();
-	}
-	public void SelectMission(CampaignMission mission, List<InfoHero> listHeroes){
-		WarTableControllerScript.Instance.OpenMission(mission, listHeroes);
-		this.mission = mission;
+		WarTableControllerScript.Instance.OpenMission(infoMission.mission, this.OnOpenCloseMission);
+		FightControllerScript.Instance.RegisterOnFightResult(OnResultFight);
 	}
 	private void OnOpenCloseMission(bool isOpen){
-		if(!isOpen){ Open(); }else{ Close(); }
+		if(isOpen == false){ Open(); }else{ Close(); }
 	}
 	public void Open(){
 		UnregisterOnOpenCloseMission();
@@ -86,5 +85,15 @@ public class CampaignScript : MonoBehaviour{
 		instance = this;
 		canvasCampaign = GetComponent<Canvas>();
 	}
-   
+	void Start(){
+		PlayerScript.Instance.RegisterOnLoadGame(OnLoadGame);
+	}
+	void OnLoadGame(){
+		campaingSaveObject = PlayerScript.GetCitySave.mainCampaignBuilding;
+		currentMission = campaingSaveObject.GetRecordInt(NAME_RECORD_NUM_CURRENT_MISSION);
+		OpenChapter( ChapterControllerScript.Instance.GetCampaignChapter(currentMission) );
+		OpenMission(currentMission);
+	}
+	private BuildingWithFightTeams campaingSaveObject;
+   	public DateTime GetAutoFightPreviousDate{get => campaingSaveObject.GetRecordDate("AutoFight");}
 }

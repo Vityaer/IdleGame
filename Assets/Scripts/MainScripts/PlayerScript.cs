@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ObjectSave;
 using System;
 public class PlayerScript : MonoBehaviour{
 	[SerializeField] private List<InfoHero> listHeroes = new List<InfoHero>();
 	public Player player;
 	private static PlayerScript instance;
 	public  static PlayerScript Instance{get => instance;}
-	void Awake(){
+	void Awake(){ 
 		instance = this;
+		SaveLoadControllerScript.LoadGame(player.PlayerGame);
 	}
 	void Start(){
-		SaveLoadControllerScript.LoadGame(player.PlayerGame);
 		SaveLoadControllerScript.LoadListHero(listHeroes);
 		if(listHeroes.Count == 0) {
 			PlayerScript.Instance.AddResource(new Resource(TypeResource.SimpleHireCard, 50, 0));
@@ -21,10 +22,10 @@ public class PlayerScript : MonoBehaviour{
 		}else{
 			OnChangeListHeroes(null);
 		}
-		CampaignScript.Instance.OpenMissions(player.PlayerGame.CampaignMissionNumComplete);
 		UpdateAllResource();
 		RegisterOnChange();
 		flagLoadedGame = true;
+		OnLoadedGame();
 	}
 	void OnDestroy(){
 		SaveGame();
@@ -32,7 +33,6 @@ public class PlayerScript : MonoBehaviour{
 	public bool flagLoadedGame = false;
 	public void SaveGame(){
 		if(flagLoadedGame){
-			player.PlayerGame.PrepareForSave();
 			SaveLoadControllerScript.SaveGame(player.PlayerGame);
 			SaveLoadControllerScript.SaveListHero(listHeroes);
 		}
@@ -69,17 +69,6 @@ public class PlayerScript : MonoBehaviour{
 	private void OnChangeListHeroes(InfoHero hero){
 		if(observerChangeListHeroes != null) observerChangeListHeroes(hero);
 		if(observerChangeCountHeroes != null) observerChangeCountHeroes();
-	}
-//API mine
-	public Mine LoadMine(int ID){
-		return player.PlayerGame.LoadMine(ID);
-	}
-	public DateTime GetPreviousDateTimeForMine(int ID){
-		return FunctionHelp.StringToDateTime(player.PlayerGame.GetPreviousDateTimeForMine(ID));
-	}
-	public void SaveMine(Mine mine){
-		player.PlayerGame.SaveMine(mine);
-		SaveGame();
 	}
 //API resources	
 	public void AddReward(Reward reward){
@@ -167,6 +156,15 @@ public class PlayerScript : MonoBehaviour{
 		}
 	}
 	public void RegisterOnLevelUP(Action<BigDigit> d){ player.RegisterOnLevelUP(d); }
+//Geters
+	public static CitySaveObject GetCitySave{ get => instance.player.PlayerGame.citySaveObject;}
+	public static PlayerSaveObject GetPlayerSave{ get => instance.player.PlayerGame.playerSaveObject;}
+	public static Game GetPlayerGame{ get => instance.player.PlayerGame;}
+
+//LoadGame
+	private Action onLoadedGame;
+	public void RegisterOnLoadGame(Action d){if(flagLoadedGame){d();}else{ onLoadedGame += d;} }
+	private void OnLoadedGame(){if(onLoadedGame != null) onLoadedGame(); onLoadedGame = null;}
 //Level
 	private void RegisterOnChange(){
 		RegisterOnChangeResource(AddExp, TypeResource.Exp);

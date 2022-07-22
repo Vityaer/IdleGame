@@ -30,7 +30,7 @@ public class ArrowScript : MonoBehaviour{
 	}
 	private HeroControllerScript target;
 	private Strike strike;
-	public float speed = 4f;
+	public float speed = 10f;
 
 	public void SetTarget(HeroControllerScript target, Strike strike){
 		this.target = target;

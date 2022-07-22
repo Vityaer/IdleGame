@@ -26,4 +26,7 @@ public class RatingHeroScript : MonoBehaviour{
 			Debug.Log(gameObject.name);
 		}
 	}
+	public void Hide(){
+		ShowRating(0);
+	}
 }

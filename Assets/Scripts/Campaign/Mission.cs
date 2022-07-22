@@ -11,11 +11,15 @@ public class Mission : ICloneable{
 
 	public string Name{get => name; set => name = value;}
 	public List<MissionEnemy> listEnemy{get => _listEnemy;}
-
+	[Header("Win reward")]
+	[SerializeField] protected Reward winReward;
+	public Reward WinReward{get => winReward;}
+	
 	public object Clone(){
         return new Mission  { 	Name = this.Name,
         							 	_listEnemy = this.listEnemy,
-        								location = this.location
+        								location = this.location,
+        								winReward = (Reward) this.WinReward.Clone()
         							};				
     }
 }

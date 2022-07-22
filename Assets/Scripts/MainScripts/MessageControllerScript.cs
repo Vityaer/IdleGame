@@ -15,7 +15,6 @@ public class MessageControllerScript : MonoBehaviour{
 	public WinLosePanelScript winPanelScript, losePanelScript;
 	public void OpenWin(Reward reward, string message = ""){
 		if(reward != null){
-			PlayerScript.Instance.AddReward(reward);
 			winPanelScript.OpenPanel(reward, message);
 			canvas.enabled = true;
 		}

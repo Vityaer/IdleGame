@@ -9,7 +9,7 @@ public class BaseObject: VisualAPI{
 //API
 	public bool IsNull(){ return (sprite == null); }
 	public virtual string GetTextAmount(){return string.Empty;}
-	public virtual string GetName(){return string.Empty;}
+	public virtual string GetName(){return "string.Empty";}
 
 
 //VisualAPI

@@ -140,18 +140,19 @@ public class Resistance : ICloneable{
 [System.Serializable]
 public class GeneralInfoHero{
 	public  string Name;
-	public Race race;
+	public  Race race;
 	public  Vocation ClassHero;
 	public  int ratingHero;
-	public Rare rare;
-	public int idHero;
-	public Sprite ImageHero{get{
-	 	return Prefab?.GetComponent<SpriteRenderer>().sprite;}}
+	public  Rare rare;
+	public  int idHero;
+	private Sprite _image;
+	public  Sprite ImageHero{get{ if(_image == null) {_image = Prefab?.GetComponent<SpriteRenderer>().sprite;} return _image;} set{_image = value;}}
 	public  int Level;
-	public bool isAlive = true;
+	public  bool isAlive = true;
 	private GameObject prefab;
-	public  GameObject Prefab{get {if (prefab == null) prefab = Resources.Load<GameObject>( string.Concat("Heroes/", this.idHero.ToString()) ); return prefab;} set => prefab = value;}
-
+	public  GameObject Prefab{get {if(IDPrefab == 0) IDPrefab = idHero; if (prefab == null) prefab = Resources.Load<GameObject>( string.Concat("Heroes/", this.IDPrefab.ToString()) ); return prefab;} set => prefab = value;}
+	[HideInInspector]public  int IDCreate, IDPrefab = 0;
+	
 	public object Clone(){
         return new GeneralInfoHero  { 	Name = this.Name,
         							 	race = this.race,
@@ -160,7 +161,9 @@ public class GeneralInfoHero{
         							 	rare = this.rare,
         							 	idHero = this.idHero,
         							 	Level = this.Level,
-        							 	isAlive = this.isAlive
+        							 	isAlive = this.isAlive,
+        							 	IDCreate = this.IDCreate,
+        							 	IDPrefab = this.IDPrefab
         							};				
     }
 

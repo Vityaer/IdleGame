@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class ThingUIScript : MonoBehaviour{
 	[Header("Info")]
 	public  Image border;
@@ -10,10 +11,11 @@ public class ThingUIScript : MonoBehaviour{
 	public  Image imageThing;
 	public  RatingHeroScript ratingThing;
 	public  ItemSliderControllerScript sliderAmount;
-	public  Text textAmount;
+	public  TextMeshProUGUI textAmount;
 	public  GameObject doneForUse;
 	public  Image selectBorder;
-	
+	[Header("controller")]
+	public bool OnlyMainData = false;
 	public void UpdateUI(Sprite image, Rare rare, string text, int rating = 0){
 		Clear();
 		imageThing.sprite  = image;
@@ -38,7 +40,13 @@ public class ThingUIScript : MonoBehaviour{
 	public void UpdateUI(SplinterController splinterController){
 		Clear();
 		imageThing.sprite = splinterController.splinter.Image;
-		sliderAmount.SetAmount(splinterController.splinter.Amount, splinterController.splinter.RequireAmount);
+		if(sliderAmount != null){
+			if(OnlyMainData == false){
+				sliderAmount.SetAmount(splinterController.splinter.Amount, splinterController.splinter.RequireAmount);
+			}else{
+				sliderAmount.Hide();
+			}
+		}
 		imageThing.enabled = true;
 	}
 	public void Select(){

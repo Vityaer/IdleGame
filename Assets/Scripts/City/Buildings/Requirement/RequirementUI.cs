@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
+using ObjectSave;
 public class RequirementUI : MonoBehaviour{
 	[SerializeField] private Text description;
 	public Requirement requirement;
@@ -13,26 +14,33 @@ public class RequirementUI : MonoBehaviour{
 		if(requirement.CurrentStage < requirement.CountStage){
 			requirement.AddProgress(amount);
 			UpdateUI();
+                  OnChange();
 		}
 	}
 	
 	public void GetReward(){
 		requirement.GetReward();
 		UpdateUI();
+            OnChange();
 	}
 	public void SetData(Requirement requirement){
 		this.requirement = requirement;
 		description.text = requirement.description;
 		UpdateUI();
-		if(requirement.CurrentStage < requirement.CountStage){
+		if(requirement.CurrentStage < requirement.CountStage ){
 			SubscribeAction();
 		}
 	}
+      public void SetProgress(RequirementSave requirementSave){
+            requirement.SetProgress(requirementSave.currentStage, requirementSave.progress);
+            UpdateUI();
+      }
 	public void UpdateUI(){
+		rewardController.ShowReward(requirement.GetRewardInfo());
 		if(requirement.CurrentStage < requirement.CountStage){
 			buttonGetReward.interactable = requirement.CheckCount();
 			sliderAmount.SetAmount(requirement.Progress, requirement.GetRequireCount());
-			rewardController.ShowReward(requirement.GetRewardInfo());
+                  buttonGetReward.gameObject.SetActive(true);
 		}else{
 			buttonGetReward.gameObject.SetActive(false);
 			sliderAmount.Hide();
@@ -61,7 +69,13 @@ public class RequirementUI : MonoBehaviour{
             case TypeRequirement.CountDefeat:
             case TypeRequirement.CountPointsOnSimpleArena:
             case TypeRequirement.CountPointsOnTournament:
-                break;  
+                break;
+            case TypeRequirement.TryCompleteChallangeTower:
+                  ChallengeTowerScript.Instance.RegisterOnTryCompleteMision(ChangeProgress);
+                  break;
+            case TypeRequirement.CompleteChallengeTower:
+                  ChallengeTowerScript.Instance.RegisterOnCompleteMision(ChangeProgress);
+                  break;            
             // case TypeRequirement.GetHeroes:
             //     requirementScript.listRequirement[i].requireInt = EditorGUILayout.IntField("Count:", requirementScript.listRequirement[i].requireInt);
             //     break;
@@ -88,4 +102,12 @@ public class RequirementUI : MonoBehaviour{
             //  break;  
 		}
 	}
+      public void Restart(){
+            requirement.ClearProgress();
+            UpdateUI();
+      }
+      private Action observerOnChange;
+      public void RegisterOnChange(Action d){observerOnChange += d;}
+      public void UnRegisterOnChange(Action d){observerOnChange += d;}
+      private void OnChange(){Debug.Log(observerOnChange == null); if(observerOnChange != null) observerOnChange(); Debug.Log("OnChange");}
 }

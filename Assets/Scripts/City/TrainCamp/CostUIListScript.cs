@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CostUIListScript : MonoBehaviour{
-    public List<GameObject> costObject = new List<GameObject>();
+    public List<ResourceObjectCost> costObject = new List<ResourceObjectCost>();
 
     public void ShowCosts(ListResource resourcesCost){
-    	ClearPanelCosts();
     	for(int i=0; i< resourcesCost.List.Count; i++){
-    		costObject[i].GetComponent<ResourceObjectCost>().SetInfo(resourcesCost.List[i]);
-    		costObject[i].SetActive(true);
+    		costObject[i].SetData(resourcesCost.List[i]);
     	}
-    }
-    private void ClearPanelCosts(){
-    	foreach (GameObject obj in costObject) {
-    		obj.SetActive(false);
-    	}
+        for(int i = resourcesCost.List.Count; i < costObject.Count; i++){
+            costObject[i].Hide();
+        }
     }
 }

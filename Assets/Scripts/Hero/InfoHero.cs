@@ -107,6 +107,16 @@ public class InfoHero : ScriptableObject, ICloneable{
 			skill.GetInfoAboutSkill(localization);
 		}
 	}
+	public bool CheckСonformity(RequirementHero requirementHero){
+		bool result = false;
+		if((generalInfo.ratingHero == requirementHero.rating) && (generalInfo.race == requirementHero.race)){
+			result  = true;
+		}
+		return result;
+	}
+	public void UpRating(){
+		generalInfo.ratingHero += 1;
+	}
 	public object Clone(){
 		return new InfoHero{
 			generalInfo = this.generalInfo,

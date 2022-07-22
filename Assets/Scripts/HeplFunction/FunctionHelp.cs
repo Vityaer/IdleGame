@@ -39,47 +39,80 @@ internal class FunctionHelp : MonoBehaviour {
 		StreamWriter sw = new StreamWriter(Application.dataPath + Name);
 		sw.Close();
 	}
-	public static string AmountToString(TypeIssue typeIssue, int min, int  max, int count){
-		string result = string.Empty;
-		switch(typeIssue){
-			case TypeIssue.Necessarily:
-			case TypeIssue.Perhaps:
-				result = string.Concat(result, count.ToString());
-				break;
-			case TypeIssue.Range:
-				result = string.Concat(min.ToString(), "-", max.ToString());
-				break;
-		}
-		return result;
-	}
-	public static string ResourceAmountToString(TypeIssue typeIssue,Resource res, float min, float  max, float count){
-		string result = string.Empty;
-		Resource curRes = new Resource(res.Name, 0, res.E10);
-		switch(typeIssue){
-			case TypeIssue.Necessarily:
-				result = string.Concat(res.ToString());
-				break;
-			case TypeIssue.Perhaps:
-				curRes.Count = count;  
- 				result = string.Concat(curRes.ToString());
-				break;
-			case TypeIssue.Range:
-				curRes.Count = min;
-				result = string.Concat(curRes.ToString(), "-");
-				curRes.Count = max;
-				result = string.Concat(result, curRes.ToString());
-				break;
-		}
-		return result;
-	}
+	// public static string AmountToString(TypeIssue typeIssue, int min, int  max, int count){
+	// 	string result = string.Empty;
+	// 	switch(typeIssue){
+	// 		case TypeIssue.Necessarily:
+	// 		case TypeIssue.Perhaps:
+	// 			result = string.Concat(result, count.ToString());
+	// 			break;
+	// 		case TypeIssue.Range:
+	// 			result = string.Concat(min.ToString(), "-", max.ToString());
+	// 			break;
+	// 	}
+	// 	return result;
+	// }
+	// public static string ResourceAmountToString(TypeIssue typeIssue,Resource res, float min, float  max, float count){
+	// 	string result = string.Empty;
+	// 	Resource curRes = new Resource(res.Name, 0, res.E10);
+	// 	switch(typeIssue){
+	// 		case TypeIssue.Necessarily:
+	// 			result = string.Concat(res.ToString());
+	// 			break;
+	// 		case TypeIssue.Perhaps:
+	// 			curRes.Count = count;  
+ // 				result = string.Concat(curRes.ToString());
+	// 			break;
+	// 		case TypeIssue.Range:
+	// 			curRes.Count = min;
+	// 			result = string.Concat(curRes.ToString(), "-");
+	// 			curRes.Count = max;
+	// 			result = string.Concat(result, curRes.ToString());
+	// 			break;
+	// 	}
+	// 	return result;
+	// }
 	public static DateTime StringToDateTime(string strDate){
 		DateTime convertedDate = new DateTime();
 		try{
         	convertedDate = Convert.ToDateTime(strDate);
     	} catch (FormatException) {
     		convertedDate = DateTime.Now; 
-    		Debug.Log("wrong format");
     	}
     	return convertedDate;
+	}
+	public static string AmountFromRequireCount(int currentAmount, int maxCount){
+		return string.Concat(currentAmount.ToString(), "/", maxCount.ToString());
+	}
+	public static string AmountFromRequireCountWithColorLess(int currentAmount, int maxCount){
+		string result = string.Empty;
+		if(currentAmount < maxCount){
+			result = string.Concat("<color=red>",currentAmount.ToString(), "</color>","/", maxCount.ToString());
+		}else{
+			result = AmountFromRequireCount(currentAmount, maxCount);
+		}
+		return result;
+	}
+	public static string AmountFromRequireCount(BigDigit currentAmount, BigDigit maxCount){
+		return string.Concat(currentAmount.ToString(), "/", maxCount.ToString());
+	}
+	public static string AmountFromRequireCountWithColorLess(BigDigit currentAmount, BigDigit maxCount){
+		string result = string.Empty;
+		if(currentAmount < maxCount){
+			result = string.Concat("<color=red>",currentAmount.ToString(), "</color>","/", maxCount.ToString());
+		}else{
+			result = AmountFromRequireCount(currentAmount, maxCount);
+		}
+		return result;
+	}
+	public static int CalculateCountTact(DateTime previousDateTime, int MaxCount = 8640, int lenthTact = 5){
+		DateTime localDate = DateTime.Now;
+		TimeSpan interval = localDate - previousDateTime;
+		int tact = (int) (interval.TotalSeconds)/lenthTact;
+		tact = Math.Min(tact, MaxCount);
+		return tact;
+	}
+	public static string TextLevel(int level){
+		return string.Concat("Уровень ", level.ToString());
 	}
 }

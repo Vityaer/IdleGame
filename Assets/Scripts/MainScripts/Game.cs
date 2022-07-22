@@ -7,70 +7,70 @@ using ObjectSave;
 public class Game{
 
 	public int maxCountHeroes = 100;
-	[SerializeField] private int campaignMissionNumComplete;
-	public int CampaignMissionNumComplete{get => campaignMissionNumComplete; set => campaignMissionNumComplete = value;}
 
-	public ListResource StoreResources;
+	public CitySaveObject citySaveObject = new CitySaveObject();
+	public PlayerSaveObject playerSaveObject = new PlayerSaveObject();
 
-	[SerializeField]
-	private string date;//date record
-	public DateTime Date{get => GetDate(date); set => date = value.ToString();}
-	[SerializeField]
-	private List<MineSave> datePreviousMine = new List<MineSave>();
-
-	public string strDate {get => date;}
-	public List<Task> listTasks = new List<Task>(); 
-	public Game(){
-		Date = DateTime.Now;
-	}
+	public Game(){}
 	public void CreateGame(Game game){
-		StoreResources = game.StoreResources;
-		campaignMissionNumComplete = game.CampaignMissionNumComplete; 
-		datePreviousMine = game.datePreviousMine;
-		date = game.strDate;
-		listTasks = game.listTasks;
+		citySaveObject = game.citySaveObject;
+		playerSaveObject = game.playerSaveObject;
 	}
-	private DateTime GetDate(string strDate){
-		if(campaignMissionNumComplete == 0) 
-	    	if(PlayerScript.Instance != null) PlayerScript.Instance.AddResource(new Resource(TypeResource.SimpleHireCard, 5, 0));
-		DateTime convertedDate = new DateTime();
-	    	try {
-	        	convertedDate = Convert.ToDateTime(strDate);
-	    	}
-	    	catch (FormatException) {
-	    		convertedDate = DateTime.Now; 
-	    		Debug.Log("wrong format");
-	    	}
-	    return convertedDate;  
-	}
-	public void PrepareForSave(){
-		listTasks = TaskGiverScript.tasks;
-	}
-
-
 //API mines
-	public string GetPreviousDateTimeForMine(int ID){
-		MineSave mineSave = datePreviousMine.Find(x => x.ID == ID);
-		return  (mineSave != null) ? mineSave.previousDateTime : DateTime.Now.ToString();
-	}
-	public void SaveMine(Mine mine){
-		MineSave mineSave = datePreviousMine.Find(x => x.ID == mine.ID);
-		if(mineSave != null) {
-			mineSave.ChangeInfo(mine);
+	public void SaveMine(MineControllerScript mineController){ citySaveObject.industry.SaveMine(mineController);}
+	public List<MineSave> GetMines{ get => citySaveObject.industry.listMine; }
+//API timeManagement
+	public TimeManagement timeManagement{get => citySaveObject.timeManagement;}
+	public void NewTimeReward(TypeDateRecord type, DateTime date){
+		DateRecord record = timeManagement.records.Find(x => x.type == type);
+		if(record != null){
+			record.Date = date;
 		}else{
-			datePreviousMine.Add(new MineSave(mine));
-		}	
-	}
-	public Mine LoadMine(int ID){
-		Debug.Log("load mine...");
-		Mine result = new Mine(ID);  
-		MineSave mineSave = datePreviousMine.Find(x => x.ID == ID);
-		if(mineSave != null){
-			Debug.Log(mineSave.Level.ToString());
-			result.SetData(mineSave.Level, FunctionHelp.StringToDateTime(mineSave.previousDateTime));
-		}else{
-			result.SetData(0, DateTime.Now);
+			record = new DateRecord(type, date);
+			timeManagement.records.Add(record);
 		}
-		return result;	
+		SaveLoadControllerScript.SaveGame(this);
+	}
+//API market
+	public MallSave mall{get => citySaveObject.mall;}
+	public void NewDataAboutSellProduct(TypeMarket typeMarket, int IDproduct, int countSell){
+		MarketSave market = mall.markets.Find(x => x.typeMarket == typeMarket);
+		if(market == null){
+			market = new MarketSave();
+			mall.markets.Add(market);
+		}
+		MarketProductSave product = market.products.Find(x => x.ID == IDproduct);
+		if(product == null){
+			product = new MarketProductSave(IDproduct, countSell);
+			market.products.Add(product);
+		}else{
+			product.UpdateData(countSell);
+		}
+		SaveLoadControllerScript.SaveGame(this);
 	}	
+	public List<MarketProductSave> GetProductForMarket(TypeMarket typeMarket){
+		List<MarketProductSave> result = new List<MarketProductSave>();
+		MarketSave market = mall.markets.Find(x => x.typeMarket == typeMarket);
+		if(market != null) result = market.products;
+		return result;
+	}
+//API every time tasks and requrements
+	public AllRequirement allRequirement{get => playerSaveObject.allRequirement;}
+	public void SaveMainRequirements(List<Requirement> mainRequirements){SaveRequirement(allRequirement.saveMainRequirements, mainRequirements);}
+	public void SaveEveryTimeTask(List<Requirement> everyTimeTasks){ SaveRequirement(allRequirement.saveEveryTimeTasks, everyTimeTasks); }
+	private void SaveRequirement(List<RequirementSave> listSave, List<Requirement> requirements){
+		RequirementSave currentSave = null; 
+		foreach(Requirement task in requirements){
+			currentSave = listSave.Find(x => x.ID == task.ID);
+			if(currentSave != null){
+				currentSave.ChangeData(task);
+			}else{
+				listSave.Add(new RequirementSave(task));
+			}
+		}
+		Debug.Log(listSave.Count);
+	}
+	public List<RequirementSave> saveMainRequirements{get => allRequirement.saveMainRequirements;}
+	public List<RequirementSave> saveEveryTimeTasks{get => allRequirement.saveEveryTimeTasks;}
+	public ListResource StoreResources{get => playerSaveObject.storeResources;}
 }

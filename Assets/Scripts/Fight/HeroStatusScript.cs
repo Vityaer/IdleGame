@@ -4,21 +4,10 @@ using UnityEngine;
 public partial class HeroStatusScript : MonoBehaviour{
 	public SliderScript sliderHP;
 	public SliderScript sliderStamina;
-	private Vector2 delta = new Vector2(0, 30), posUI;
+	private Vector2 delta = new Vector2(0, 30);
 	private HeroControllerScript heroController;
 	// private GameObject panelStatus;
 	void Awake(){
-		Vector2 TopLeft = GameObject.Find("CornerTopLeft").GetComponent<Transform>().position;
-		Vector2 BottomRight = GameObject.Find("CornerBottomRight").GetComponent<Transform>().position;
-		Vector2 pos = GetComponent<Transform>().position;
-		posUI = new Vector2();
-		posUI.x = 720 * (pos.x/(BottomRight.x - TopLeft.x));
-		posUI.y = 1280 * (pos.y/(TopLeft.y - BottomRight.y)) + delta.y; 
-		posUI += delta;
-		// panelStatus = Instantiate(Resources.Load<GameObject>("UI/HeroStatus"), GameObject.Find("FightUI/BoxSliderHeroes").transform);
-		// panelStatus.GetComponent<RectTransform>().anchoredPosition = posUI;
-		// sliderHP      = panelStatus.transform.Find("SliderHP").GetComponent<SliderScript>();
-		// sliderStamina = panelStatus.transform.Find("SliderStamina").GetComponent<SliderScript>();
 		heroController = GetComponent<HeroControllerScript>();
 	}
 	void Start(){
@@ -28,7 +17,7 @@ public partial class HeroStatusScript : MonoBehaviour{
 //Helth	
 	private float currentHP;
 	public void ChangeHP(float HP){
-		if(HP < currentHP){ListFightTextsScript.Instance.ShowDamage(currentHP - HP, posUI);} else{ListFightTextsScript.Instance.ShowHeal(HP - currentHP, posUI);}
+		if(HP < currentHP){ListFightTextsScript.Instance.ShowDamage(currentHP - HP, gameObject.transform.position);} else{ListFightTextsScript.Instance.ShowHeal(HP - currentHP, gameObject.transform.position);}
 		currentHP = HP;
 		sliderHP.ChangeValue(HP);
 		if((HP / sliderHP.maxValue < 0.5f) &&(HP / sliderHP.maxValue > 0.3f)){

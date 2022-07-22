@@ -18,6 +18,7 @@ public class TabPanelCheats : EditorWindow{
 
     Vector2 scrollPos;
     int IDsplinter, IDItem;
+    Resource res = new Resource();
     void OnGUI(){
     	EditorGUILayout.BeginVertical();
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
@@ -36,6 +37,12 @@ public class TabPanelCheats : EditorWindow{
         if (GUILayout.Button("+ 50 Special tasks")){ AddSpecialTask(); }
         if (GUILayout.Button("+ 50 race hire")){ AddRaceHire(); }
         if (GUILayout.Button("+ 50 spin coin")){ AddSpinCoin(); }
+        GUILayout.BeginHorizontal("box");
+            res.Name  = (TypeResource)EditorGUILayout.EnumPopup("TypeResource:", res.Name);
+            res.Count = EditorGUILayout.FloatField("Count:", res.Count);
+            res.E10   = EditorGUILayout.IntField("E10:", res.E10);  
+            if (GUILayout.Button("Add Resource")){AddCustomResource();}
+        GUILayout.EndHorizontal();
 
         GUILayout.BeginHorizontal("box");
             IDsplinter = EditorGUILayout.IntField("ID:", IDsplinter);
@@ -93,14 +100,18 @@ public class TabPanelCheats : EditorWindow{
     void AddSpinCoin(){
         if(PlayerScript.Instance != null) PlayerScript.Instance.AddResource(new Resource(TypeResource.CoinFortune, 50, 0));
     }
+    void AddCustomResource(){
+        if(PlayerScript.Instance != null) PlayerScript.Instance.AddResource(res);
+    }
     SplintersList splintersList = null;
     void AddSplinters(){
         if(IDsplinter != 0){
             if(InventoryControllerScript.Instance != null){
                 if(splintersList == null) splintersList = Resources.Load<SplintersList>("Items/ListSplinters"); 
-                Splinter splinter = splintersList?.GetItem(IDsplinter);
-                if(splinter != null)
+                Splinter splinter = splintersList.GetSplinter(IDsplinter);
+                if(splinter != null){
                     InventoryControllerScript.Instance.AddSplinter(new SplinterController(splinter, splinter.RequireAmount ));
+                }
             }
         }
     }

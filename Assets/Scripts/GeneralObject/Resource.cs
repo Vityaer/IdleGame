@@ -20,7 +20,11 @@ public enum TypeResource{
 	SpecialTask = 12,
 	TicketGrievance = 13,
 	SimpleStoneReplacement = 14,
-	RaceHireCard = 15
+	RaceHireCard = 15,
+	FriendHeart = 16,
+	MineStone = 17,
+	RedDust = 18,
+	EventAgentMonet = 19
 }
 
 
@@ -66,7 +70,9 @@ public class Resource : BaseObject, ICloneable, VisualAPI{
 	public static Resource operator* (Resource res, float k){
 		Resource result = new Resource(res.Name, Mathf.Ceil(res.Count * k), res.E10);
 		return result;
-	}	
+	}
+	public static bool operator< (Resource a, Resource b){ return b.CheckCount(a); }		
+	public static bool operator> (Resource a, Resource b){ return a.CheckCount(b); }		
 //Image
 	private static Sprite[] spriteAtlas;   
 	public Sprite Image{ 
@@ -98,6 +104,9 @@ public class Resource : BaseObject, ICloneable, VisualAPI{
 	}
 	public void UpdateUI(){
 		UI?.UpdateUI(Image, Rare.C, ToString());
+	}
+	public int ConvertToInt(){
+		return (int) (Count * Mathf.Pow(10, E10));
 	}
 
 }

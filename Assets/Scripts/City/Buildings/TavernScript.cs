@@ -14,8 +14,8 @@ public class TavernScript : Building{
 //Simple hire
 	private Resource simpleHireCost = new Resource(TypeResource.SimpleHireCard, 1, 0);
 	public void SelectSimpleHire(){
-		CostOneHire.SetInfo(simpleHireCost);
-		CostManyHire.SetInfo(simpleHireCost * 10f);
+		CostOneHire.SetData(simpleHireCost);
+		CostManyHire.SetData(simpleHireCost * 10f);
 		btnOneHire.onClick.RemoveAllListeners();
 		btnManyHire.onClick.RemoveAllListeners();
 		btnOneHire.onClick.AddListener( () => ActionSimpleHireOne()  );  
@@ -44,7 +44,7 @@ public class TavernScript : Building{
 				} else if(rand <= 100f){
 					workList = listHeroes.FindAll(x => (x.generalInfo.ratingHero == 5));
 				}
-				hero = new InfoHero(workList[ UnityEngine.Random.Range(0, workList.Count) ]);
+				hero = (InfoHero) (workList[ UnityEngine.Random.Range(0, workList.Count) ]).Clone();
 
 				if(hero != null){
 					hero.generalInfo.Name = hero.generalInfo.Name + " №" + UnityEngine.Random.Range(0, 1000).ToString();
@@ -60,8 +60,8 @@ public class TavernScript : Building{
 
 	
 	public void SelectSpecialHire(){
-		CostOneHire.SetInfo(specialHireCost);
-		CostManyHire.SetInfo(specialHireCost * 10f);
+		CostOneHire.SetData(specialHireCost);
+		CostManyHire.SetData(specialHireCost * 10f);
 		btnOneHire.onClick.RemoveAllListeners();
 		btnManyHire.onClick.RemoveAllListeners();
 		btnOneHire.onClick.AddListener( () => ActionSpecialHireOne()  );  
@@ -86,7 +86,7 @@ public class TavernScript : Building{
 				} else if(rand <= 100f){
 					workList = listHeroes.FindAll(x => (x.generalInfo.ratingHero == 5));
 				}
-				hero = new InfoHero(workList[ UnityEngine.Random.Range(0, workList.Count) ]);
+				hero = (InfoHero) (workList[ UnityEngine.Random.Range(0, workList.Count) ]).Clone();
 				if(hero != null){
 					hero.generalInfo.Name = hero.generalInfo.Name + " №" + UnityEngine.Random.Range(0, 1000).ToString();
 					AddNewHero(hero);			
@@ -126,7 +126,12 @@ public class TavernScript : Building{
 			listHeroes = new List<InfoHero>(Resources.LoadAll("ScriptableObjects/HeroesData", typeof(InfoHero)) as InfoHero[]);
 		}
 	}
-
+//API
+	public InfoHero GetInfoHero(int ID){
+		InfoHero hero =  (InfoHero) listHeroes.Find(x => x.generalInfo.idHero == ID)?.Clone();
+		if(hero == null) Debug.Log(string.Format("not exist hero with ID= {ID}", ID));
+		return hero;
+	}
 //Observers
 	private Action<BigDigit> observerSimpleHire, observerSpecialHire, observerFriendHire;
 	public void RegisterOnSimpleHire(Action<BigDigit> d){observerSimpleHire += d;}	 

@@ -20,6 +20,7 @@ public class CityControllerScript : MonoBehaviour{
 		if(isOpen){ Open(); }else{ Close(); }
 	}
 	public void Open(){
+		// Debug.Log("open city");
 		canvasCity.enabled = true;
 		sliderCity.enabled = true;
 		canvasButtonsUI.SetActive(true);

@@ -18,6 +18,7 @@ public class Inventory{
 		foreach(ItemController controller in items) if(controller.item.Type == typeItems) list.Add(controller as VisualAPI);
 	}
 	public void Add(ItemController itemController){
+		Debug.Log("add item");
 		ItemController workItem = items.Find(x => (x.item.ID == itemController.item.ID));
 		if(workItem != null){
 			workItem.IncreaseAmount(itemController.Amount);
@@ -26,7 +27,7 @@ public class Inventory{
 		}
 	}
 	public void Add(SplinterController splinterController){
-		SplinterController workSplinter = splinters.Find(x => (x.splinter.objectReward == splinterController.splinter.objectReward));
+		SplinterController workSplinter = splinters.Find(x => (x.splinter.ID == splinterController.splinter.ID));
 		if(workSplinter != null){
 			workSplinter.IncreaseAmount(splinterController.splinter.Amount);
 		}else{
@@ -39,10 +40,15 @@ public class Inventory{
 	public void Add(List<SplinterController> splinters){
 		for(int i = 0; i < splinters.Count; i++) Add(splinters[i]);
 	}
+	public void RemoveSplinter(Splinter splinerForDelete){
+		SplinterController controller = splinters.Find(x => x.splinter == splinerForDelete);
+		if(controller == null) Debug.Log("not found splinter for delete");
+		splinters.Remove(controller);
+	}
+
 	public Inventory(InventorySave inventorySave){
 		Item _item = null; Splinter _splinter = null;
 		ItemsList itemsList = Resources.Load<ItemsList>("Items/ListItems");
-		SplintersList splintersList = Resources.Load<SplintersList>("Items/ListSplinters"); 
 		foreach(ItemSave item in inventorySave.listItem){
 			_item = itemsList?.GetItem(item.ID);
 			if(_item != null){
@@ -50,12 +56,11 @@ public class Inventory{
 			}			
 		}
 		foreach(SplinterSave item in inventorySave.listSplinter){
-			_splinter = splintersList?.GetItem(item.ID);
+			_splinter = SplinterSystem.Instance.GetSplinter(item.ID);
 			if(_splinter != null){
 				splinters.Add(new SplinterController(_splinter, item.Amount));
 			}
 		}
 	}
 	public Inventory(){}
-
 }

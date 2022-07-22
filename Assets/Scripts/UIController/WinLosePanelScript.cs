@@ -16,6 +16,7 @@ public class WinLosePanelScript : MonoBehaviour{
 	}
 
 	public void ClosePanel(){
+		PlayerScript.Instance.AddReward(reward);
  		panelReward.SetActive(false);
  		WarTableControllerScript.Instance.FinishMission(); 
 	}

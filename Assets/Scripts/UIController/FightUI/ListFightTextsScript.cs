@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class ListFightTextsScript : MonoBehaviour{
 	public List<DamageHealTextScript> listFightTextChangeHP = new List<DamageHealTextScript>();
-
+	public GameObject prefabTextFight;
 	public void ShowDamage(float damage, Vector2 pos){
-		GetFightText()?.PlayDamage(damage, pos);
+		GetFightText().PlayDamage(damage, pos);
 	}
 	public void ShowHeal(float heal, Vector2 pos){
-		GetFightText()?.PlayDamage(heal, pos);
+		GetFightText().PlayDamage(heal, pos);
 	}
 	public void ShowMessage(string message, Vector2 pos){
 		// GetFightText()?.PlayMessage(message, pos);
 	}
 	private DamageHealTextScript GetFightText(){
-		DamageHealTextScript result = null;
-		foreach(DamageHealTextScript script in listFightTextChangeHP){
-			if(script.InWork == false)
-				result = script;
-		}
+		DamageHealTextScript result = listFightTextChangeHP.Find(x => x.InWork == false);
+		if(result == null)
+			result = Instantiate(prefabTextFight).GetComponent<DamageHealTextScript>();
 		return result;
 	}
 

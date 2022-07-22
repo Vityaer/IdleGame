@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using TMPro;
 public class DamageHealTextScript : MonoBehaviour{
 	private bool inWork = false;
 	public bool InWork{get => inWork;}
-	private Text textComponent;
+	[SerializeField] private TextMeshProUGUI textComponent;
+	[SerializeField] private RectTransform rectTransform;
 	public Color colorDamage, colorHeal;
 	public Vector2 delta = new Vector2(0, 100f);
 	public float speed = 1f;
-	private RectTransform rectTransform;
-	void Awake(){
-		textComponent = GetComponent<Text>();
-		rectTransform = GetComponent<RectTransform>();
-	}
 	public void PlayDamage(float damage, Vector2 pos){
 		PlayInfo(damage, pos, colorDamage);
 	}
@@ -26,8 +22,9 @@ public class DamageHealTextScript : MonoBehaviour{
 		if(inWork == false){
 			inWork = true;
 			textComponent.color = colorDamage;  
-			textComponent.DOFade(1f, 0.05f);
 			textComponent.text  = amount.ToString();
+			gameObject.SetActive(true); 
+			textComponent.DOFade(1f, 0.05f);
 			rectTransform.anchoredPosition = pos;
 			rectTransform.DOAnchorPos(new Vector2(pos.x + delta.x, pos.y + delta.y), speed).OnComplete(Disable);
 		}
@@ -37,6 +34,7 @@ public class DamageHealTextScript : MonoBehaviour{
 		inWork = false;
 	} 
 	public void ClearText(){
-		textComponent.text = "";
+		gameObject.SetActive(false); 
+		textComponent.text = string.Empty;
 	}
 }

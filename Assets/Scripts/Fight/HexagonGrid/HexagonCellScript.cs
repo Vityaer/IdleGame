@@ -6,19 +6,18 @@ using System;
 using UnityEditor;
 #endif
 
-
 public class HexagonCellScript : MonoBehaviour{
-
 	private Transform tr;
 	public Vector3 Position{get => transform.position;} 
 	[SerializeField] private List<NeighbourCell> neighbours = new List<NeighbourCell>();
 	public SpriteRenderer spriteCell, spriteAvailable;
 	private GameObject subject;
 	HeroControllerScript heroScript;
-	public HeroControllerScript Hero{get => heroScript;}
 	public bool available = true;
 	public bool availableMove = true;
 
+	public bool CanStand{get => (availableMove && (heroScript == null));}
+	public HeroControllerScript Hero{get => heroScript;}
 	void Awake(){
 		tr = base.transform;
 	}
@@ -31,21 +30,22 @@ public class HexagonCellScript : MonoBehaviour{
 		this.playerCanController = playerCanController;
 		this.step = step;
 		achievableMove = true;
-		HeroControllerScript.RegisterOnEndAction(ClearCanMove);
+		HeroControllerScript.RegisterOnEndSelectCell(ClearCanMove);
 		for(int i = 0; i < neighbours.Count; i++) neighbours[i].CheckMove(step - 1, playerCanController);
 	}
 
 	public void CheckMove(int step, bool playerCanController){
+		this.playerCanController = playerCanController;
 		if(available && availableMove){
 			if((achievableMove == false) || (this.step < step)){
-				this.playerCanController = playerCanController;
 				this.step = step;
 				OnAchivableMove();
+				if(achievableMove == false) HeroControllerScript.RegisterOnEndSelectCell(ClearCanMove);
 				achievableMove = true;
+				
 				if((showAchievable == false) && playerCanController){
 					showAchievable = true;
 					spriteAvailable.enabled = true;
-					HeroControllerScript.RegisterOnEndAction(ClearCanMove);
 				}
 				if(step > 0) for(int i = 0; i < neighbours.Count; i++) neighbours[i].CheckMove(step - 1, playerCanController);
 			}
@@ -55,16 +55,6 @@ public class HexagonCellScript : MonoBehaviour{
 		return neighbours.Find(x => x.achievableMove).Cell;
 	}
 	public bool GetCanAttackCell{ get => (neighbours.Find(x => (x.achievableMove == true)) != null); }
-		// get{
-		// 	Debug.Log("current cell: "  + gameObject.name);
-		// 	for(int i= 0; i < neighbours.Count  ;i++){
-		// 		if(neighbours[i].achievableMove == true){
-		// 			Debug.Log(neighbours[i].Cell.gameObject.name);
-		// 		}
-		// 	}
-		// 	return (neighbours.Find(x => (x.achievableMove == true)) != null);
-		// }
-	// }
 	public void RegisterOnSelectDirection(Action<HexagonCellScript> selectDirectionForHero, bool showUIDirection = true){
 		observerSelectDirection = selectDirectionForHero;
 		if(showUIDirection)
@@ -90,7 +80,9 @@ public class HexagonCellScript : MonoBehaviour{
 		this.step = 0;
 		achievableMove = false;
 		spriteAvailable.enabled = false;
-		HeroControllerScript.UnregisterOnEndAction(ClearCanMove);
+		playerCanController = false;
+		dist = 100;
+		HeroControllerScript.UnregisterOnEndSelectCell(ClearCanMove);
 	}
 	public void SetSubject(GameObject newSubject){
 		this.subject = newSubject;
@@ -126,10 +118,58 @@ public class HexagonCellScript : MonoBehaviour{
 	private void OnAchivableMove(){if(observerAchivableMove != null) observerAchivableMove(this);}
 
 	public void CheckOnNeighbour(HexagonCellScript otherCell){
-		if(Vector3.Distance(this.Position, otherCell.Position) < (1.1f * transform.localScale.x))
-			neighbours.Add(new NeighbourCell(this, otherCell));
+		if(Vector3.Distance(this.Position, otherCell.Position) < (1.1f * transform.localScale.x)){
+			NeighbourCell newNeighbour = new NeighbourCell(this, otherCell);
+			neighbours.Add(newNeighbour);
+			#if UNITY_EDITOR_WIN
+			Undo.RecordObject(this, "fill cell");
+			#endif
+		}
 	}
 	public void ClearNeighbours(){ neighbours.Clear(); }
+//Find way
+	private int dist = 100;
+	public int GetDist{get => dist;}
+	private HexagonCellScript previousCell = null;
+	public HexagonCellScript PreviousCell{get => previousCell;}
+	bool checkNext = false;
+	List<NeighbourCell> asumptionNeighbourCell = new List<NeighbourCell>();
+	NeighbourDirection directionToTarget;
+	public void FindWay(HexagonCellScript previousCell, HexagonCellScript target, bool onGround = true, int step = 1){
+		if(available && (availableMove || (previousCell == null) ||(this == target))){
+			if(step < dist){
+				checkNext = true;
+				dist = step;
+			}else if(step == dist){
+				checkNext = (UnityEngine.Random.Range(0f, 1f) > 0.5f);
+			}else{checkNext = false;}
+			if(checkNext){
+				if(this.previousCell == null) HexagonGridScript.Instance.RegisterOnFoundWay(ClearFindWay);
+				this.previousCell = previousCell;
+				if((target.GetDist > step) && (this != target)){
+					directionToTarget = NeighbourCell.GetDirection(this, target);
+					for(int level = 0; level <= 3; level++){
+						NeighbourCell.GetNeighboursOnLevelNear(neighbours, directionToTarget, level, asumptionNeighbourCell);
+						if(asumptionNeighbourCell.Count > 0) CheckNeighbour(previousCell, target, onGround, step);
+
+					}
+				}
+			}
+		}
+	}
+	private void CheckNeighbour(HexagonCellScript previousCell, HexagonCellScript target, bool onGround, int step){
+		for(int i = 0; i < asumptionNeighbourCell.Count; i++){
+			if(asumptionNeighbourCell[i].Cell != previousCell) asumptionNeighbourCell[i].FindWay(this, target, onGround, step: (step + 1));
+
+		}
+	}
+	public void ClearFindWay(){
+		HexagonGridScript.Instance.UnregisterOnFoundWay(ClearFindWay);
+		dist = 100;
+		previousCell = null;
+		checkNext = false;
+	}
+
 	
 #if UNITY_EDITOR_WIN
 //Potision controller	
